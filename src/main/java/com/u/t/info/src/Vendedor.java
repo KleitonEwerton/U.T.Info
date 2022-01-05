@@ -10,8 +10,7 @@ package com.u.t.info.src;
  */
 public class Vendedor extends Funcionario {
     
-    public Vendedor(String nome, String contato, String cpf, String codigoHash, Integer identificacao,
-			String endereço)
+    public Vendedor(String nome, String contato, String cpf, String codigoHash, Integer identificacao,String endereço)
     {
         super(nome,contato,cpf,codigoHash,identificacao,endereço);
     }

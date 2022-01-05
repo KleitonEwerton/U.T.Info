@@ -13,8 +13,10 @@ import java.util.List;
 
 public class Gerente extends Funcionario{
     
+    static public List<Produto> bdProdutos = new ArrayList<>();         //Simula Banco de dados, por enquanto
     static public List<Fornecedor> bdFornecedores = new ArrayList<>();  //Simula Banco de dados, por enquanto
-    static public List<Supervisor> bdSupervisores = new ArrayList<>();    //Simula Banco de dados, por enquanto
+    static public List<Supervisor> bdSupervisores = new ArrayList<>();  //Simula Banco de dados, por enquanto
+    static public List<Vendedor> bdVendedores = new ArrayList<>();      //Simula Banco de dados, por enquanto
     
     
     public Gerente(String nome, String contato, String cpf, String codigoHash, Integer identificacao,String endereço){
@@ -22,11 +24,12 @@ public class Gerente extends Funcionario{
         super(nome, contato, cpf, codigoHash, identificacao, endereço);
         
     }
-    
+   
     public void cadastrarProduto(String nome, String codigo, double precoCompra, double precoVenda, String fornecedor, String descricao, String modelo,int qtdeEstoque, int estoqueMinimo){
         
        Produto produto = new Produto(nome, codigo, precoCompra, precoVenda, fornecedor, descricao, modelo, qtdeEstoque, estoqueMinimo);
        //TODO: Salva esse produto no banco de dados
+       bdProdutos.add(produto);
        produto.salvaProduto();
       
     }
@@ -59,6 +62,20 @@ public class Gerente extends Funcionario{
     public Gerente getSupervisor(String keyDeBusca){
         
         //TODO: malipular banco de dados para pegar um Supervisor
+        return null;
+        
+    }
+    
+     
+    public void cadastrarVendedor(String nome, String contato, String cpf, String codigoHash, Integer identificacao,String endereço){
+        Vendedor vendedor = new Vendedor(nome,  contato,  cpf,  codigoHash,  identificacao,endereço);
+        //TODO: Salva esse produto no banco de dados
+        bdVendedores.add(vendedor); 
+    }
+    
+    public Vendedor getVendedor(String keyDeBusca){
+        
+        //TODO: malipular banco de dados para pegar um Vendedor
         return null;
         
     }
