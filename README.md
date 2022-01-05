@@ -12,7 +12,7 @@
 
 - [x] Cliente
 - [x] Funcionario 
-- [ ] Vendedor
+- [x] Vendedor
 - [x] Fornecedor 
 - [x] Supervisor
 - [x] Gerente
