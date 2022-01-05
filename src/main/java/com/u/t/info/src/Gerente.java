@@ -4,6 +4,7 @@
  */
 package com.u.t.info.src;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,25 +13,29 @@ import java.util.List;
 
 public class Gerente extends Funcionario{
     
+    static public List<Fornecedor> bdFornecedores = new ArrayList<>();  //Simula Banco de dados, por enquanto
+    static public List<Supervisor> bdSupervisores = new ArrayList<>();    //Simula Banco de dados, por enquanto
+    
+    
     public Gerente(String nome, String contato, String cpf, String codigoHash, Integer identificacao,String endereço){
         
         super(nome, contato, cpf, codigoHash, identificacao, endereço);
         
     }
     
-    public void cadastrarProduto(String nome, String codigo, double precoCompra, double precoVenda, String fornecedor, String descricao, String modelo){
+    public void cadastrarProduto(String nome, String codigo, double precoCompra, double precoVenda, String fornecedor, String descricao, String modelo,int qtdeEstoque, int estoqueMinimo){
         
-       Produto produto = new Produto(nome, codigo, precoCompra, precoVenda, fornecedor, descricao, modelo);
+       Produto produto = new Produto(nome, codigo, precoCompra, precoVenda, fornecedor, descricao, modelo, qtdeEstoque, estoqueMinimo);
        //TODO: Salva esse produto no banco de dados
        produto.salvaProduto();
       
-        
     }
     
     public void cadastrarFornecedor(String razaoSocial, String cnpj, String endereco, List<String> listaDeProdutos){
         
         Fornecedor fornecedor = new Fornecedor(razaoSocial, cnpj, endereco, listaDeProdutos);
         //TODO: Salva esse fornecedor no banco de dados, e os produtos da lista de produtos
+        bdFornecedores.add(fornecedor);
         fornecedor.salvarFornecedor();
         
         
@@ -46,6 +51,7 @@ public class Gerente extends Funcionario{
     public void cadastraSupervisor(String nome, String contato, String cpf, String codigoHash, Integer identificacao, String endereço){
         Supervisor supervisor = new Supervisor(nome,contato,cpf,codigoHash, identificacao,endereço);
        //TODO: Salva esse supervisor no banco de dados
+       bdSupervisores.add(supervisor);
        supervisor.salvaSupervisor();
         
     }
@@ -71,4 +77,14 @@ public class Gerente extends Funcionario{
         //Escrita do relátorio em um arquivo da saída
     
     }
+    
+    public static List<Fornecedor> getBdFornecedores() {
+        return bdFornecedores;
+    }
+
+    public static List<Supervisor> getBdSupervisores() {
+        return bdSupervisores;
+    }
+    
+    
 }

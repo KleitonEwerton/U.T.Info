@@ -20,7 +20,7 @@ public class Sistema {
         listaProdutos.add("SSD");
         listaProdutos.add("HD");
         gerente.cadastrarFornecedor("Joao", "fds", "Chega", listaProdutos);
-        gerente.cadastrarProduto("SSD", "fff", 0, 0,"Joao" , "Mais rapido", "Melhor que tem");
+        gerente.cadastrarProduto("SSD", "fff", 0, 0,"Joao" , "Mais rapido", "Melhor que tem",44,3);
     }
     
 }
