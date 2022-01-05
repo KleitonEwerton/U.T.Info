@@ -5,7 +5,6 @@
 package com.u.t.info.src;
 
 public class Cliente {
-
     private String nome;
     private String endereco;
     private String cpf;
