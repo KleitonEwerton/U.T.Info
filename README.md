@@ -10,7 +10,7 @@
 
 ## 🏝️ Features
 
-- [ ] Cliente
+- [x] Cliente
 - [x] Funcionario 
 - [ ] Vendedor
 - [x] Fornecedor 
