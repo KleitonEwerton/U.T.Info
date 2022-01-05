@@ -16,7 +16,7 @@ public class Supervisor extends Funcionario{
 	
 	//se tiver produto em estoque autoriza compra
 	public boolean ordemCompra(Produto produto, int qtdeCompra) {
-		if(produto.getQtdeEstque()>qtdeCompra) {
+		if(produto.getQtdeEstoque()>qtdeCompra) {
 			return true;
 		}
 		return false;
@@ -24,7 +24,7 @@ public class Supervisor extends Funcionario{
 	
 	//se estoque for menor que estooque minimo exibe mensagem avisando que deve repor estoque
 	public void controleEstoque(Produto produto) {
-		if(produto.getQtdeEstque() < produto.getEstoqueMinimo()) {
+		if(produto.getQtdeEstoque() < produto.getEstoqueMinimo()) {
 			System.out.println("Comprar mais produtos, temos menos que o estoque minimo estipulado!!");
 		}
 	}
@@ -32,13 +32,14 @@ public class Supervisor extends Funcionario{
 	//realiza devolução, se produto não estiver defeituoso ele volta pro estoque
 	public void devolucao(Produto produto, boolean defeito, int qtdeDevolucao) {
 		if(!defeito) {
-			produto.setQtdeEstoque(produto.getQtdeEstque()+qtdeDevolucao);
+			produto.setQtdeEstoque(produto.getQtdeEstoque()+qtdeDevolucao);
 		}
 	}
-        
-        public void salvaSupervisor(){
-            //TODO: salvar esse supervisor no banco de dados
-            System.out.println("Supervisor salvo");
-        }
 	
+	 public void salvaSupervisor(){
+         //TODO: salvar esse supervisor no banco de dados
+         System.out.println("Supervisor salvo");
+     }
+		
+
 }
