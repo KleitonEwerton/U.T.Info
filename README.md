@@ -57,14 +57,14 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Git](https://git-scm.com/)
 
 ## 👨‍💻 Autores
-- Ágata
+- Ágata Meireles Carvalho - [GitHub](https://github.com/agatameireles11)
 - Kleiton Ewerton de Oliveira - [GitHub](https://github.com/KleitonEwerton)
 - Luiz
 - NiKolas
 
 
 ## 📞 Contatos
--
+- agata.meireles@gmail.com / agata.meireles@estudante.ufjf.br
 - kleitonewertonoliveira@gmail.com  
 -
 - nikolasgenesio@gmail.com
