@@ -9,7 +9,7 @@ public class Cliente {
     private String endereco;
     private String cpf;
     private String contato;
-
+    
     public Cliente(String nome, String endereco, String cpf, String contato) {
         this.nome = nome;
         this.endereco = endereco;
