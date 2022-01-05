@@ -60,11 +60,11 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - Ágata
 - Kleiton Ewerton de Oliveira - [GitHub](https://github.com/KleitonEwerton)
 - Luiz
-- Nicolas
+- NiKolas
 
 
 ## 📞 Contatos
 -
 - kleitonewertonoliveira@gmail.com  
 -
--
+- nikolasgenesio@gmail.com
