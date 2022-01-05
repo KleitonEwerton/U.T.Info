@@ -2,13 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.ufjf.dcc.dcc025.trabalhooo;
+package com.u.t.info.src;
 
-/**
- *
- * @author agata
- */
- 
+
  public class Produto {
 	private String nome;
 	private String codigo;
@@ -112,6 +108,10 @@ package br.ufjf.dcc.dcc025.trabalhooo;
 	public double desconto(double porcentagem) {
 		return this.precoVenda - (this.precoVenda * porcentagem/100);
 	}
+        public void salvaProduto(){
+            //TODO: salva esse produto no banco de dados
+            System.out.println("Produto Salvo");
+        }
 	
 }
 
