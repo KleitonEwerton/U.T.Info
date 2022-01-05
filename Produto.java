@@ -17,6 +17,8 @@ package br.ufjf.dcc.dcc025.trabalhooo;
 	private String fornecedor;
 	private String descricao;
 	private String modelo;
+	private int qtdeEstoque;
+	private int estoqueMinimo;
 	
 	//Construtor
 	public Produto(String nome, String codigo, double precoCompra, double precoVenda, String fornecedor, String descricao, String modelo) {
@@ -72,8 +74,22 @@ package br.ufjf.dcc.dcc025.trabalhooo;
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
+	public int getQtdeEstque() {
+		return qtdeEstoque;
+	}
+	public void setQtdeEstoque(int qtdeEstoque) {
+		this.qtdeEstoque = qtdeEstoque;
+	}
 	
-	//para fins de teste
+	
+	public int getEstoqueMinimo() {
+		return estoqueMinimo;
+	}
+
+	public void setEstoqueMinimo(int estoqueMinimo) {
+		this.estoqueMinimo = estoqueMinimo;
+	}
+
 	public void imprimeInformacao() {
 		System.out.print("Nome: ");
 		System.out.println(getNome());
@@ -98,3 +114,4 @@ package br.ufjf.dcc.dcc025.trabalhooo;
 	}
 	
 }
+
