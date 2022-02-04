@@ -11,10 +11,10 @@ import javax.swing.JFrame;
  *
  * @author KleitonEwerton
  */
-public class TelaSupervisor extends JFrame{
+public class TelaFornecedor extends JFrame{
     
-    public TelaSupervisor(){
-        super("Supervisor");
+    public TelaFornecedor(){
+        super("Fornecedor");
     }
     
     public void draw(){
@@ -22,6 +22,8 @@ public class TelaSupervisor extends JFrame{
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 600);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null); 
         
         //TODO: verificar o layout antes
         //TODO: Botões Laterais

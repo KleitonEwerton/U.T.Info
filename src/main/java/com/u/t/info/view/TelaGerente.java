@@ -39,7 +39,8 @@ public class TelaGerente extends JFrame{
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 600);
-        
+        this.setResizable(false);
+        this.setLocationRelativeTo(null); 
         
         //TOOL BAR
         
