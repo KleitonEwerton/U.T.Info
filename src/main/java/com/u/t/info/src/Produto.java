@@ -4,116 +4,119 @@
  */
 package com.u.t.info.src;
 
-
 public class Produto {
-	private String nome;
-	private String codigo;
-	private double precoCompra;
-	private double precoVenda;
-	private String fornecedor;
-	private String descricao;
-	private String modelo;
-	private int qtdeEstoque;
-	private int estoqueMinimo;
 
-	// Construtor
-	public Produto(String nome, String codigo, double precoCompra, double precoVenda, String fornecedor, String descricao, String modelo, int qtdeEstoque, int estoqueMinimo) {
+    private String nome;
+    private String codigo;
+    private double precoCompra;
+    private double precoVenda;
+    private String fornecedor;
+    private String descricao;
+    private String modelo;
+    private int qtdeEstoque;
+    private int estoqueMinimo;
 
-		this.nome = nome;
-		this.codigo = codigo;
-		this.precoCompra = precoCompra;
-		this.precoVenda = precoVenda;
-		this.fornecedor = fornecedor;
-		this.descricao = descricao;
-		this.modelo = modelo;
-		this.qtdeEstoque = qtdeEstoque;
-		this.estoqueMinimo = estoqueMinimo;
-	}
+    // Construtor
+    public Produto() {
 
-	// gets e sets
-	public String getNome() {
-		return nome;
-	}
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public Produto(String nome, String codigo, double precoCompra, double precoVenda, String fornecedor, String descricao, String modelo, int qtdeEstoque, int estoqueMinimo) {
 
-	public String getCodigo() {
-		return codigo;
-	}
+        this.nome = nome;
+        this.codigo = codigo;
+        this.precoCompra = precoCompra;
+        this.precoVenda = precoVenda;
+        this.fornecedor = fornecedor;
+        this.descricao = descricao;
+        this.modelo = modelo;
+        this.qtdeEstoque = qtdeEstoque;
+        this.estoqueMinimo = estoqueMinimo;
+    }
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
+    // gets e sets
+    public String getNome() {
+        return nome;
+    }
 
-	public double getPrecoCompra() {
-		return precoCompra;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setPrecoCompra(double precoCompra) {
-		this.precoCompra = precoCompra;
-	}
+    public String getCodigo() {
+        return codigo;
+    }
 
-	public double getPrecoVenda() {
-		return precoVenda;
-	}
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
-	public void setPrecoVenda(double precoVenda) {
-		this.precoVenda = precoVenda;
-	}
+    public double getPrecoCompra() {
+        return precoCompra;
+    }
 
-	public String getFornecedor() {
-		return fornecedor;
-	}
+    public void setPrecoCompra(double precoCompra) {
+        this.precoCompra = precoCompra;
+    }
 
-	public void setFornecedor(String fornecedor) {
-		this.fornecedor = fornecedor;
-	}
+    public double getPrecoVenda() {
+        return precoVenda;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setPrecoVenda(double precoVenda) {
+        this.precoVenda = precoVenda;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public String getFornecedor() {
+        return fornecedor;
+    }
 
-	public String getModelo() {
-		return modelo;
-	}
+    public void setFornecedor(String fornecedor) {
+        this.fornecedor = fornecedor;
+    }
 
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public int getQtdeEstoque() {
-		return qtdeEstoque;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public void setQtdeEstoque(int qtdeEstoque) {
-		this.qtdeEstoque = qtdeEstoque;
-	}
+    public String getModelo() {
+        return modelo;
+    }
 
-	public int getEstoqueMinimo() {
-		return estoqueMinimo;
-	}
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
 
-	public void setEstoqueMinimo(int estoqueMinimo) {
-		this.estoqueMinimo = estoqueMinimo;
-	}
+    public int getQtdeEstoque() {
+        return qtdeEstoque;
+    }
 
-	// funcao de desconto
-	// Retorno: novo valor com desconto
-	// param: valor da porcentagem. Ex.: 30.5 = 30.5%
-	public double desconto(double porcentagem) {
-		return this.precoVenda - (this.precoVenda * porcentagem / 100);
-	}
+    public void setQtdeEstoque(int qtdeEstoque) {
+        this.qtdeEstoque = qtdeEstoque;
+    }
 
-	public void salvaProduto() {
-		// TODO: salva esse produto no banco de dados
-		System.out.println("Produto Salvo");
-	}
+    public int getEstoqueMinimo() {
+        return estoqueMinimo;
+    }
+
+    public void setEstoqueMinimo(int estoqueMinimo) {
+        this.estoqueMinimo = estoqueMinimo;
+    }
+
+    // funcao de desconto
+    // Retorno: novo valor com desconto
+    // param: valor da porcentagem. Ex.: 30.5 = 30.5%
+    public double desconto(double porcentagem) {
+        return this.precoVenda - (this.precoVenda * porcentagem / 100);
+    }
+
+    public void salvaProduto() {
+        // TODO: salva esse produto no banco de dados
+        System.out.println("Produto Salvo");
+    }
 
 }
-
