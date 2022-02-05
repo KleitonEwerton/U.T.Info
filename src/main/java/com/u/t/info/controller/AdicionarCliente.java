@@ -35,7 +35,6 @@ public class AdicionarCliente implements ActionListener {
             limpar.LimparFormulario();
         } catch (NullPointerException e) {
             JOptionPane.showConfirmDialog(null, "Selecione o tipo do número", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
-
         }
     }
 }
