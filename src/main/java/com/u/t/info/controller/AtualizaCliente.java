@@ -34,7 +34,6 @@ public class AtualizaCliente implements WindowListener {
                 List<Cliente> cliente = JSONCliente.toClientes(dados);
                 tela.setClientes(cliente);
             }
-
         } catch (FileNotFoundException ex) {
             //JOptionPane.showConfirmDialog(tela, "Não foi possível carregar os dados!");
             //aqui a lista esta vazia

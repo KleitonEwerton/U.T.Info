@@ -19,7 +19,6 @@ public class Arquivo {
         while (leitor.hasNextLine()) {
             conteudo.append(leitor.nextLine()).append("\n");
         }
-
         return conteudo.toString();
     }
 

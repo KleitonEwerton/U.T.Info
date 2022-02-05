@@ -65,7 +65,6 @@ public class BuscaCepCliente implements ActionListener {
                 tela.getCidade().setText("");
                 tela.getUf().setText("");
             } else {
-
                 ruaStr = array[7];
                 bairroStr = array[15];
                 cidadeStr = array[19];

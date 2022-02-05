@@ -28,7 +28,6 @@ public class AdicionarCliente implements ActionListener {
                     tela.getCep().getText(), tela.getRua().getText(), tela.getNumeroCasa().getText(),
                     tela.getBairro().getText(), tela.getCidade().getText(), tela.getUf().getText(),
                     tela.getTel1().getText(), str);
-
             tela.getClientes().add(cliente);
             JOptionPane.showMessageDialog(tela, "Cliente adicionado");
             LimparFormularioCliente limpar= new LimparFormularioCliente(tela);

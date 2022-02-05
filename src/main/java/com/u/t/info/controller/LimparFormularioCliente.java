@@ -27,5 +27,4 @@ public class LimparFormularioCliente {
         tela.getTel().clearSelection();
         tela.repaint();
     }
-
 }

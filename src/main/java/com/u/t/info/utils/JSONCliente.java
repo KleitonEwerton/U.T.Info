@@ -36,5 +36,4 @@ public class JSONCliente {
         List<Cliente> clientes = gson.fromJson(json, clientesTipo);
         return clientes;
     }
-
 }

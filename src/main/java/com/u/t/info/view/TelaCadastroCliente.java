@@ -408,7 +408,6 @@ public class TelaCadastroCliente extends JFrame {
         painel.add(new JLabel(""), gbc34);
 
         this.add(painel);
-
     }
 
     public static void main(String[] args) {

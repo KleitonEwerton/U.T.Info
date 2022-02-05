@@ -32,4 +32,5 @@ public class Vendedor extends Funcionario {
         produto.setQtdeEstoque(produto.getQtdeEstoque()-1);
         System.out.println("Venda do " + produto.getNome() + " para " + cliente.getNome());
     }
+
 }
