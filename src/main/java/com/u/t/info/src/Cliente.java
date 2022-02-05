@@ -6,31 +6,36 @@ package com.u.t.info.src;
 
 public class Cliente {
     private String nome;
-    private String endereco;
     private String cpf;
-    private String contato;
-    
-    public Cliente(String nome, String endereco, String cpf, String contato) {
+    private String cidade;
+    private String cep;
+    private String rua;
+    private String numero;
+    private String bairro;
+    private String uf;
+    private String telefone;
+    private String tipo;
+
+    public Cliente(String nome, String cpf, String cep, String rua, String numero, String bairro, String cidade, String uf, String telefone, String tipo) {
         this.nome = nome;
-        this.endereco = endereco;
         this.cpf = cpf;
-        this.contato = contato;
+        this.cep = cep;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.telefone = telefone;
+        this.tipo = tipo;
     }
-    
+
+
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public String getCpf() {
@@ -41,11 +46,67 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public String getContato() {
-        return contato;
+    public String getCep() {
+        return cep;
     }
 
-    public void setContato(String contato) {
-        this.contato = contato;
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

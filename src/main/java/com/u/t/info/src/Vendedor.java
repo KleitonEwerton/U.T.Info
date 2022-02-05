@@ -10,14 +10,14 @@ package com.u.t.info.src;
  */
 public class Vendedor extends Funcionario {
     
-    public Vendedor(String nome, String contato, String cpf, String codigoHash, Integer identificacao,String endereço)
+    public Vendedor(String nome, String contato, String cpf, String codigoHash, Integer identificacao,String endereco)
     {
-        super(nome,contato,cpf,codigoHash,identificacao,endereço);
+        super(nome,contato,cpf,codigoHash,identificacao,endereco);
     }
     
     public void cadatrarCliente(String nome, String endereco, String cpf, String contato)
     {
-        Cliente cliente = new Cliente(nome,endereco,cpf,contato);
+        Cliente cliente = new Cliente(nome,endereco,cpf,contato, "", "", "", "", "", "");
         System.out.println(nome + " foi cadastrado(a).");
     }
     
