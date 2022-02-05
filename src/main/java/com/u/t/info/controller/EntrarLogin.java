@@ -26,7 +26,6 @@ public class EntrarLogin implements ActionListener {
 
     public EntrarLogin(TelaInicial tela) {
         this.tela = tela;
-
     }
 
     @Override

@@ -204,5 +204,6 @@ public class TelaInicial extends JFrame {
     public void setJpSenha(JPasswordField jpSenha) {
         this.jpSenha = jpSenha;
     }
+
 }
 
