@@ -23,4 +23,5 @@ public class HabilitarEstoque implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         tela.getCardLayout().show(tela.getPainel(), "1");
     }
+
 }

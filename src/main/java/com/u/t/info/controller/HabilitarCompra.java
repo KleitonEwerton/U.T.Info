@@ -23,4 +23,5 @@ public class HabilitarCompra implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         tela.getCardLayout().show(tela.getPainel(), "2");
     }
+
 }
