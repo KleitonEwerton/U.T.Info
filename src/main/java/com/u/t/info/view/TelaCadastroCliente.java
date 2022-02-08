@@ -3,7 +3,7 @@ package com.u.t.info.view;
 import com.u.t.info.controller.AdicionarCliente;
 import com.u.t.info.controller.AtualizaCliente;
 import com.u.t.info.src.Cliente;
-import com.u.t.info.utils.BuscaCepCliente;
+import com.u.t.info.utils.BuscaCep;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,23 +15,25 @@ import javax.swing.border.Border;
  *
  * @author Nikolas
  */
-public class TelaCadastroCliente extends JFrame {
+public class TelaCadastroCliente extends TelaCadastro {
 
     private JTextField nome, cpf;
-    private JTextField rua, bairro, cidade, uf, cep, numeroCasa;
+    private JTextField numeroCasa;
     private JTextField tel1;
     private JButton pesquisarCep, salvar, sair;
     private JRadioButton fixo, celular;
     private ButtonGroup tel;
     private List<Cliente> clientes;
 
+
     public TelaCadastroCliente() {
-        super("Cadastro de Cliente");
         this.clientes = new ArrayList<>();
         this.addWindowListener(new AtualizaCliente(this));
     }
 
-    public void desenhoTelaCadastro() {
+    @Override
+    public void desenha() {
+        this.setTitle("Cadastro de Cliente");
         this.setVisible(true); //visibilidade
         this.setSize(800, 600); //tamanho
         this.setResizable(false); //bloquear redimensionamento
@@ -167,7 +169,7 @@ public class TelaCadastroCliente extends JFrame {
         gbc8.gridy = 5;
         painel.add(jLCEP, gbc8);
 
-        cep = new JTextField(10);
+        super.setCep(new JTextField(10));
         GridBagConstraints gbc9 = new GridBagConstraints();
         gbc9.gridwidth = 1;
         gbc9.anchor = GridBagConstraints.WEST;
@@ -176,7 +178,7 @@ public class TelaCadastroCliente extends JFrame {
         gbc9.gridx = 1;
         gbc9.gridy = 5;
 
-        painel.add(cep, gbc9);
+        painel.add(super.getCep(), gbc9);
 
         pesquisarCep = new JButton("Localizar");
         GridBagConstraints gbc10 = new GridBagConstraints();
@@ -187,7 +189,7 @@ public class TelaCadastroCliente extends JFrame {
         gbc10.insets = new Insets(20, 0, 0, 0);
         gbc10.gridheight = 1;
 
-        pesquisarCep.addActionListener(new BuscaCepCliente(this));
+        pesquisarCep.addActionListener(new BuscaCep(this));
 
         painel.add(pesquisarCep, gbc10);
 
@@ -204,7 +206,7 @@ public class TelaCadastroCliente extends JFrame {
 
         painel.add(jLRua, gbc11);
 
-        rua = new JTextField(47);
+        super.setRua(new JTextField(47));
         GridBagConstraints gbc12 = new GridBagConstraints();
         gbc12.gridwidth = GridBagConstraints.RELATIVE;
         gbc12.anchor = GridBagConstraints.WEST;
@@ -212,7 +214,7 @@ public class TelaCadastroCliente extends JFrame {
         gbc12.gridheight = 1;
         gbc12.gridx = 1;
         gbc12.gridy = 6;
-        painel.add(rua, gbc12);
+        painel.add(super.getRua(), gbc12);
 
         JLabel jLNumero = new JLabel("Número: ", JLabel.CENTER);
         font = new Font("Leelawadee UI", Font.PLAIN, 18);
@@ -249,7 +251,7 @@ public class TelaCadastroCliente extends JFrame {
         gbc15.gridy = 7;
         painel.add(jLBairro, gbc15);
 
-        bairro = new JTextField(12);
+        super.setBairro(new JTextField(12));
         GridBagConstraints gbc16 = new GridBagConstraints();
         gbc16.gridwidth = 1;
         gbc16.anchor = GridBagConstraints.WEST;
@@ -257,7 +259,7 @@ public class TelaCadastroCliente extends JFrame {
         gbc16.gridheight = 1;
         gbc16.gridx = 1;
         gbc16.gridy = 7;
-        painel.add(bairro, gbc16);
+        painel.add(super.getBairro(), gbc16);
 
         JLabel jLCidade = new JLabel("Cidade: ", JLabel.CENTER);
         font = new Font("Leelawadee UI", Font.PLAIN, 18);
@@ -272,7 +274,7 @@ public class TelaCadastroCliente extends JFrame {
         gbc17.gridy = 7;
         painel.add(jLCidade, gbc17);
 
-        cidade = new JTextField(28);
+        super.setCidade(new JTextField(28));
         GridBagConstraints gbc18 = new GridBagConstraints();
         gbc18.gridwidth = 1;
         gbc18.anchor = GridBagConstraints.WEST;
@@ -281,7 +283,7 @@ public class TelaCadastroCliente extends JFrame {
         gbc18.gridheight = 1;
         gbc18.gridx = 3;
         gbc18.gridy = 7;
-        painel.add(cidade, gbc18);
+        painel.add(super.getCidade(), gbc18);
 
         JLabel jLUF = new JLabel("UF: ", JLabel.CENTER);
         font = new Font("Leelawadee UI", Font.PLAIN, 18);
@@ -296,7 +298,7 @@ public class TelaCadastroCliente extends JFrame {
         gbc19.gridy = 7;
         painel.add(jLUF, gbc19);
 
-        uf = new JTextField(2);
+        super.setUf(new JTextField(2));
         GridBagConstraints gbc20 = new GridBagConstraints();
         gbc20.gridwidth = GridBagConstraints.REMAINDER;
         gbc20.anchor = GridBagConstraints.WEST;
@@ -304,7 +306,7 @@ public class TelaCadastroCliente extends JFrame {
         gbc20.gridheight = 1;
         gbc20.gridx = 6;
         gbc20.gridy = 7;
-        painel.add(uf, gbc20);
+        painel.add(super.getUf(), gbc20);
 
         JLabel jLContato = new JLabel("Contato", JLabel.CENTER);
         font = new Font("Leelawadee UI", Font.PLAIN, 18);
@@ -412,7 +414,7 @@ public class TelaCadastroCliente extends JFrame {
 
     public static void main(String[] args) {
         TelaCadastroCliente tela = new TelaCadastroCliente();
-        tela.desenhoTelaCadastro();
+        tela.desenha();
         tela.pack();
     }
 
@@ -430,46 +432,6 @@ public class TelaCadastroCliente extends JFrame {
 
     public void setCpf(JTextField cpf) {
         this.cpf = cpf;
-    }
-
-    public JTextField getRua() {
-        return rua;
-    }
-
-    public void setRua(JTextField rua) {
-        this.rua = rua;
-    }
-
-    public JTextField getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(JTextField bairro) {
-        this.bairro = bairro;
-    }
-
-    public JTextField getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(JTextField cidade) {
-        this.cidade = cidade;
-    }
-
-    public JTextField getUf() {
-        return uf;
-    }
-
-    public void setUf(JTextField uf) {
-        this.uf = uf;
-    }
-
-    public JTextField getCep() {
-        return cep;
-    }
-
-    public void setCep(JTextField cep) {
-        this.cep = cep;
     }
 
     public JTextField getNumeroCasa() {

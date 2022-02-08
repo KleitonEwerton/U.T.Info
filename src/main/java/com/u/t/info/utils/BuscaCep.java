@@ -1,27 +1,27 @@
 package com.u.t.info.utils;
 
+import com.u.t.info.view.TelaCadastro;
 import com.u.t.info.view.TelaCadastroCliente;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
-/**
- *
- * @author Nikolas
- */
-public class BuscaCepCliente implements ActionListener {
+public class BuscaCep implements ActionListener {
 
     String ruaStr;
     String bairroStr;
     String cidadeStr;
     String ufStr;
 
-    private final TelaCadastroCliente tela;
+    private final TelaCadastro tela;
 
-    public BuscaCepCliente(TelaCadastroCliente tela) {
+    public BuscaCep(TelaCadastro tela) {
         this.tela = tela;
     }
 
@@ -80,4 +80,5 @@ public class BuscaCepCliente implements ActionListener {
         }
     }
 }
+
 
