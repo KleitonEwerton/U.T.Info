@@ -258,6 +258,7 @@ public class TelaSupervisor extends JFrame{
     public JPanel getPainel() {
         return painel;
     }
+
     public void setPainel(JPanel painel) {
         this.painel = painel;
     }
