@@ -5,6 +5,8 @@
 package com.u.t.info.controller;
 
 import com.u.t.info.view.TelaSupervisor;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,9 +23,7 @@ public class HabilitarDevolucoes implements ActionListener{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-       tela.getEstoque().setVisible(false);
-       tela.getCompras().setVisible(false);
-       tela.getDevolucoes().setVisible(true);
+        tela.getCardLayout().show(tela.getPainel(), "3");
     }
     
 }

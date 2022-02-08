@@ -21,9 +21,7 @@ public class HabilitarCompra implements ActionListener{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-       tela.getEstoque().setVisible(false);
-       tela.getCompras().setVisible(true);
-       tela.getDevolucoes().setVisible(false);
+        tela.getCardLayout().show(tela.getPainel(), "2");
     }
     
 }

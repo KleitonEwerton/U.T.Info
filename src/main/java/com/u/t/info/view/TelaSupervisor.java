@@ -7,20 +7,11 @@ package com.u.t.info.view;
 import com.u.t.info.controller.HabilitarCompra;
 import com.u.t.info.controller.HabilitarDevolucoes;
 import com.u.t.info.controller.HabilitarEstoque;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.HeadlessException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -41,17 +32,14 @@ public class TelaSupervisor extends JFrame{
     
      private JTable tabela;
     private JScrollPane barraRolagem;
-    
+    private CardLayout cardLayout;
+    JPanel painel;
     
     public TelaSupervisor()  {
         
         //não entendi como usar ainda
         super("Supervisonamento");
         this.calendario();
-        estoque.setVisible(true);
-        compras.setVisible(false);
-        devolucoes.setVisible(false);
-        
     }
     
    public void calendario(){
@@ -82,46 +70,72 @@ public class TelaSupervisor extends JFrame{
     public void desenha(){
         this.painelPrincipal = new JPanel();
         this.painelPrincipal.setLayout(new BorderLayout());
-        
-        
-        //não deu certo as funções dos botões
-        desenhaMenus();
+        this.painelPrincipal.setPreferredSize(new Dimension(800, 600));
+
         desenhaPainelEstoque();
-       //desenhaPainelCompras();
-       //desenhaPainelDevolucoes();
-        
-        
-        
+        desenhaPainelCompras();
+        desenhaPainelDevolucoes();
+
+        desenhaCard();
+
+        desenhaMenus();
         this.add(this.painelPrincipal);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.repaint();
     }
-    
+    public void desenhaCard()
+    {
+        cardLayout = new CardLayout();
+        painel = new JPanel();
+        painel.setLayout(cardLayout);
+        //painel.setPreferredSize(new Dimension(500,500));
+
+        painel.add(this.estoque, "1");
+        painel.add(this.compras, "2");
+        painel.add(this.devolucoes, "3");
+        cardLayout.show(painel,"1");
+
+        this.painelPrincipal.add(painel, BorderLayout.CENTER);
+    }
     public void desenhaMenus(){
-       
-        
         botoes = new JPanel();
-        botoes.setBorder(BorderFactory.createTitledBorder("Adiconar Produto"));
-        botoes.setLayout(new GridLayout(0, 1));
+        botoes.setBorder(BorderFactory.createTitledBorder("Adicionar Produto"));
+        botoes.setLayout(new GridBagLayout());
         
-         JButton btnEstoque = new JButton("Estoque");
-         btnEstoque.addActionListener(new HabilitarEstoque(this));
+        JButton btnEstoque = new JButton("Estoque");
+        btnEstoque.addActionListener(new HabilitarEstoque(this));
         btnEstoque.setBackground(Color.red);
-        botoes.add(btnEstoque);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.gridheight = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+        botoes.add(btnEstoque, gbc);
         
         JButton btnCompras = new JButton("Compras");
         btnCompras.addActionListener(new HabilitarCompra(this));
         btnCompras.setBackground(Color.red);
-        botoes.add(btnCompras);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        botoes.add(btnCompras, gbc);
         
         JButton btnDevolucao = new JButton("Devolução");
         btnDevolucao.addActionListener(new HabilitarDevolucoes(this));
         btnDevolucao.setBackground(Color.red);
-        botoes.add(btnDevolucao);
-        
-        this.painelPrincipal.add(botoes, BorderLayout.CENTER);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        botoes.add(btnDevolucao, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.weighty = 1.0;
+        botoes.add(new JLabel(""), gbc);
+        this.painelPrincipal.add(botoes, BorderLayout.WEST);
     }
     
     public void desenhaPainelEstoque(){
@@ -129,11 +143,10 @@ public class TelaSupervisor extends JFrame{
         estoque.setBorder(BorderFactory.createTitledBorder("Estoque"));
         
         this.setLayout(new BorderLayout());
-        estoque.setPreferredSize(new Dimension(500, 500));
+        //estoque.setPreferredSize(new Dimension(500, 500));
         
         DefaultTableModel modelo = new DefaultTableModel();
-        
-        
+
         //TODO: pegar objeto de produto ainda nn sei como fazer
         Object[] dados
                 = {"Notebook", 12, 3};
@@ -150,53 +163,48 @@ public class TelaSupervisor extends JFrame{
         tabela = new JTable(modelo);
 
         barraRolagem = new JScrollPane(tabela);
+        barraRolagem.setPreferredSize(new Dimension(650, 400));
         estoque.add(barraRolagem, BorderLayout.CENTER);
         
         //oq fazer????
         JButton notificarGerente = new JButton("Notificar gerente");
         estoque.add(notificarGerente);
 
-        this.painelPrincipal.add(estoque, BorderLayout.EAST);
     }
     
     
     //não sei oq terá nesses dois paineis ainda
      public void desenhaPainelCompras(){
-        
+
         compras.setBorder(BorderFactory.createTitledBorder("Compras"));
         
         this.setLayout(new BorderLayout());
-        estoque.setPreferredSize(new Dimension(500, 500));
+        //estoque.setPreferredSize(new Dimension(500, 500));
         
         JLabel quantidadeDeCompra = new JLabel("Quantidade para compra");
         JLabel quantidadeEmestoque = new JLabel("Quantidade em estoque");
         
         compras.add(quantidadeDeCompra);
         compras.add(quantidadeEmestoque);
-        
-        
-        
 
-        this.painelPrincipal.add(compras, BorderLayout.EAST);
+        //this.painelPrincipal.add(compras, BorderLayout.EAST);
     }
      
         public void desenhaPainelDevolucoes(){
         
-        devolucoes.setBorder(BorderFactory.createTitledBorder("Compras"));
+        devolucoes.setBorder(BorderFactory.createTitledBorder("Devoluções"));
         
         this.setLayout(new BorderLayout());
-        estoque.setPreferredSize(new Dimension(500, 500));
+        //estoque.setPreferredSize(new Dimension(500, 500));
         
         JLabel quantidadeDevolucao = new JLabel("Quantidade para devolver");
         JLabel defeito = new JLabel("Defeito");
         
         compras.add(quantidadeDevolucao);
         compras.add(defeito);
-        
-        
-        
 
-        this.painelPrincipal.add(devolucoes, BorderLayout.EAST);
+        //this.painelPrincipal.add(devolucoes, BorderLayout.EAST);
+        //this.getEstoque().isOptimizedDrawingEnabled();
     }
    
     
@@ -230,7 +238,28 @@ public class TelaSupervisor extends JFrame{
     public void setDevolucoes(JPanel devolucoes) {
         this.devolucoes = devolucoes;
     }
-    
-     
-    
+
+    public JPanel getPainelPrincipal() {
+        return painelPrincipal;
+    }
+
+    public void setPainelPrincipal(JPanel painelPrincipal) {
+        this.painelPrincipal = painelPrincipal;
+    }
+
+    public CardLayout getCardLayout() {
+        return cardLayout;
+    }
+
+    public void setCardLayout(CardLayout cardLayout) {
+        this.cardLayout = cardLayout;
+    }
+
+    public JPanel getPainel() {
+        return painel;
+    }
+
+    public void setPainel(JPanel painel) {
+        this.painel = painel;
+    }
 }
