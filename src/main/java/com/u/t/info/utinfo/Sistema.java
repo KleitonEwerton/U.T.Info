@@ -25,6 +25,7 @@ public class Sistema {
         
         TelaGerente telagerente = new TelaGerente();
         telagerente.draw();
+        
     }
     
 }

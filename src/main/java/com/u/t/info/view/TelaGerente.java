@@ -4,11 +4,16 @@
  */
 package com.u.t.info.view;
 
+import com.u.t.info.tables.*;
+
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -22,9 +27,23 @@ public class TelaGerente extends JFrame{
     private JPanel produtos;
     private JPanel fornecedores;
 
+    private TableFuncionarios modelFuncionario;
+    private JTable tableFuncionario;
+    private TableProdutos modelProduto;
+    private JTable tableProduto;
+    private TableFornecedores modelFornecedor;
+    private JTable tableFornecedor;
     
     private JButton btnCadastraFuncionario;
     private JButton btnDemitirFuncionario;
+    private JButton btnCadastraProduto;
+    private JButton btnRemoverProduto;
+    private JButton btnCadastraFornecedor;
+    private JButton btnRemoverFornecedor;
+    private JPanel auxPanelFuncionario;
+    private JPanel auxPanelProduto;
+    private JPanel auxPanelFornecedor;
+    
 
     
     public TelaGerente() {
@@ -35,7 +54,6 @@ public class TelaGerente extends JFrame{
 
         
         //CONFIGURAÇÕES
-        
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 600);
@@ -43,7 +61,6 @@ public class TelaGerente extends JFrame{
         this.setLocationRelativeTo(null); 
         
         //TOOL BAR
-        
         this.menuBar = new JTabbedPane();
         this.funcionarios = new JPanel();
         this.produtos = new JPanel();
@@ -55,23 +72,98 @@ public class TelaGerente extends JFrame{
 
         this.getContentPane().add(menuBar);
         
-        
-        //BOTÕES PARTE INFERIOR
-        
-        this.btnCadastraFuncionario = new JButton("Cadastrar Novo Funcionário");
-        this.btnDemitirFuncionario = new JButton("Demitir Funcionário");
+        //MENU BAR
+        drawFuncionarios();
+        this.funcionarios.add(auxPanelFuncionario);
 
-        this.funcionarios.add(this.btnCadastraFuncionario);
-        this.funcionarios.add(this.btnDemitirFuncionario);
-
-
+        drawProdutos();
+        this.produtos.add(auxPanelProduto);
         
-        //OTHERS
+        drawFornecedores();
+        this.fornecedores.add(auxPanelFornecedor);
         
+        //OUTROS
         this.setVisible(true);
         
        
     }  
     
-    
+    private void drawFuncionarios(){
+        
+        //FUNCIONARIOS
+        //BOTÕES PARTE INFERIOR
+        
+        this.btnCadastraFuncionario = new JButton("Cadastrar Novo Funcionário");
+        this.btnDemitirFuncionario = new JButton("Demitir Funcionário");
+
+        this.modelFuncionario = new TableFuncionarios();
+        
+        this.tableFuncionario = new JTable(modelFuncionario);
+        
+        this.tableFuncionario.setVisible(true);
+        
+        this.tableFuncionario.setPreferredScrollableViewportSize(new Dimension(800,400));
+        
+        this.funcionarios.add(new JScrollPane(this.tableFuncionario));
+        
+        this.auxPanelFuncionario = new JPanel();
+        
+        this.btnCadastraFuncionario.setPreferredSize(new Dimension(385,30));
+        this.btnDemitirFuncionario.setPreferredSize(new Dimension(385,30));
+        
+        auxPanelFuncionario.add(this.btnCadastraFuncionario);
+        auxPanelFuncionario.add(this.btnDemitirFuncionario);
+        
+    }
+    private void drawProdutos(){
+        //PRODUTOS
+        //BOTÕES PARTE INFERIOR
+        
+        this.btnCadastraProduto = new JButton("Cadastrar Novo Produto");
+        this.btnRemoverProduto= new JButton("Remover Produto");
+
+        this.modelProduto = new TableProdutos();
+        
+        this.tableProduto = new JTable(modelProduto);
+        
+        this.tableProduto.setVisible(true);
+        
+        this.tableProduto.setPreferredScrollableViewportSize(new Dimension(800,400));
+        
+        this.produtos.add(new JScrollPane(this.tableProduto));
+        
+        this.auxPanelProduto = new JPanel();
+        
+        this.btnCadastraProduto.setPreferredSize(new Dimension(385,30));
+        this.btnRemoverProduto.setPreferredSize(new Dimension(385,30));
+        
+        auxPanelProduto.add(this.btnCadastraProduto);
+        auxPanelProduto.add(this.btnRemoverProduto);
+        
+    }
+    private void drawFornecedores(){
+        //FORNECEDORES
+        //BOTÕES PARTE INFERIOR
+        
+        this.btnCadastraFornecedor = new JButton("Cadastrar Novo Fornecedor");
+        this.btnRemoverFornecedor  = new JButton("Remover Fornecedor");
+
+        this.modelFornecedor = new TableFornecedores();
+        
+        this.tableFornecedor = new JTable(modelFornecedor);
+        
+        this.tableFornecedor.setVisible(true);
+        
+        this.tableFornecedor.setPreferredScrollableViewportSize(new Dimension(800,400));
+        
+        this.fornecedores.add(new JScrollPane(this.tableFornecedor));
+        
+        this.auxPanelFornecedor = new JPanel();
+        
+        this.btnCadastraFornecedor.setPreferredSize(new Dimension(385,30));
+        this.btnRemoverFornecedor.setPreferredSize(new Dimension(385,30));
+        
+        auxPanelFornecedor.add(this.btnCadastraFornecedor);
+        auxPanelFornecedor.add(this.btnRemoverFornecedor);
+    }
 }
