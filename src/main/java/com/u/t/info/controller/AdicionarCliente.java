@@ -36,4 +36,5 @@ public class AdicionarCliente implements ActionListener {
             JOptionPane.showConfirmDialog(null, "Selecione o tipo do número", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
         }
     }
+    
 }

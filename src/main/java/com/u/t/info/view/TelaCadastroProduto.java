@@ -4,10 +4,14 @@
  */
 package com.u.t.info.view;
 
+import com.u.t.info.controller.AdicionarProduto;
+import com.u.t.info.controller.AtualizaProduto;
 import com.u.t.info.src.Produto;
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.Border;
+import java.util.List;
 
 /**
  *
@@ -21,7 +25,7 @@ public class TelaCadastroProduto extends JFrame {
     private String[] listafornecedores = {"Dell", "Samsung", "Positivo", "Asus", "Acer"};
 
     private JTabbedPane barraDeMenu;
-    private JList<Produto> listaProdutos;
+    private List<Produto> listaProdutos;
     private JPanel cadastro;
     private JPanel venda;
     private JPanel inf;
@@ -41,7 +45,6 @@ public class TelaCadastroProduto extends JFrame {
     private JTextField codigo;
     private JTextField modelo;
     private JTextField estoqueInicial;
-    private JTextField estoqueMinimo;
     private JTextField custoVenda;
     private JTextField custoCompra;
     private JTextField codigoVenda;
@@ -56,6 +59,8 @@ public class TelaCadastroProduto extends JFrame {
 
     public TelaCadastroProduto() {
         super("Produto");
+        this.listaProdutos = new ArrayList<>();
+        this.addWindowListener(new AtualizaProduto(this));
     }
 
     public void desenha() {
@@ -206,7 +211,7 @@ public class TelaCadastroProduto extends JFrame {
         gbc10.gridy = 3;
         cadastro.add(estoqueMin, gbc10);
 
-        estoqueMinimo = new JTextField(8);
+        estoqueInicial = new JTextField(8);
         GridBagConstraints gbc11 = new GridBagConstraints();
         gbc11.gridwidth = GridBagConstraints.REMAINDER;
         gbc11.anchor = GridBagConstraints.WEST;
@@ -214,7 +219,7 @@ public class TelaCadastroProduto extends JFrame {
         gbc11.gridheight = 1;
         gbc11.gridx = 3;
         gbc11.gridy = 3;
-        cadastro.add(estoqueMinimo, gbc11);
+        cadastro.add(estoqueInicial, gbc11);
 
         GridBagConstraints gbc12 = new GridBagConstraints();
         gbc12.weighty = 1.0;
@@ -353,8 +358,6 @@ public class TelaCadastroProduto extends JFrame {
         DefaultListModel<Produto> model = new DefaultListModel<>();
         model.addElement(new Produto("Notebook", "123", 4000.00,4500.00, "Dell", "8GB CORE I5", "iNSPIRATION",1000, 50));
 
-
-        listaProdutos = new JList<>(model);
     }
 
     public void desenhaBotoes() {
@@ -388,6 +391,7 @@ public class TelaCadastroProduto extends JFrame {
         gbc2.anchor = GridBagConstraints.SOUTHEAST;
         gbc2.insets = new Insets(20, 0, 20, 35);
         gbc2.gridheight = 1;
+        salvar.addActionListener(new AdicionarProduto(this));
         painel.add(salvar, gbc2);
 
         GridBagConstraints gbc4 = new GridBagConstraints();
@@ -467,23 +471,15 @@ public class TelaCadastroProduto extends JFrame {
         this.fornecedores = fornecedores;
     }
 
-    public JTextField getEstoqueMinimo() {
-        return estoqueMinimo;
-    }
-
-    public void setEstoqueMinimo(JTextField estoqueMinimo) {
-        this.estoqueMinimo = estoqueMinimo;
-    }
-
     public JTextField getCodigo() {
         return codigo;
     }
 
-    public JList<Produto> getListaProdutos() {
+    public List<Produto> getListaProdutos() {
         return listaProdutos;
     }
 
-    public void setListaProdutos(JList<Produto> listaProdutos) {
+    public void setListaProdutos(List<Produto> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }
 }

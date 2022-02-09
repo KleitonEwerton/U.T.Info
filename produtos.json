@@ -1,0 +1,1 @@
+[{"nome":"Notebook","codigo":"12A","precoCompra":3200.0,"precoVenda":5400.0,"fornecedor":"Dell","descricao":"Muito top!","modelo":"I5","qtdeEstoque":12,"estoqueMinimo":2},{"nome":"Computador","codigo":"85B","precoCompra":800.0,"precoVenda":1000.0,"fornecedor":"Positivo","descricao":"Muito ruim, mas é o que temos!","modelo":"QuadCore","qtdeEstoque":50,"estoqueMinimo":2}]
