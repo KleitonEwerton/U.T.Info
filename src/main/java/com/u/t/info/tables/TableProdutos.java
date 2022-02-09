@@ -72,7 +72,7 @@ public class TableProdutos extends AbstractTableModel{
     }
     
     
-    public void removeProduto(int indexLinha){
+    public void removerProduto(int indexLinha){
         this.listProduto.remove(indexLinha);                        
         this.fireTableRowsDeleted(indexLinha,indexLinha); 
     }

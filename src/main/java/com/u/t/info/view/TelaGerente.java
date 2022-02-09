@@ -111,6 +111,8 @@ public class TelaGerente extends JFrame{
         this.btnCadastraFuncionario.setPreferredSize(new Dimension(385,30));
         this.btnDemitirFuncionario.setPreferredSize(new Dimension(385,30));
         
+        this.btnDemitirFuncionario.addActionListener(new RemoverFuncionario(this));
+        
         auxPanelFuncionario.add(this.btnCadastraFuncionario);
         auxPanelFuncionario.add(this.btnDemitirFuncionario);
         
@@ -136,6 +138,8 @@ public class TelaGerente extends JFrame{
         
         this.btnCadastraProduto.setPreferredSize(new Dimension(385,30));
         this.btnRemoverProduto.setPreferredSize(new Dimension(385,30));
+        
+        this.btnRemoverProduto.addActionListener(new RemoveProduto(this));
         
         auxPanelProduto.add(this.btnCadastraProduto);
         auxPanelProduto.add(this.btnRemoverProduto);
@@ -163,7 +167,36 @@ public class TelaGerente extends JFrame{
         this.btnCadastraFornecedor.setPreferredSize(new Dimension(385,30));
         this.btnRemoverFornecedor.setPreferredSize(new Dimension(385,30));
         
+        this.btnRemoverFornecedor.addActionListener(new RemoverFornecedor(this));
+        
         auxPanelFornecedor.add(this.btnCadastraFornecedor);
         auxPanelFornecedor.add(this.btnRemoverFornecedor);
     }
+
+    public JTable getTableFuncionario() {
+        return tableFuncionario;
+    }
+
+    public JTable getTableProduto() {
+        return tableProduto;
+    }
+
+    public JTable getTableFornecedor() {
+        return tableFornecedor;
+    }
+
+    public TableFuncionarios getModelFuncionario() {
+        return modelFuncionario;
+    }
+
+    public TableProdutos getModelProduto() {
+        return modelProduto;
+    }
+
+    public TableFornecedores getModelFornecedor() {
+        return modelFornecedor;
+    }
+
+   
+    
 }

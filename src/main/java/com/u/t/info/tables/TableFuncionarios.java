@@ -18,8 +18,8 @@ public class TableFuncionarios extends AbstractTableModel{
     
    
     public TableFuncionarios(){
-        listFuncionarios.add(new Gerente("Rfdsfdsfafa", "rafa.gmailfsdfsdfsf.com","1223333333211", "pdfsdsfdfsfdoooo", 12,"rua dfdsfdfsdfsfdfsas dores"));
-        listFuncionarios.add(new Gerente("Rfdsfdddssfafa", "rafa.gmailfsddsfsdfsf.com","122333333ds3211", "pdfsdsfdfsdasfdoooo", 12,"rua dfdsfddsfsdfsfdfsas dores"));
+        listFuncionarios.add(new Gerente("Rfdsfdsfafa", "rafa.gmailfsdfsdfsf.com","1223333333211", "pdfsdsfdfsfdoooo", 12,"rua dfdsfdfsdfsfdfsas dores","120", "fdfsdf","nmddd","dfsdf",322));
+        listFuncionarios.add(new Gerente("Rfdsfdsfafa", "rafa.gmailfsdfsdfsf.com","1223333333211", "pdfsdsfdfsfdoooo", 12,"rua dfdsfdfsdfsfdfsas dores","120", "fdfsdf","nmddd","dfsdf",322));
     }
     
     @Override
@@ -53,7 +53,7 @@ public class TableFuncionarios extends AbstractTableModel{
             case 4:
                 return this.listFuncionarios.get(indexLinha).getIdentificacao();
             case 5:
-                return this.listFuncionarios.get(indexLinha).getEndereço();
+                return this.listFuncionarios.get(indexLinha).getRua() +" "+this.listFuncionarios.get(indexLinha).getNumero() ;
         }
         return null;
         
@@ -67,7 +67,7 @@ public class TableFuncionarios extends AbstractTableModel{
     }
     
     
-    public void removeFuncionario(int indexLinha){
+    public void removerFuncionario(int indexLinha){
         this.listFuncionarios.remove(indexLinha);                        
         this.fireTableRowsDeleted(indexLinha,indexLinha); 
     }

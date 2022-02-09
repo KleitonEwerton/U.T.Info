@@ -70,7 +70,7 @@ public class TableFornecedores extends AbstractTableModel{
     }
     
     
-    public void removeFornecedor(int indexLinha){
+    public void removerFornecedor(int indexLinha){
         this.listFornecedores.remove(indexLinha);                        
         this.fireTableRowsDeleted(indexLinha,indexLinha); 
     }
