@@ -7,6 +7,8 @@ package com.u.t.info.view;
 import com.u.t.info.controller.HabilitarCompra;
 import com.u.t.info.controller.HabilitarDevolucoes;
 import com.u.t.info.controller.HabilitarEstoque;
+import com.u.t.info.controller.RealizarDevolucao;
+import com.u.t.info.tables.TableProdutos;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,35 +20,48 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author agata
  */
-public class TelaSupervisor extends JFrame{
+public class TelaSupervisor extends JFrame {
 
     private JPanel painelPrincipal;
 
     private JPanel estoque = new JPanel();
     private JPanel compras = new JPanel();
-    private JPanel devolucoes= new JPanel();
+    private JPanel devolucoes = new JPanel();
 
     private JPanel botoes;
 
     private JLabel txt_Inf = new JLabel();
-
-    private JTable tabela;
+    
+    private JLabel quantidadeDevolucao;
+    private JTextField jtQuantidadeDevolucao;
+    private JLabel codigo;
+    private JTextField jtCodigo;
+    private JLabel defeito;
+    private JRadioButton sim;
+    private JRadioButton nao;
+    private ButtonGroup rbDefeito;
+    
+    private int lastIndex;
+    
     private JScrollPane barraRolagem;
     private CardLayout cardLayout;
-    JPanel painel;
+    private JPanel painel;
 
-    public TelaSupervisor()  {
+    private TableProdutos modelProduto;
+    private JTable tableProduto;
+
+    public TelaSupervisor() {
 
         //não entendi como usar ainda
         super("Supervisonamento");
         this.calendario();
     }
 
-    public void calendario(){
-        Thread clock = new Thread(){
-            public void run(){
-                try{
-                    for(;;){
+    public void calendario() {
+        Thread clock = new Thread() {
+            public void run() {
+                try {
+                    for (;;) {
                         Calendar cal = new GregorianCalendar();
                         int dia = cal.get(Calendar.DAY_OF_MONTH);
                         int mes = cal.get(Calendar.MONTH);
@@ -56,10 +71,10 @@ public class TelaSupervisor extends JFrame{
                         int minutos = cal.get(Calendar.MINUTE);
                         int horas = cal.get(Calendar.HOUR_OF_DAY);
 
-                        txt_Inf.setText("Supervisionamento" + " " + (horas-1) + ":" + minutos + ":" + segundos + "    " + dia+"/" + (mes+1) + "/" + ano);
+                        txt_Inf.setText("Supervisionamento" + " " + (horas - 1) + ":" + minutos + ":" + segundos + "    " + dia + "/" + (mes + 1) + "/" + ano);
                         sleep(1000);
                     }
-                }catch(InterruptedException e){
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -67,7 +82,7 @@ public class TelaSupervisor extends JFrame{
         clock.start();
     }
 
-    public void desenha(){
+    public void desenha() {
         this.painelPrincipal = new JPanel();
         this.painelPrincipal.setLayout(new BorderLayout());
         this.painelPrincipal.setPreferredSize(new Dimension(800, 600));
@@ -85,8 +100,8 @@ public class TelaSupervisor extends JFrame{
 
         this.repaint();
     }
-    public void desenhaCard()
-    {
+
+    public void desenhaCard() {
         cardLayout = new CardLayout();
         painel = new JPanel();
         painel.setLayout(cardLayout);
@@ -95,13 +110,14 @@ public class TelaSupervisor extends JFrame{
         painel.add(this.estoque, "1");
         painel.add(this.compras, "2");
         painel.add(this.devolucoes, "3");
-        cardLayout.show(painel,"1");
+        cardLayout.show(painel, "1");
 
         this.painelPrincipal.add(painel, BorderLayout.CENTER);
     }
-    public void desenhaMenus(){
+
+    public void desenhaMenus() {
         botoes = new JPanel();
-        botoes.setBorder(BorderFactory.createTitledBorder("Adicionar Produto"));
+        botoes.setBorder(BorderFactory.createTitledBorder("Menu"));
         botoes.setLayout(new GridBagLayout());
 
         JButton btnEstoque = new JButton("Estoque");
@@ -138,33 +154,23 @@ public class TelaSupervisor extends JFrame{
         this.painelPrincipal.add(botoes, BorderLayout.WEST);
     }
 
-    public void desenhaPainelEstoque(){
+    public void desenhaPainelEstoque() {
 
         estoque.setBorder(BorderFactory.createTitledBorder("Estoque"));
 
         this.setLayout(new BorderLayout());
         //estoque.setPreferredSize(new Dimension(500, 500));
 
-        DefaultTableModel modelo = new DefaultTableModel();
+        this.estoque.setPreferredSize(new Dimension(500, 500));
 
-        //TODO: pegar objeto de produto ainda nn sei como fazer
-        Object[] dados
-                = {"Notebook", 12, 3};
+        this.modelProduto = new TableProdutos();
 
-        //adciona titulo das colunas
-        modelo.addColumn("Produto");
-        modelo.addColumn("Estoque inicial");
-        modelo.addColumn("Estoque Restante");
+        this.tableProduto = new JTable(modelProduto);
+        this.tableProduto.setVisible(true);
 
-
-        //adiciona os dados manuais para teste
-        modelo.addRow(dados);
-
-        tabela = new JTable(modelo);
-
-        barraRolagem = new JScrollPane(tabela);
-        barraRolagem.setPreferredSize(new Dimension(650, 400));
-        estoque.add(barraRolagem, BorderLayout.CENTER);
+        //this.tabelaProdutos.setPreferredScrollableViewportSize(new Dimension(800, 400));
+        barraRolagem = new JScrollPane(tableProduto);
+        this.estoque.add(barraRolagem, BorderLayout.CENTER);
 
         //oq fazer????
         JButton notificarGerente = new JButton("Notificar gerente");
@@ -172,16 +178,15 @@ public class TelaSupervisor extends JFrame{
 
     }
 
-
     //não sei oq terá nesses dois paineis ainda
-    public void desenhaPainelCompras(){
+    public void desenhaPainelCompras() {
 
         compras.setBorder(BorderFactory.createTitledBorder("Compras"));
 
         this.setLayout(new BorderLayout());
         //estoque.setPreferredSize(new Dimension(500, 500));
 
-        JLabel quantidadeDeCompra = new JLabel("Quantidade para compra");
+        JLabel quantidadeDeCompra = new JLabel("Quantidade para compra: ");
         JLabel quantidadeEmestoque = new JLabel("Quantidade em estoque");
 
         compras.add(quantidadeDeCompra);
@@ -190,23 +195,47 @@ public class TelaSupervisor extends JFrame{
         //this.painelPrincipal.add(compras, BorderLayout.EAST);
     }
 
-    public void desenhaPainelDevolucoes(){
+    public void desenhaPainelDevolucoes() {
 
-        devolucoes.setBorder(BorderFactory.createTitledBorder("Devoluções"));
+        this.devolucoes.setBorder(BorderFactory.createTitledBorder("Devoluções"));
 
         this.setLayout(new BorderLayout());
         //estoque.setPreferredSize(new Dimension(500, 500));
+        
+        
 
-        JLabel quantidadeDevolucao = new JLabel("Quantidade para devolver");
-        JLabel defeito = new JLabel("Defeito");
-
-        compras.add(quantidadeDevolucao);
-        compras.add(defeito);
+        this.quantidadeDevolucao = new JLabel("Quantidade para devolução:");
+        this.jtQuantidadeDevolucao = new JTextField(10);
+        this.codigo = new JLabel("Código do produto: ");
+        this.jtCodigo = new JTextField(20);
+        this.defeito = new JLabel("Produto se encontra com defeito efeito? ");
+        this.sim = new JRadioButton("Sim");
+        this.nao = new JRadioButton("Não");
+        this.rbDefeito = new ButtonGroup();
+        this.rbDefeito.add(sim);
+        this.rbDefeito.add(nao);
+     
+        JButton btnDevolucao = new JButton("Devolução");
+        btnDevolucao.addActionListener(new RealizarDevolucao(this));
+        this.devolucoes.add(this.quantidadeDevolucao);
+       
+        this.devolucoes.add(this.jtQuantidadeDevolucao);
+        
+        this.devolucoes.add(this.codigo);
+        
+        this.devolucoes.add(this.jtCodigo);
+       
+        this.devolucoes.add(this.defeito);
+       
+        this.devolucoes.add(this.sim);
+        
+        this.devolucoes.add(this.nao);
+        
+        this.devolucoes.add(btnDevolucao);
 
         //this.painelPrincipal.add(devolucoes, BorderLayout.EAST);
         //this.getEstoque().isOptimizedDrawingEnabled();
     }
-
 
     public static void main(String[] args) {
         TelaSupervisor tela = new TelaSupervisor();
@@ -262,4 +291,46 @@ public class TelaSupervisor extends JFrame{
     public void setPainel(JPanel painel) {
         this.painel = painel;
     }
+
+    public JTextField getJtQuantidadeDevolucao() {
+        return jtQuantidadeDevolucao;
+    }
+
+    public void setJtQuantidadeDevolucao(JTextField jtQuantidadeDevolucao) {
+        this.jtQuantidadeDevolucao = jtQuantidadeDevolucao;
+    }
+
+    public JRadioButton getSim() {
+        return sim;
+    }
+
+    public void setSim(JRadioButton sim) {
+        this.sim = sim;
+    }
+
+    public JRadioButton getNao() {
+        return nao;
+    }
+
+    public void setNao(JRadioButton nao) {
+        this.nao = nao;
+    }
+
+    public JTable getTableProduto() {
+        return tableProduto;
+    }
+
+    public void setTableProduto(JTable tableProduto) {
+        this.tableProduto = tableProduto;
+    }
+
+    public int getLastIndex() {
+        return lastIndex;
+    }
+
+    public void setLastIndex(int lastIndex) {
+        this.lastIndex = lastIndex;
+    }
+    
+    
 }
