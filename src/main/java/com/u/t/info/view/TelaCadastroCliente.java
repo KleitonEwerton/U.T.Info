@@ -25,7 +25,6 @@ public class TelaCadastroCliente extends TelaCadastro {
     private ButtonGroup tel;
     private List<Cliente> clientes;
 
-
     public TelaCadastroCliente() {
         this.clientes = new ArrayList<>();
         this.addWindowListener(new AtualizaCliente(this));
@@ -299,6 +298,7 @@ public class TelaCadastroCliente extends TelaCadastro {
         painel.add(jLUF, gbc19);
 
         super.setUf(new JTextField(2));
+        super.getUf().setEnabled(false);
         GridBagConstraints gbc20 = new GridBagConstraints();
         gbc20.gridwidth = GridBagConstraints.REMAINDER;
         gbc20.anchor = GridBagConstraints.WEST;

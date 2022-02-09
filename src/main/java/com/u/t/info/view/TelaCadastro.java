@@ -50,4 +50,5 @@ public abstract class TelaCadastro extends JFrame {
     public void setCep(JTextField cep) {
         this.cep = cep;
     }
+
 }
