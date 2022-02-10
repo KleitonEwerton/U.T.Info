@@ -4,16 +4,22 @@
  */
 package com.u.t.info.src;
 
+import java.util.List;
+
 /**
  *
  * @author luiz
  */
 public class Vendedor extends Funcionario {
     
-    public Vendedor(String nome, String contato, String cpf, String codigoHash, Integer identificacao, String rua, String numero, String cidade, String uf, String cep, double salario)
-    {
-        super( nome, contato,  cpf,  codigoHash,identificacao, rua, numero, cidade, uf, cep, salario);
+    private List<Venda> vendas;
+
+    public Vendedor(List<Venda> vendas, String nome, String contato, String cpf, String codigoHash, Integer identificacao, String rua, String numero, String cidade, String uf, String cep, double salario) {
+        super(nome, contato, cpf, codigoHash, identificacao, rua, numero, cidade, uf, cep, salario);
+        this.vendas = vendas;
     }
+    
+   
     
     public void cadatrarCliente(String nome, String endereco, String cpf, String contato)
     {
@@ -31,6 +37,11 @@ public class Vendedor extends Funcionario {
     {
         produto.setQtdeEstoque(produto.getQtdeEstoque()-1);
         System.out.println("Venda do " + produto.getNome() + " para " + cliente.getNome());
+    }
+
+    @Override
+    public double calculaPagamento() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

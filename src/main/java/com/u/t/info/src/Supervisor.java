@@ -39,6 +39,11 @@ public class Supervisor extends Funcionario{
          //TODO: salvar esse supervisor no banco de dados
          System.out.println("Supervisor salvo");
      }
+
+    @Override
+    public double calculaPagamento() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 		
 
 }

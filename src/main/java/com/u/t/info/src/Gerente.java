@@ -30,5 +30,10 @@ public class Gerente extends Funcionario{
         //Escrita do relátorio em um arquivo da saída
     
     }
+
+    @Override
+    public double calculaPagamento() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
