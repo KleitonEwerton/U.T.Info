@@ -1,10 +1,13 @@
 package com.u.t.info.view;
 
 import com.u.t.info.src.Fornecedor;
+import com.u.t.info.tables.TableFornecedores;
 import com.u.t.info.utils.BuscaCep;
 
 import javax.swing.JFrame;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -355,6 +358,8 @@ public class TelaCadastroFornecedor extends TelaCadastro {
         painel.add(sair, gbc32);
 
         salvar = new JButton("Salvar");
+        salvar.addActionListener(new SalvarFornecedor(this));
+        
         GridBagConstraints gbc33 = new GridBagConstraints();
         gbc33.gridx = 6;
         gbc33.gridy = 13;
@@ -374,12 +379,6 @@ public class TelaCadastroFornecedor extends TelaCadastro {
 
         this.add(painel);
 
-    }
-
-    public static void main(String[] args) {
-        TelaCadastroFornecedor tela = new TelaCadastroFornecedor();
-        tela.desenha();
-        tela.pack();
     }
 
     public JTextField getRazaoSocial() {
@@ -447,3 +446,23 @@ public class TelaCadastroFornecedor extends TelaCadastro {
     }
 }
 
+class SalvarFornecedor implements ActionListener{
+
+    private final TelaCadastroFornecedor tela;
+
+    public SalvarFornecedor(TelaCadastroFornecedor tela) {
+        this.tela = tela;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        List<String> arrayList = new ArrayList<>();
+        arrayList.add("dasdad");
+        arrayList.add("dasddsadsad");
+        
+        TelaGerente.modelFornecedor.addNovoFornecedor(new Fornecedor(tela.getRazaoSocial().getText(), tela.getCnpj().getText(), "rua zero", arrayList));
+        
+    }
+    
+}

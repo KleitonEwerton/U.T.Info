@@ -26,13 +26,17 @@ public class TelaGerente extends JFrame{
     private JPanel funcionarios;
     private JPanel produtos;
     private JPanel fornecedores;
+    private JPanel auxPanelFuncionario;
+    private JPanel auxPanelProduto;
+    private JPanel auxPanelFornecedor;
 
-    private TableFuncionarios modelFuncionario;
     private JTable tableFuncionario;
-    private TableProdutos modelProduto;
-    private JTable tableProduto;
-    private TableFornecedores modelFornecedor;
     private JTable tableFornecedor;
+    private JTable tableProduto;
+    
+    private TableProdutos modelProduto;
+    private TableFuncionarios modelFuncionario;
+    public static TableFornecedores modelFornecedor;
     
     private JButton btnCadastraFuncionario;
     private JButton btnDemitirFuncionario;
@@ -40,11 +44,7 @@ public class TelaGerente extends JFrame{
     private JButton btnRemoverProduto;
     private JButton btnCadastraFornecedor;
     private JButton btnRemoverFornecedor;
-    private JPanel auxPanelFuncionario;
-    private JPanel auxPanelProduto;
-    private JPanel auxPanelFornecedor;
-    
-
+    private JButton btnCadastrarProdutos;
     
     public TelaGerente() {
         super("Aplicações de Gerenciamento");
@@ -151,8 +151,9 @@ public class TelaGerente extends JFrame{
         
         this.btnCadastraFornecedor = new JButton("Cadastrar Novo Fornecedor");
         this.btnRemoverFornecedor  = new JButton("Remover Fornecedor");
-
-        this.modelFornecedor = new TableFornecedores();
+        this.btnCadastrarProdutos = new JButton("Cadastrar produtos do fornecedor"); 
+        
+        TelaGerente.modelFornecedor = new TableFornecedores();
         
         this.tableFornecedor = new JTable(modelFornecedor);
         
@@ -164,13 +165,15 @@ public class TelaGerente extends JFrame{
         
         this.auxPanelFornecedor = new JPanel();
         
-        this.btnCadastraFornecedor.setPreferredSize(new Dimension(385,30));
-        this.btnRemoverFornecedor.setPreferredSize(new Dimension(385,30));
+        this.btnCadastraFornecedor.setPreferredSize(new Dimension(266,30));
+        this.btnRemoverFornecedor.setPreferredSize(new Dimension(266,30));
+        this.btnCadastrarProdutos.setPreferredSize(new Dimension(266,30));
         
         this.btnRemoverFornecedor.addActionListener(new RemoverFornecedor(this));
         
-        auxPanelFornecedor.add(this.btnCadastraFornecedor);
-        auxPanelFornecedor.add(this.btnRemoverFornecedor);
+        this.auxPanelFornecedor.add(this.btnCadastraFornecedor);
+        this.auxPanelFornecedor.add(this.btnRemoverFornecedor);
+        this.auxPanelFornecedor.add(this.btnCadastrarProdutos);
     }
 
     public JTable getTableFuncionario() {

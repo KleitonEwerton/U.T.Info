@@ -19,12 +19,7 @@ public class TableFornecedores extends AbstractTableModel{
    
     public TableFornecedores(){
         
-        List<String> arrayList = new ArrayList<>();
-        arrayList.add("dasdad");
-        arrayList.add("dasddsadsad");
         
-        listFornecedores.add(new Fornecedor("eee222eeee","2222eewrewre","2222REwrewre", arrayList));
-        listFornecedores.add(new Fornecedor("ee333eeeee","3333eewrewre","333REwrewre", arrayList));
         
     }
     
@@ -79,4 +74,9 @@ public class TableFornecedores extends AbstractTableModel{
     public Fornecedor getFornecedor(int indexLinha){
         return this.listFornecedores.get(indexLinha);
     }
+
+    public List<Fornecedor> getListFornecedores() {
+        return listFornecedores;
+    }
+    
 }

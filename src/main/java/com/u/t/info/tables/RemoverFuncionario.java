@@ -9,11 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author KleitonEwerton
- */
-
 public class RemoverFuncionario implements ActionListener{
 
     private final TelaGerente tela;
