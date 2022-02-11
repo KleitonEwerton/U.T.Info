@@ -7,6 +7,7 @@ package com.u.t.info.view;
 import com.u.t.info.controller.HabilitarCompra;
 import com.u.t.info.controller.HabilitarDevolucoes;
 import com.u.t.info.controller.HabilitarEstoque;
+import com.u.t.info.controller.NotificarGerente;
 import com.u.t.info.controller.RealizarDevolucao;
 import com.u.t.info.tables.TableProdutos;
 import java.awt.*;
@@ -174,6 +175,7 @@ public class TelaSupervisor extends JFrame {
 
         //oq fazer????
         JButton notificarGerente = new JButton("Notificar gerente");
+        notificarGerente.addActionListener(new NotificarGerente(this));
         estoque.add(notificarGerente);
 
     }
@@ -330,6 +332,14 @@ public class TelaSupervisor extends JFrame {
 
     public void setLastIndex(int lastIndex) {
         this.lastIndex = lastIndex;
+    }
+
+    public TableProdutos getModelProduto() {
+        return modelProduto;
+    }
+
+    public void setModelProduto(TableProdutos modelProduto) {
+        this.modelProduto = modelProduto;
     }
     
     

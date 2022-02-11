@@ -4,6 +4,7 @@
  */
 package com.u.t.info.view;
 
+import com.u.t.info.controller.RelatorioDeEstoque;
 import com.u.t.info.src.Gerente;
 import com.u.t.info.tables.*;
 
@@ -52,6 +53,7 @@ public class TelaGerente extends JFrame{
     
     public TelaGerente(Gerente gerente) {
         super("Aplicações de Gerenciamento - " + gerente.getNome());
+        this.addWindowListener(new RelatorioDeEstoque(this));
     }
 
     public void draw(){
