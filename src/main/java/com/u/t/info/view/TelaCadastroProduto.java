@@ -5,9 +5,15 @@
 package com.u.t.info.view;
 
 import com.u.t.info.controller.AdicionarProduto;
+import com.u.t.info.controller.AtualizaCliente;
 import com.u.t.info.controller.AtualizaProduto;
+import com.u.t.info.src.Cliente;
 import com.u.t.info.src.Produto;
+import com.u.t.info.utils.Arquivo;
+import com.u.t.info.utils.JSONCliente;
+
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -61,6 +67,27 @@ public class TelaCadastroProduto extends JFrame {
         super("Produto");
         this.listaProdutos = new ArrayList<>();
         this.addWindowListener(new AtualizaProduto(this));
+
+    }
+
+    public void atualizaLista()
+    {
+        fornecedores = new JComboBox();
+        try {
+            //janela é aberta
+            String dados = Arquivo.lerArquivo("clientes.json");
+            if (!dados.isEmpty()) {
+                List<Cliente> cliente = JSONCliente.toClientes(dados);
+                for(int i = 0; i < cliente.size(); i++)
+                {
+                    fornecedores.addItem(cliente.get(i).getNome());
+                    //System.out.println("Nome: "+cliente.get(i).getNome());
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            fornecedores.addItem("NULL");
+            //aqui a lista esta vazia
+        }
     }
 
     public void desenha() {
@@ -91,7 +118,7 @@ public class TelaCadastroProduto extends JFrame {
         cadastro = new JPanel();
         GridBagLayout layout = new GridBagLayout();
         cadastro.setLayout(layout);
-
+        atualizaLista();
         JLabel jLInfoProduto = new JLabel("Informações Básicas do Produto", JLabel.CENTER);
         Font font = new Font("Leelawadee UI", Font.PLAIN, 18);
         Border blackline = BorderFactory.createLineBorder(Color.black);
@@ -187,7 +214,7 @@ public class TelaCadastroProduto extends JFrame {
         gbc8.gridy = 3;
         cadastro.add(fornecedor, gbc8);
 
-        fornecedores = new JComboBox(this.listafornecedores);
+        //fornecedores = new JComboBox(this.listafornecedores);
         fornecedores.setPreferredSize(new Dimension(200, 25));
 
         GridBagConstraints gbc9 = new GridBagConstraints();

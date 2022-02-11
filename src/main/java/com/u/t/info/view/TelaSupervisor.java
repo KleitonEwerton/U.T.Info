@@ -9,11 +9,17 @@ import com.u.t.info.controller.HabilitarDevolucoes;
 import com.u.t.info.controller.HabilitarEstoque;
 import com.u.t.info.controller.NotificarGerente;
 import com.u.t.info.controller.RealizarDevolucao;
+import com.u.t.info.src.Produto;
 import com.u.t.info.tables.TableProdutos;
+import com.u.t.info.utils.Arquivo;
+import com.u.t.info.utils.JSONProduto;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,24 +38,24 @@ public class TelaSupervisor extends JFrame {
     private JPanel botoes;
 
     private JLabel txt_Inf = new JLabel();
-    
+
     private JLabel quantidadeDevolucao;
     private JTextField jtQuantidadeDevolucao;
     private JLabel codigo;
-    private JTextField jtCodigo;
     private JLabel defeito;
     private JRadioButton sim;
     private JRadioButton nao;
     private ButtonGroup rbDefeito;
-    
+
     private int lastIndex;
-    
+
     private JScrollPane barraRolagem;
     private CardLayout cardLayout;
     private JPanel painel;
 
     private TableProdutos modelProduto;
     private JTable tableProduto;
+    private JComboBox jComboBoxProdutos;
 
     public TelaSupervisor() {
 
@@ -81,6 +87,27 @@ public class TelaSupervisor extends JFrame {
             }
         };
         clock.start();
+    }
+
+    public void atualizaListaProdutos()
+    {
+        this.jComboBoxProdutos = new JComboBox();
+        this.jComboBoxProdutos.setPreferredSize(new Dimension(200, 20));
+        try {
+            //janela é aberta
+            String dados = Arquivo.lerArquivo("produtos.json");
+            if (!dados.isEmpty()) {
+                List<Produto> produtos = JSONProduto.toProdutos(dados);
+                for(int i =0; i < produtos.size(); i++)
+                {
+                    String str = produtos.get(i).getCodigo() + " - " + produtos.get(i).getNome();
+                    jComboBoxProdutos.addItem(str);
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            //JOptionPane.showConfirmDialog(tela, "Não foi possível carregar os dados!");
+            //aqui a lista esta vazia
+        }
     }
 
     public void desenha() {
@@ -203,36 +230,37 @@ public class TelaSupervisor extends JFrame {
 
         this.setLayout(new BorderLayout());
         //estoque.setPreferredSize(new Dimension(500, 500));
-        
-        
+
+
 
         this.quantidadeDevolucao = new JLabel("Quantidade para devolução:");
         this.jtQuantidadeDevolucao = new JTextField(10);
         this.codigo = new JLabel("Código do produto: ");
-        this.jtCodigo = new JTextField(20);
+
         this.defeito = new JLabel("Produto se encontra com defeito efeito? ");
         this.sim = new JRadioButton("Sim");
         this.nao = new JRadioButton("Não");
         this.rbDefeito = new ButtonGroup();
         this.rbDefeito.add(sim);
         this.rbDefeito.add(nao);
-     
+
         JButton btnDevolucao = new JButton("Devolução");
         btnDevolucao.addActionListener(new RealizarDevolucao(this));
         this.devolucoes.add(this.quantidadeDevolucao);
-       
+
         this.devolucoes.add(this.jtQuantidadeDevolucao);
-        
+
         this.devolucoes.add(this.codigo);
-        
-        this.devolucoes.add(this.jtCodigo);
-       
+
+        atualizaListaProdutos();
+        this.devolucoes.add(this.jComboBoxProdutos);
+
         this.devolucoes.add(this.defeito);
-       
+
         this.devolucoes.add(this.sim);
-        
+
         this.devolucoes.add(this.nao);
-        
+
         this.devolucoes.add(btnDevolucao);
 
         //this.painelPrincipal.add(devolucoes, BorderLayout.EAST);
@@ -241,7 +269,6 @@ public class TelaSupervisor extends JFrame {
 
     public static void main(String[] args) {
         TelaSupervisor tela = new TelaSupervisor();
-
         tela.desenha();
         tela.pack();
     }
@@ -341,6 +368,12 @@ public class TelaSupervisor extends JFrame {
     public void setModelProduto(TableProdutos modelProduto) {
         this.modelProduto = modelProduto;
     }
-    
-    
+
+    public JComboBox getjComboBoxProdutos() {
+        return jComboBoxProdutos;
+    }
+
+    public void setjComboBoxProdutos(JComboBox jComboBoxProdutos) {
+        this.jComboBoxProdutos = jComboBoxProdutos;
+    }
 }

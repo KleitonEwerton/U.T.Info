@@ -37,6 +37,7 @@ public class AtualizaCliente implements WindowListener {
         } catch (FileNotFoundException ex) {
             //JOptionPane.showConfirmDialog(tela, "Não foi possível carregar os dados!");
             //aqui a lista esta vazia
+
         }
     }
 

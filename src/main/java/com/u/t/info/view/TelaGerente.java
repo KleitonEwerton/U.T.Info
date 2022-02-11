@@ -254,7 +254,6 @@ class AbrirTelaCadastroFornecedor implements ActionListener{
         TelaCadastroFornecedor tela = new TelaCadastroFornecedor();
         tela.desenha();
         tela.pack();
-        
     }
     
     

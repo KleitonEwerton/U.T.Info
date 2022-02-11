@@ -42,8 +42,9 @@ public class NotificarGerente implements ActionListener {
             try {
                 Produto produtos = new Produto(modelo.getValueAt(selectedIndex, 0).toString(), modelo.getValueAt(selectedIndex, 1).toString(), Double.parseDouble(modelo.getValueAt(selectedIndex, 2).toString()), Double.parseDouble(modelo.getValueAt(selectedIndex, 3).toString()), modelo.getValueAt(selectedIndex, 4).toString(), modelo.getValueAt(selectedIndex, 5).toString(), modelo.getValueAt(selectedIndex, 6).toString(), Integer.parseInt(modelo.getValueAt(selectedIndex, 7).toString()), Integer.parseInt(modelo.getValueAt(selectedIndex, 8).toString()));
                 String toJSON = JSONProduto.toJSON(produtos);
-                System.out.println(toJSON);
+                //System.out.println(toJSON);
                 Arquivo.escreverArquivo(CAMINHO, toJSON);
+                JOptionPane.showMessageDialog(tela, "Gerente será notificado!");
             } catch (IOException ex) {
                 JOptionPane.showConfirmDialog(tela, "Não foi possível salvar os dados!");
             }
