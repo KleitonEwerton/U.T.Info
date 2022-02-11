@@ -4,6 +4,7 @@
  */
 package com.u.t.info.view;
 
+import com.u.t.info.src.Gerente;
 import com.u.t.info.tables.*;
 
 import java.awt.BorderLayout;
@@ -49,8 +50,8 @@ public class TelaGerente extends JFrame{
     private JButton btnRemoverFornecedor;
     private JButton btnCadastrarProdutos;
     
-    public TelaGerente() {
-        super("Aplicações de Gerenciamento");
+    public TelaGerente(Gerente gerente) {
+        super("Aplicações de Gerenciamento - " + gerente.getNome());
     }
 
     public void draw(){
