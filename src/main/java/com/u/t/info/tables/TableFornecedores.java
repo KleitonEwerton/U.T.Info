@@ -5,6 +5,11 @@
 package com.u.t.info.tables;
 
 import com.u.t.info.src.Fornecedor;
+import com.u.t.info.utils.Arquivo;
+import com.u.t.info.utils.JSONFornecedor;
+import static com.u.t.info.utils.JSONFornecedor.toFornecedores;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -13,13 +18,13 @@ import javax.swing.table.AbstractTableModel;
 
 public class TableFornecedores extends AbstractTableModel{
     
-    private final String[] colunas = new String[]{"Razao Social","CNPJ","Endereço", "Lista De Produtos"};
-    private final List<Fornecedor> listFornecedores = new ArrayList<>();    
+    private final String[] colunas = new String[]{"Razao Social","CNPJ","CEP", "Lista De Produtos"};
+    private List<Fornecedor> listFornecedores = new ArrayList<>();    
     
    
     public TableFornecedores(){
         
-        
+        lerFornecedores();
         
     }
     
@@ -48,7 +53,7 @@ public class TableFornecedores extends AbstractTableModel{
             case 1:
                 return this.listFornecedores.get(indexLinha).getCnpj();     
             case 2:
-                return this.listFornecedores.get(indexLinha).getEndereco();
+                return this.listFornecedores.get(indexLinha).getCep();
             case 3:
                 return this.listFornecedores.get(indexLinha).getListaDeProdutos(); 
             
@@ -58,16 +63,18 @@ public class TableFornecedores extends AbstractTableModel{
     }
     
   
-    public void addNovoFornecedor(Fornecedor produto){
+    public void addNovoFornecedor(Fornecedor produto) throws IOException{
         this.listFornecedores.add(produto);      
-        this.fireTableDataChanged();          
+        this.fireTableDataChanged();  
+        salvarFornecedores();
         
     }
     
-    
     public void removerFornecedor(int indexLinha){
+        
         this.listFornecedores.remove(indexLinha);                        
         this.fireTableRowsDeleted(indexLinha,indexLinha); 
+        salvarFornecedores();
     }
     
     
@@ -79,4 +86,34 @@ public class TableFornecedores extends AbstractTableModel{
         return listFornecedores;
     }
     
+    private void salvarFornecedores(){
+        
+        String toJSON = JSONFornecedor.toJSONFornecedores(listFornecedores);
+        
+        try{
+            
+            Arquivo.escreverArquivo("fornecedores",toJSON);
+            
+        } catch (IOException ex) {
+            
+            System.out.println("Erro ao salvar os fornecedores");
+            
+        }
+        
+    }
+    private void lerFornecedores(){
+        
+        try{
+            
+            String lerArquivo = Arquivo.lerArquivo("fornecedores");
+            listFornecedores = toFornecedores(lerArquivo);
+            
+        } catch (FileNotFoundException ex) {
+            
+            System.out.println("Erro ao abrir o arquivo dos fornecedores");
+        }
+        
+        
+        
+    }
 }

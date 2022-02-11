@@ -11,13 +11,22 @@ public class Fornecedor {
     
     private String razaoSocial;
     private String cnpj;
-    private String endereco;
-    private List<String> listaDeProdutos;
     
-    public Fornecedor(String razaoSocial, String cnpj,String endereco, List<String> listaDeProdutos) {
+    private List<String> listaDeProdutos;
+    private final String rua;
+    private final String numero;
+    private final String cidade;
+    private final String uf;
+    private final String cep;
+    
+    public Fornecedor(String razaoSocial, String cnpj,List<String> listaDeProdutos, String rua, String numero, String cidade, String uf, String cep) {
         this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
-        this.endereco = endereco;
+        this.rua = rua;
+        this.numero = numero;
+        this.cidade=cidade;
+        this.uf = uf;
+        this.cep = cep;
         this.listaDeProdutos = listaDeProdutos;
 
     }
@@ -38,14 +47,6 @@ public class Fornecedor {
         this.cnpj = cnpj;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
     public List<String> getListaDeProdutos() {
         return listaDeProdutos;
     }
@@ -56,14 +57,26 @@ public class Fornecedor {
         this.listaDeProdutos = listaDeProdutos;
         
     }
-    
-    public void salvarFornecedor(){
-        
-        //TODO: salvar o fornecedor em uma arquivo do banco de dados
-        System.out.println("Fornecedor salvo");
+
+    public String getRua() {
+        return rua;
     }
-    
-    
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public String getCep() {
+        return cep;
+    }
     
     
 }

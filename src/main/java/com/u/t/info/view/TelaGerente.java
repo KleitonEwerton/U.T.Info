@@ -8,8 +8,11 @@ import com.u.t.info.tables.*;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -55,7 +58,7 @@ public class TelaGerente extends JFrame{
         
         //CONFIGURAÇÕES
         this.setLayout(new BorderLayout());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(800, 600);
         this.setResizable(false);
         this.setLocationRelativeTo(null); 
@@ -170,6 +173,7 @@ public class TelaGerente extends JFrame{
         this.btnCadastrarProdutos.setPreferredSize(new Dimension(266,30));
         
         this.btnRemoverFornecedor.addActionListener(new RemoverFornecedor(this));
+        this.btnCadastraFornecedor.addActionListener(new AbrirTelaCadastroFornecedor());
         
         this.auxPanelFornecedor.add(this.btnCadastraFornecedor);
         this.auxPanelFornecedor.add(this.btnRemoverFornecedor);
@@ -199,7 +203,101 @@ public class TelaGerente extends JFrame{
     public TableFornecedores getModelFornecedor() {
         return modelFornecedor;
     }
+ 
+}
 
-   
+class AbrirTelaCadastroFornecedor implements ActionListener{
     
+    public AbrirTelaCadastroFornecedor(){
+        
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e){
+        
+        TelaCadastroFornecedor tela = new TelaCadastroFornecedor();
+        tela.desenha();
+        tela.pack();
+        
+    }
+    
+    
+}
+
+class RemoveProduto implements ActionListener{
+
+    private final TelaGerente tela;
+
+    public RemoveProduto(TelaGerente tela) {
+        this.tela = tela;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        int indexLinha = this.tela.getTableProduto().getSelectedRow();
+        
+        try{
+            
+            this.tela.getModelProduto().removerProduto(indexLinha);
+            
+        }catch(Exception ex){
+            
+            JOptionPane.showMessageDialog(null, "NENHUMA LINHA SELECIONADA, IMPOSSÍVEL REMOVER", "ERRO",JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+    }
+    
+}
+class RemoverFornecedor implements ActionListener{
+
+    private final TelaGerente tela;
+
+    public RemoverFornecedor(TelaGerente tela) {
+        this.tela = tela;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        int indexLinha = this.tela.getTableFornecedor().getSelectedRow();
+        
+        try{
+            
+            this.tela.getModelFornecedor().removerFornecedor(indexLinha);
+            
+        }catch(Exception ex){
+            
+            JOptionPane.showMessageDialog(null, "NENHUMA LINHA SELECIONADA, IMPOSSÍVEL REMOVER", "ERRO",JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+    }
+    
+}
+class RemoverFuncionario implements ActionListener{
+
+    private final TelaGerente tela;
+
+    public RemoverFuncionario(TelaGerente tela) {
+        this.tela = tela;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        int indexLinha = this.tela.getTableFuncionario().getSelectedRow();
+        
+        try{
+            
+            this.tela.getModelFuncionario().removerFuncionario(indexLinha);
+            
+        }catch(Exception ex){
+            
+            JOptionPane.showMessageDialog(null, "NENHUMA LINHA SELECIONADA, IMPOSSÍVEL REMOVER", "ERRO",JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+    }
 }

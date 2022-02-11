@@ -8,8 +8,12 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -36,7 +40,7 @@ public class TelaCadastroFornecedor extends TelaCadastro {
         this.setSize(800, 600); //tamanho
         this.setResizable(false); //bloquear redimensionamento
         this.setLocationRelativeTo(null); //iniciar no meio da tela
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //sair da aplicação
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //sair da aplicação
         desenhaTelaCadastroFornecedor(); //desenho da tela
     }
 
@@ -456,12 +460,20 @@ class SalvarFornecedor implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        List<String> arrayList = Arrays.asList(tela.getListaProdutos().getText().split("\\s*,\\s*"));
         
-        List<String> arrayList = new ArrayList<>();
-        arrayList.add("dasdad");
-        arrayList.add("dasddsadsad");
-        
-        TelaGerente.modelFornecedor.addNovoFornecedor(new Fornecedor(tela.getRazaoSocial().getText(), tela.getCnpj().getText(), "rua zero", arrayList));
+        try {
+            
+            TelaGerente.modelFornecedor.addNovoFornecedor(new Fornecedor(tela.getRazaoSocial().getText(), 
+                    tela.getCnpj().getText(), arrayList,tela.getRua().getText(),
+                    tela.getNumeroCasa().getText(),tela.getCidade().getText(), tela.getUf().getText(),
+                        tela.getCep().getText()));
+            
+        } catch (IOException ex) {
+            
+            System.out.println("Erro ao salvar fornecedor");
+        }
         
     }
     
