@@ -3,12 +3,14 @@ package com.u.t.info.utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.u.t.info.src.Produto;
+import java.io.FileNotFoundException;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JSONProduto {
+    
     public static String toJSON(Produto produto) {
         Gson gson = new Gson();
         return gson.toJson(produto);
@@ -31,5 +33,22 @@ public class JSONProduto {
         }.getType();
         List<Produto> produtos = gson.fromJson(json, produtosTipo);
         return produtos;
+    }
+    
+    public static List<Produto> lerProdutos(){
+        
+        List<Produto> listProdutos = new ArrayList<>();    
+        
+        try{
+            
+            String lerArquivo = Arquivo.lerArquivo("clientes");
+            listProdutos = toProdutos(lerArquivo);
+            
+        } catch (FileNotFoundException ex) {
+            
+            System.out.println("Erro ao abrir o arquivo dos clientes");
+        }
+        
+        return listProdutos;
     }
 }

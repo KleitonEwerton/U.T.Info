@@ -46,7 +46,7 @@ public class AtualizaCliente implements WindowListener {
             //janela é fechada
             List<Cliente> clientes = tela.getClientes();
 
-            String toJSON = JSONCliente.toJSON(clientes);
+            String toJSON = JSONCliente.toJSONClientes(clientes);
 
             Arquivo.escreverArquivo(CAMINHO, toJSON);
 

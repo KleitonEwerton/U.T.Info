@@ -3,6 +3,7 @@ package com.u.t.info.utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.u.t.info.src.Fornecedor;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +34,24 @@ public class JSONFornecedor {
         List<Fornecedor> fornecedores = gson.fromJson(json, fornecedoresTipo);
         return fornecedores;
     }
+    
+    public static List<Fornecedor> lerFornecedores(){
+        
+        List<Fornecedor> listFornecedores = new ArrayList<>();    
+        
+        try{
+            
+            String lerArquivo = Arquivo.lerArquivo("fornecedores");
+            listFornecedores = toFornecedores(lerArquivo);
+            
+        } catch (FileNotFoundException ex) {
+            
+            System.out.println("Erro ao abrir o arquivo dos fornecedores");
+        }
+        
+        return listFornecedores;
+    }
+    
+    
     
 }

@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.u.t.info.tables;
 
 import com.u.t.info.src.Fornecedor;
 import com.u.t.info.utils.Arquivo;
 import com.u.t.info.utils.JSONFornecedor;
-import static com.u.t.info.utils.JSONFornecedor.toFornecedores;
-import java.io.FileNotFoundException;
+import static com.u.t.info.utils.JSONFornecedor.lerFornecedores;
 import java.io.IOException;
 
 import java.util.List;
@@ -24,7 +20,7 @@ public class TableFornecedores extends AbstractTableModel{
    
     public TableFornecedores(){
         
-        lerFornecedores();
+        listFornecedores  = lerFornecedores();
         
     }
     
@@ -101,19 +97,5 @@ public class TableFornecedores extends AbstractTableModel{
         }
         
     }
-    private void lerFornecedores(){
-        
-        try{
-            
-            String lerArquivo = Arquivo.lerArquivo("fornecedores");
-            listFornecedores = toFornecedores(lerArquivo);
-            
-        } catch (FileNotFoundException ex) {
-            
-            System.out.println("Erro ao abrir o arquivo dos fornecedores");
-        }
-        
-        
-        
-    }
+    
 }

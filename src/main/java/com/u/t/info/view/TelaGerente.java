@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.u.t.info.view;
 
 import com.u.t.info.controller.RelatorioDeEstoque;
@@ -20,10 +17,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
-/**
- *
- * @author KleitonEwerton
- */
 public class TelaGerente extends JFrame{
     
     private JTabbedPane menuBar;
@@ -102,13 +95,15 @@ public class TelaGerente extends JFrame{
         this.btnCadastraFuncionario = new JButton("Cadastrar Novo Funcionário");
         this.btnDemitirFuncionario = new JButton("Demitir Funcionário");
 
+        
+        
         this.modelFuncionario = new TableFuncionarios();
         
         this.tableFuncionario = new JTable(modelFuncionario);
         
         this.tableFuncionario.setVisible(true);
         
-        this.tableFuncionario.setPreferredScrollableViewportSize(new Dimension(800,400));
+        this.tableFuncionario.setPreferredScrollableViewportSize(new Dimension(780,400));
         
         this.funcionarios.add(new JScrollPane(this.tableFuncionario));
         
@@ -118,6 +113,7 @@ public class TelaGerente extends JFrame{
         this.btnDemitirFuncionario.setPreferredSize(new Dimension(385,30));
         
         this.btnDemitirFuncionario.addActionListener(new RemoverFuncionario(this));
+        this.btnCadastraFuncionario.addActionListener(new AbrirTelaCadastroFuncionario());
         
         auxPanelFuncionario.add(this.btnCadastraFuncionario);
         auxPanelFuncionario.add(this.btnDemitirFuncionario);
@@ -136,7 +132,7 @@ public class TelaGerente extends JFrame{
         
         this.tableProduto.setVisible(true);
         
-        this.tableProduto.setPreferredScrollableViewportSize(new Dimension(800,400));
+        this.tableProduto.setPreferredScrollableViewportSize(new Dimension(780,400));
         
         this.produtos.add(new JScrollPane(this.tableProduto));
         
@@ -146,6 +142,7 @@ public class TelaGerente extends JFrame{
         this.btnRemoverProduto.setPreferredSize(new Dimension(385,30));
         
         this.btnRemoverProduto.addActionListener(new RemoveProduto(this));
+        this.btnCadastraProduto.addActionListener(new AbrirTelaCadastroProduto());
         
         auxPanelProduto.add(this.btnCadastraProduto);
         auxPanelProduto.add(this.btnRemoverProduto);
@@ -165,7 +162,7 @@ public class TelaGerente extends JFrame{
         
         this.tableFornecedor.setVisible(true);
         
-        this.tableFornecedor.setPreferredScrollableViewportSize(new Dimension(800,400));
+        this.tableFornecedor.setPreferredScrollableViewportSize(new Dimension(780,400));
         
         this.fornecedores.add(new JScrollPane(this.tableFornecedor));
         
@@ -207,6 +204,42 @@ public class TelaGerente extends JFrame{
         return modelFornecedor;
     }
  
+}
+
+class AbrirTelaCadastroProduto implements ActionListener{
+    
+    public AbrirTelaCadastroProduto(){
+        
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e){
+        
+        TelaCadastroProduto tela = new TelaCadastroProduto();
+        tela.desenha();
+        tela.pack();
+        
+    }
+    
+    
+}
+
+class AbrirTelaCadastroFuncionario implements ActionListener{
+    
+    public AbrirTelaCadastroFuncionario(){
+        
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e){
+        
+        TelaCadastroFuncionario tela = new TelaCadastroFuncionario();
+        tela.desenha();
+        tela.pack();
+        
+    }
+    
+    
 }
 
 class AbrirTelaCadastroFornecedor implements ActionListener{

@@ -348,6 +348,7 @@ public class TelaCadastroFornecedor extends TelaCadastro {
         painel.add(new JScrollPane(listaProdutos), gbc23);
 
         sair = new JButton("Cancelar");
+        sair.addActionListener(new  CancelarAcao(this));
 
         GridBagConstraints gbc32 = new GridBagConstraints();
         gbc32.gridx = 3;
@@ -456,6 +457,7 @@ class SalvarFornecedor implements ActionListener{
 
     public SalvarFornecedor(TelaCadastroFornecedor tela) {
         this.tela = tela;
+        
     }
     
     @Override
@@ -478,3 +480,21 @@ class SalvarFornecedor implements ActionListener{
     }
     
 }
+class CancelarAcao implements ActionListener{
+
+    private final TelaCadastroFornecedor tela;
+
+    public CancelarAcao(TelaCadastroFornecedor tela) {
+        this.tela = tela;
+        
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        tela.dispose();
+       
+    }
+    
+}
+
