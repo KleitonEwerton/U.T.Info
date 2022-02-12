@@ -6,6 +6,7 @@ import com.u.t.info.src.Gerente;
 import com.u.t.info.tables.*;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -49,6 +50,7 @@ public class TelaGerente extends JFrame{
     private Gerente gerente;
     private JButton btnAtualizarProdutos;
     private JButton btnAtualizarFornecedores;
+    private Component vendas;
     
     public TelaGerente(Gerente gerente) {
         super("Aplicações de Gerenciamento - " + gerente.getNome());
@@ -58,7 +60,6 @@ public class TelaGerente extends JFrame{
 
     public void draw(){
 
-        
         //CONFIGURAÇÕES
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -71,10 +72,12 @@ public class TelaGerente extends JFrame{
         this.funcionarios = new JPanel();
         this.produtos = new JPanel();
         this.fornecedores = new JPanel();
+        
 
         this.menuBar.addTab("Funcionários", this.funcionarios);
         this.menuBar.addTab("Produtos", this.produtos);
         this.menuBar.addTab("Fornecedores", this.fornecedores);
+        this.menuBar.addTab("Vendas", this.vendas);
 
         this.getContentPane().add(menuBar);
         
@@ -94,6 +97,12 @@ public class TelaGerente extends JFrame{
         
        
     }  
+    
+    private void drawVednas(){
+        
+        
+        
+    }
     
     private void drawFuncionarios(){
         

@@ -230,6 +230,7 @@ public class TelaSupervisor extends JFrame {
 
         JButton btnDevolucao = new JButton("Devolução");
         btnDevolucao.addActionListener(new RealizarDevolucao(this));
+        
         this.devolucoes.add(this.quantidadeDevolucao);
 
         this.devolucoes.add(this.jtQuantidadeDevolucao);
