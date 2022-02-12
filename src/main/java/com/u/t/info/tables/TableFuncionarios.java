@@ -5,6 +5,14 @@
 package com.u.t.info.tables;
 
 import com.u.t.info.src.Funcionario;
+import static com.u.t.info.src.Funcionario.retornaListaFuncionarios;
+import com.u.t.info.src.Gerente;
+import com.u.t.info.src.Supervisor;
+import com.u.t.info.src.Vendedor;
+
+import static com.u.t.info.utils.JSONGerente.salvarGerentesJSON;
+import static com.u.t.info.utils.JSONSupervisor.salvarSupervisoresJSON;
+import static com.u.t.info.utils.JSONVendedor.salvarVendedoressJSON;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -13,13 +21,14 @@ import javax.swing.table.AbstractTableModel;
 
 public class TableFuncionarios extends AbstractTableModel{
     
-    private final String[] colunas = new String[]{"Nome", "Contato", "CPF", "Codigo Hash", "Identificacao", "Endereço"};
-    private final List<Funcionario> listFuncionarios = new ArrayList<>();    
+    private final String[] colunas = new String[]{"CPF","Nome", "Contato", "CEP","Ocupação"};
+    private List<Funcionario> listFuncionarios;    
     
    
     public TableFuncionarios(){
-        //listFuncionarios.add(new Gerente("Rfdsfdsfafa", "rafa.gmailfsdfsdfsf.com","1223333333211", "pdfsdsfdfsfdoooo", 12,"rua dfdsfdfsdfsfdfsas dores","120", "fdfsdf","nmddd","dfsdf",322));
-        //listFuncionarios.add(new Gerente("Rfdsfdsfafa", "rafa.gmailfsdfsdfsf.com","1223333333211", "pdfsdsfdfsfdoooo", 12,"rua dfdsfdfsdfsfdfsas dores","120", "fdfsdf","nmddd","dfsdf",322));
+        this.listFuncionarios = new ArrayList<>();
+        this.listFuncionarios = retornaListaFuncionarios();
+        
     }
     
     @Override
@@ -43,35 +52,88 @@ public class TableFuncionarios extends AbstractTableModel{
         switch(indexColuna){
             
             case 0:
-                return this.listFuncionarios.get(indexLinha).getNome();      
+                return this.listFuncionarios.get(indexLinha).getCpf();      
             case 1:
-                return this.listFuncionarios.get(indexLinha).getContato();     
+                return this.listFuncionarios.get(indexLinha).getNome();     
             case 2:
-                return this.listFuncionarios.get(indexLinha).getCpf();
+                return this.listFuncionarios.get(indexLinha).getContato();
             case 3:
-                return this.listFuncionarios.get(indexLinha).getSenha();
+                return this.listFuncionarios.get(indexLinha).getCep();
             case 4:
-                return this.listFuncionarios.get(indexLinha).getRua() +" "+this.listFuncionarios.get(indexLinha).getNumero() ;
+                switch (this.listFuncionarios.get(indexLinha).getClass().getTypeName())
+                {
+                    case "com.u.t.info.src.Gerente":
+                        return "Gerente";
+                    case "com.u.t.info.src.Supervisor":
+                        return "Supervisor";
+                    case "com.u.t.info.src.Vendedor":
+                        return "Vendedor";
+                }
+                
         }
         return null;
         
     }
     
   
-    public void addNovoFuncionario(Funcionario produto){
-        this.listFuncionarios.add(produto);      
-        this.fireTableDataChanged();          
+    public void atualizaTabela(){
+        
+        this.listFuncionarios = retornaListaFuncionarios();
+        this.fireTableDataChanged();
         
     }
     
+    public void addNovoFuncionario(Funcionario produto){
+        this.listFuncionarios.add(produto);      
+        this.fireTableDataChanged();          
+        salvarFuncionarios();
+    }
     
     public void removerFuncionario(int indexLinha){
+        
         this.listFuncionarios.remove(indexLinha);                        
         this.fireTableRowsDeleted(indexLinha,indexLinha); 
+        salvarFuncionarios();
     }
     
     
     public Funcionario getFuncionario(int indexLinha){
         return this.listFuncionarios.get(indexLinha);
     }
+    
+    public List<Funcionario> getListFornecedores() {
+        return listFuncionarios;
+    }
+    
+    private void salvarFuncionarios(){
+        
+        List<Gerente> listGerente       = new ArrayList<>();
+        List<Supervisor> listSupervisor = new ArrayList<>();
+        List<Vendedor> listVendedor     = new ArrayList<>();
+        
+        for(Funcionario funcionario: this.listFuncionarios){
+            
+            switch (funcionario.getClass().getTypeName())
+                {
+                    case "com.u.t.info.src.Gerente":
+                        listGerente.add((Gerente) funcionario);
+                        break;
+                    case "com.u.t.info.src.Supervisor":
+                        listSupervisor.add((Supervisor) funcionario);
+                        break;
+                    case "com.u.t.info.src.Vendedor":
+                        listVendedor.add((Vendedor) funcionario);
+                        break;
+                }
+            
+        }
+        
+        salvarGerentesJSON(listGerente);
+        salvarVendedoressJSON(listVendedor);
+        salvarSupervisoresJSON(listSupervisor);
+       
+        
+    }
+    
+    
 }

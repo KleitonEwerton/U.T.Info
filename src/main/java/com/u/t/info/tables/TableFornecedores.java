@@ -2,6 +2,7 @@
 package com.u.t.info.tables;
 
 import com.u.t.info.src.Fornecedor;
+import com.u.t.info.src.Funcionario;
 import com.u.t.info.utils.Arquivo;
 import com.u.t.info.utils.JSONFornecedor;
 import static com.u.t.info.utils.JSONFornecedor.lerFornecedores;
@@ -58,6 +59,12 @@ public class TableFornecedores extends AbstractTableModel{
         
     }
     
+    public void atualizaTabela(){
+        
+        this.listFornecedores = lerFornecedores();
+        this.fireTableDataChanged();
+        
+    }
   
     public void addNovoFornecedor(Fornecedor produto) throws IOException{
         this.listFornecedores.add(produto);      

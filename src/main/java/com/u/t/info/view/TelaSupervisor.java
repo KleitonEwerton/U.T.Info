@@ -127,7 +127,7 @@ public class TelaSupervisor extends JFrame {
         desenhaMenus();
         this.add(this.painelPrincipal);
         this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         this.repaint();
     }

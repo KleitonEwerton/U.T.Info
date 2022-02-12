@@ -42,7 +42,7 @@ public class AtualizaProduto implements WindowListener {
             //janela é fechada
             List<Produto> produtos = tela.getListaProdutos();
 
-            String toJSON = JSONProduto.toJSON(produtos);
+            String toJSON = JSONProduto.toJSONProdutos(produtos);
 
             Arquivo.escreverArquivo(CAMINHO, toJSON);
 

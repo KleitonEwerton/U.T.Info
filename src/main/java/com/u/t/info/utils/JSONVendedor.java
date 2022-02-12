@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.u.t.info.src.Vendedor;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class JSONVendedor {
     
-    public static String toJSONVenda(Vendedor vendedor) {
+    public static String toJSONVendedor(Vendedor vendedor) {
         Gson gson = new Gson();
         return gson.toJson(vendedor);
     }
@@ -51,6 +52,19 @@ public class JSONVendedor {
         }
         
         return listVendedores;
+    }
+    
+    public static void salvarVendedoressJSON(List<Vendedor> listVendedor){
+        
+        try{
+            String toJSONVendedor = JSONVendedor.toJSONSVendedores(listVendedor);
+            Arquivo.escreverArquivo("arquivos/vendedores.json",toJSONVendedor);
+            
+        } catch (IOException ex) {
+            
+            System.out.println("Erro ao salvar os vendedores em arquivos/vendedores.json");
+            
+        }
     }
     
 }

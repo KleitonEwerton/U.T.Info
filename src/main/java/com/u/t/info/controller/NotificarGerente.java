@@ -67,7 +67,7 @@ public class NotificarGerente implements ActionListener {
                         Integer.parseInt(modelo.getValueAt(selectedIndex, 7).toString()), 
                         Integer.parseInt(modelo.getValueAt(selectedIndex, 8).toString()));
                 
-                String toJSON = JSONProduto.toJSON(produtos);
+                String toJSON = JSONProduto.toJSONProduto(produtos);
                 
                 //escreve as informações do produto no arquivo
                 Arquivo.escreverArquivo(CAMINHO, toJSON);

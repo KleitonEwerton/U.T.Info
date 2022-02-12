@@ -11,12 +11,12 @@ import java.util.List;
 
 public class JSONProduto {
     
-    public static String toJSON(Produto produto) {
+    public static String toJSONProduto(Produto produto) {
         Gson gson = new Gson();
         return gson.toJson(produto);
     }
 
-    public static String toJSON(List<Produto> produtos) {
+    public static String toJSONProdutos(List<Produto> produtos) {
         Gson gson = new Gson();
         return gson.toJson(produtos);
     }
@@ -41,12 +41,12 @@ public class JSONProduto {
         
         try{
             
-            String lerArquivo = Arquivo.lerArquivo("clientes");
+            String lerArquivo = Arquivo.lerArquivo("arquivos/produtos.json");
             listProdutos = toProdutos(lerArquivo);
             
         } catch (FileNotFoundException ex) {
             
-            System.out.println("Erro ao abrir o arquivo dos clientes");
+            System.out.println("Erro ao abrir o arquivo dos produtos arquivos/produtos.json");
         }
         
         return listProdutos;

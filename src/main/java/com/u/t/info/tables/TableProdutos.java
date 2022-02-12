@@ -5,6 +5,10 @@
 package com.u.t.info.tables;
 
 import com.u.t.info.src.Produto;
+import com.u.t.info.utils.Arquivo;
+import com.u.t.info.utils.JSONProduto;
+import static com.u.t.info.utils.JSONProduto.lerProdutos;
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
@@ -13,12 +17,11 @@ import javax.swing.table.AbstractTableModel;
 public class TableProdutos extends AbstractTableModel{
     
     private final String[] colunas = new String[]{"Nome", "Codigo", "Preco de Compra", "Preco de Venda", "Fornecedor", "Descricao", "Modelo", "Estoque", "Estoque Minimo"};
-    private final List<Produto> listProduto = new ArrayList<>();    
+    private List<Produto> listProduto = new ArrayList<>();    
     
    
     public TableProdutos(){
-        listProduto.add(new Produto("Not","wrewre",23232.4,3232.4,"Joao","DSDs","dsads",222,2323));
-        listProduto.add(new Produto("No3ret","wrewwerere",23233332.4,3222332.4,"Jofdsfao","fsfDSDs","dsadfsds",22432,243323));
+        listProduto = JSONProduto.lerProdutos();
     }
     
     @Override
@@ -65,9 +68,17 @@ public class TableProdutos extends AbstractTableModel{
     }
     
   
+    public void atualizaTabela(){
+        
+        this.listProduto = lerProdutos();
+        this.fireTableDataChanged();
+        
+    }
+    
     public void addNovoProduto(Produto produto){
         this.listProduto.add(produto);      
-        this.fireTableDataChanged();          
+        this.fireTableDataChanged();  
+        salvarProdutos();       
         
     }
     
@@ -75,10 +86,31 @@ public class TableProdutos extends AbstractTableModel{
     public void removerProduto(int indexLinha){
         this.listProduto.remove(indexLinha);                        
         this.fireTableRowsDeleted(indexLinha,indexLinha); 
+        salvarProdutos();  
     }
     
     
     public Produto getProduto(int indexLinha){
         return this.listProduto.get(indexLinha);
+    }
+    
+    public List<Produto> getListFornecedores() {
+        return listProduto;
+    }
+    
+    private void salvarProdutos(){
+        
+        String toJSON = JSONProduto.toJSONProdutos(listProduto);
+        
+        try{
+            
+            Arquivo.escreverArquivo("arquivos/produtos.json",toJSON);
+            
+        } catch (IOException ex) {
+            
+            System.out.println("Erro ao salvar os fornecedores");
+            
+        }
+        
     }
 }

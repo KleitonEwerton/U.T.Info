@@ -7,8 +7,10 @@ import com.u.t.info.tables.*;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -42,10 +44,15 @@ public class TelaGerente extends JFrame{
     private JButton btnRemoverProduto;
     private JButton btnCadastraFornecedor;
     private JButton btnRemoverFornecedor;
-    private JButton btnCadastrarProdutos;
+    private JButton btnAtualizarFuncionarios;
+    
+    private Gerente gerente;
+    private JButton btnAtualizarProdutos;
+    private JButton btnAtualizarFornecedores;
     
     public TelaGerente(Gerente gerente) {
         super("Aplicações de Gerenciamento - " + gerente.getNome());
+        this.gerente = gerente;
         this.addWindowListener(new RelatorioDeEstoque(this));
     }
 
@@ -71,6 +78,7 @@ public class TelaGerente extends JFrame{
 
         this.getContentPane().add(menuBar);
         
+        
         //MENU BAR
         drawFuncionarios();
         this.funcionarios.add(auxPanelFuncionario);
@@ -94,7 +102,9 @@ public class TelaGerente extends JFrame{
         
         this.btnCadastraFuncionario = new JButton("Cadastrar Novo Funcionário");
         this.btnDemitirFuncionario = new JButton("Demitir Funcionário");
-
+        ImageIcon image = new ImageIcon(new ImageIcon("img/refresh.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+        this.btnAtualizarFuncionarios = new JButton("", image);
+        
         
         
         this.modelFuncionario = new TableFuncionarios();
@@ -109,14 +119,18 @@ public class TelaGerente extends JFrame{
         
         this.auxPanelFuncionario = new JPanel();
         
-        this.btnCadastraFuncionario.setPreferredSize(new Dimension(385,30));
-        this.btnDemitirFuncionario.setPreferredSize(new Dimension(385,30));
+        this.btnCadastraFuncionario.setPreferredSize(new Dimension(335,30));
+        this.btnDemitirFuncionario.setPreferredSize(new Dimension(335,30));
+        this.btnAtualizarFuncionarios.setPreferredSize(new Dimension(50,30));
+        
         
         this.btnDemitirFuncionario.addActionListener(new RemoverFuncionario(this));
         this.btnCadastraFuncionario.addActionListener(new AbrirTelaCadastroFuncionario());
+        this.btnAtualizarFuncionarios.addActionListener(new  AtualizarFuncionarios(this));
         
         auxPanelFuncionario.add(this.btnCadastraFuncionario);
         auxPanelFuncionario.add(this.btnDemitirFuncionario);
+        auxPanelFuncionario.add(this.btnAtualizarFuncionarios);
         
     }
     private void drawProdutos(){
@@ -125,7 +139,9 @@ public class TelaGerente extends JFrame{
         
         this.btnCadastraProduto = new JButton("Cadastrar Novo Produto");
         this.btnRemoverProduto= new JButton("Remover Produto");
-
+        ImageIcon image = new ImageIcon(new ImageIcon("img/refresh.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+        this.btnAtualizarProdutos = new JButton("", image);
+        
         this.modelProduto = new TableProdutos();
         
         this.tableProduto = new JTable(modelProduto);
@@ -138,15 +154,17 @@ public class TelaGerente extends JFrame{
         
         this.auxPanelProduto = new JPanel();
         
-        this.btnCadastraProduto.setPreferredSize(new Dimension(385,30));
-        this.btnRemoverProduto.setPreferredSize(new Dimension(385,30));
+        this.btnCadastraProduto.setPreferredSize(new Dimension(335,30));
+        this.btnRemoverProduto.setPreferredSize(new Dimension(335,30));
+        this.btnAtualizarProdutos.setPreferredSize(new Dimension(50,30));
         
         this.btnRemoverProduto.addActionListener(new RemoveProduto(this));
         this.btnCadastraProduto.addActionListener(new AbrirTelaCadastroProduto());
+        this.btnAtualizarProdutos.addActionListener(new AtualizarProdutos(this));
         
         auxPanelProduto.add(this.btnCadastraProduto);
         auxPanelProduto.add(this.btnRemoverProduto);
-        
+        auxPanelProduto.add(this.btnAtualizarProdutos);
     }
     private void drawFornecedores(){
         //FORNECEDORES
@@ -154,8 +172,9 @@ public class TelaGerente extends JFrame{
         
         this.btnCadastraFornecedor = new JButton("Cadastrar Novo Fornecedor");
         this.btnRemoverFornecedor  = new JButton("Remover Fornecedor");
-        this.btnCadastrarProdutos = new JButton("Cadastrar produtos do fornecedor"); 
-        
+        ImageIcon image = new ImageIcon(new ImageIcon("img/refresh.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+        this.btnAtualizarFornecedores = new JButton("", image);
+       
         TelaGerente.modelFornecedor = new TableFornecedores();
         
         this.tableFornecedor = new JTable(modelFornecedor);
@@ -168,16 +187,17 @@ public class TelaGerente extends JFrame{
         
         this.auxPanelFornecedor = new JPanel();
         
-        this.btnCadastraFornecedor.setPreferredSize(new Dimension(266,30));
-        this.btnRemoverFornecedor.setPreferredSize(new Dimension(266,30));
-        this.btnCadastrarProdutos.setPreferredSize(new Dimension(266,30));
+        this.btnCadastraFornecedor.setPreferredSize(new Dimension(335,30));
+        this.btnRemoverFornecedor.setPreferredSize(new Dimension(335,30));
+        this.btnAtualizarFornecedores.setPreferredSize(new Dimension(50,30));
         
         this.btnRemoverFornecedor.addActionListener(new RemoverFornecedor(this));
         this.btnCadastraFornecedor.addActionListener(new AbrirTelaCadastroFornecedor());
+        this.btnAtualizarFornecedores.addActionListener(new AtualizarFornecedores(this));
         
         this.auxPanelFornecedor.add(this.btnCadastraFornecedor);
         this.auxPanelFornecedor.add(this.btnRemoverFornecedor);
-        this.auxPanelFornecedor.add(this.btnCadastrarProdutos);
+        this.auxPanelFornecedor.add(this.btnAtualizarFornecedores);
     }
 
     public JTable getTableFuncionario() {
@@ -203,7 +223,9 @@ public class TelaGerente extends JFrame{
     public TableFornecedores getModelFornecedor() {
         return modelFornecedor;
     }
- 
+    public Gerente getGerenteResponsavel (){
+        return this.gerente;
+    }
 }
 
 class AbrirTelaCadastroProduto implements ActionListener{
@@ -326,7 +348,11 @@ class RemoverFuncionario implements ActionListener{
         
         try{
             
-            this.tela.getModelFuncionario().removerFuncionario(indexLinha);
+            if(!this.tela.getModelFuncionario().getFuncionario(indexLinha).getCpf().equals(this.tela.getGerenteResponsavel().getCpf()))
+            
+                this.tela.getModelFuncionario().removerFuncionario(indexLinha);
+            else 
+                JOptionPane.showMessageDialog(null, "Ops! Impossível remover a sí próprio", "ERRO",JOptionPane.ERROR_MESSAGE);
             
         }catch(Exception ex){
             
@@ -335,4 +361,55 @@ class RemoverFuncionario implements ActionListener{
         }
         
     }
+}
+class AtualizarFuncionarios implements ActionListener{
+
+    private final TelaGerente tela;
+
+    public AtualizarFuncionarios(TelaGerente tela){
+        this.tela = tela;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        this.tela.getModelFuncionario().atualizaTabela();
+        
+    }
+
+   
+}
+class AtualizarProdutos implements ActionListener{
+
+    private final TelaGerente tela;
+
+    public AtualizarProdutos(TelaGerente tela){
+        this.tela = tela;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        this.tela.getModelProduto().atualizaTabela();
+        
+    }
+
+   
+}
+class AtualizarFornecedores implements ActionListener{
+
+    private final TelaGerente tela;
+
+    public AtualizarFornecedores(TelaGerente tela){
+        this.tela = tela;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        this.tela.getModelFornecedor().atualizaTabela();
+        
+    }
+
+   
 }

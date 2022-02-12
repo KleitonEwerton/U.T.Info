@@ -68,7 +68,7 @@ public class RealizarDevolucao implements ActionListener{
                             PrintWriter printWriter = new PrintWriter("arquivos/produtos.json");
                             printWriter.print("");
                             printWriter.close();
-                            String toJSON = JSONProduto.toJSON(produtosAtualizados);
+                            String toJSON = JSONProduto.toJSONProdutos(produtosAtualizados);
                             //escreve com o estoque atualizado
                             Arquivo.escreverArquivo("arquivos/produtos.json", toJSON);
                             JOptionPane.showMessageDialog(tela, "Estoque Atualizado!");

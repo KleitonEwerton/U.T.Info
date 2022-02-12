@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.u.t.info.src.Supervisor;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,19 @@ public class JSONSupervisor {
         }
         
         return listSupervisores;
+    }
+    public static void salvarSupervisoresJSON(List<Supervisor> listSupervisor){
+        
+        try{
+            
+            String toJSON= JSONSupervisor.toJSONSupervisores(listSupervisor);
+            Arquivo.escreverArquivo("arquivos/supervisores.json",toJSON);
+            
+        } catch (IOException ex) {
+            
+            System.out.println("Erro ao salvar os supervisores em arquivos/supervisores.json");
+            
+        }
     }
     
 }

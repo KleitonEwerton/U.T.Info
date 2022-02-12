@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.u.t.info.src.Fornecedor;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,19 @@ public class JSONFornecedor {
         
         return listFornecedores;
     }
-    
+    public static void salvarFornecedoresJSON(List<Fornecedor> listFornecedor){
+        
+        try{
+            
+            String toJSONFornecedor = JSONFornecedor.toJSONFornecedores(listFornecedor);
+            Arquivo.escreverArquivo("arquivos/fornecedores.json",toJSONFornecedor);
+            
+        } catch (IOException ex) {
+            
+            System.out.println("Erro ao salvar os fornecedores em arquivos/fornecedores.json");
+            
+        }
+    }
     
     
 }

@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.u.t.info.src.Gerente;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,10 +49,22 @@ public class JSONGerente {
             
         } catch (FileNotFoundException ex) {
             
-            //System.out.println("Erro ao abrir o arquivo dos gerentes");
+            System.out.println("Erro ao abrir o arquivo dos gerentes");
         }
         
         return listGerentes;
+    }
+    public static void salvarGerentesJSON(List<Gerente> listGerente){
+        
+        try{
+            String toJSONGerente = JSONGerente.toJSONGerentes(listGerente);
+            Arquivo.escreverArquivo("arquivos/gerentes.json",toJSONGerente);
+            
+        } catch (IOException ex) {
+            
+            System.out.println("Erro ao salvar os gerentes em arquivos/gerentes.json");
+            
+        }
     }
     
 }

@@ -3,6 +3,8 @@ package com.u.t.info.view;
 import com.u.t.info.src.Fornecedor;
 import com.u.t.info.tables.TableFornecedores;
 import com.u.t.info.utils.BuscaCep;
+import com.u.t.info.utils.JSONFornecedor;
+import static com.u.t.info.utils.JSONFornecedor.salvarFornecedoresJSON;
 
 import javax.swing.JFrame;
 import java.awt.*;
@@ -465,17 +467,14 @@ class SalvarFornecedor implements ActionListener{
 
         List<String> arrayList = Arrays.asList(tela.getListaProdutos().getText().split("\\s*,\\s*"));
         
-        try {
-            
-            TelaGerente.modelFornecedor.addNovoFornecedor(new Fornecedor(tela.getRazaoSocial().getText(), 
-                    tela.getCnpj().getText(), arrayList,tela.getRua().getText(),
-                    tela.getNumeroCasa().getText(),tela.getCidade().getText(), tela.getUf().getText(),
-                        tela.getCep().getText()));
-            
-        } catch (IOException ex) {
-            
-            System.out.println("Erro ao salvar fornecedor");
-        }
+        List<Fornecedor> listFornecedores = JSONFornecedor.lerFornecedores();
+        
+        listFornecedores.add(new Fornecedor(tela.getRazaoSocial().getText(),
+                tela.getCnpj().getText(), arrayList,tela.getRua().getText(),
+                tela.getNumeroCasa().getText(),tela.getCidade().getText(), tela.getUf().getText(),
+                tela.getCep().getText()));
+        
+        salvarFornecedoresJSON(listFornecedores);
         
     }
     

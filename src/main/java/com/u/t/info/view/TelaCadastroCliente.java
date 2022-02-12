@@ -37,7 +37,7 @@ public class TelaCadastroCliente extends TelaCadastro {
         this.setSize(800, 600); //tamanho
         this.setResizable(false); //bloquear redimensionamento
         this.setLocationRelativeTo(null); //iniciar no meio da tela
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //sair da aplicação
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //sair da aplicação
         desenhaTelaCadastroCliente(); //desenho da tela
     }
 
@@ -127,7 +127,7 @@ public class TelaCadastroCliente extends TelaCadastro {
 
 
         Border cadastro = BorderFactory.createRaisedBevelBorder();
-        ImageIcon image = new ImageIcon(new ImageIcon("img/Pessoa.png").getImage().getScaledInstance(120, 100, Image.SCALE_DEFAULT));
+        ImageIcon image = new ImageIcon(new ImageIcon("img/refresh.png").getImage().getScaledInstance(120, 100, Image.SCALE_DEFAULT));
         JLabel imageLabel = new JLabel(image);
         imageLabel.setBorder(cadastro);
 

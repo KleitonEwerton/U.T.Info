@@ -34,12 +34,13 @@ public class TelaCadastroFuncionario extends TelaCadastro {
 
     @Override
     public void desenha() {
+        
         this.setTitle("Cadastro de Funcionário");
         this.setVisible(true); //visibilidade
         this.setSize(800, 600); //tamanho
         this.setResizable(false); //bloquear redimensionamento
         this.setLocationRelativeTo(null); //iniciar no meio da tela
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //sair da aplicação
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //sair da aplicação
         desenhaTelaCadastroFuncionario(); //desenho da tela
     }
 

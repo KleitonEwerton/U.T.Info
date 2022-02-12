@@ -62,7 +62,7 @@ public class TelaVendedor extends JFrame{
         this.setSize(800,600);
         this.setVisible(true);
         //this.setLayout(new BorderLayout());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //this.setResizable(false);
         this.setLocationRelativeTo(null);
         

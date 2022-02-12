@@ -106,7 +106,7 @@ public class TelaCadastroProduto extends JFrame {
         this.setSize(800, 600);
         this.setVisible(true);
         this.setLocationRelativeTo(null); //iniciar no meio da tela
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     }
 
