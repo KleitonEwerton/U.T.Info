@@ -50,7 +50,7 @@ public class EntrarLogin implements ActionListener {
                         login = 1;
                         break;
                     case "com.u.t.info.src.Supervisor":
-                        TelaSupervisor telaSupervisor = new TelaSupervisor();
+                        TelaSupervisor telaSupervisor = new TelaSupervisor((Supervisor) funcionario);
                         telaSupervisor.desenha();
                         tela.dispose();
                         telaSupervisor.pack();

@@ -6,6 +6,7 @@ package com.u.t.info.src;
 
 public class Produto {
 
+    //atributos da classe produto
     private String nome;
     private String codigo;
     private double precoCompra;
@@ -34,7 +35,7 @@ public class Produto {
         this.estoqueMinimo = estoqueMinimo;
     }
 
-    // gets e sets
+    // getters e setters
     public String getNome() {
         return nome;
     }

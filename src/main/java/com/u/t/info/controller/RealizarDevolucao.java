@@ -4,7 +4,7 @@
  */
 package com.u.t.info.controller;
 
-import com.sun.deploy.util.StringUtils;
+
 import com.u.t.info.src.Produto;
 import com.u.t.info.utils.Arquivo;
 import com.u.t.info.utils.JSONProduto;
@@ -15,24 +15,31 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author agata
  */
+
+/*
+Classe usada pelo supervisor para rwalizar a devolução de um produto
+*/
 public class RealizarDevolucao implements ActionListener{
+    
+    //atributo
      private final TelaSupervisor tela;
 
+     
+     //construtor
     public RealizarDevolucao(TelaSupervisor tela) {
         this.tela = tela;
     }
     
-    
+    /*
+    Evento de botão: remove o produto do arquivo e adiciona ele novamente com o estoque atualizado
+    */
     @Override
     public void actionPerformed(ActionEvent e) {
         String str = String.valueOf(tela.getjComboBoxProdutos().getSelectedItem()); //item selecionado

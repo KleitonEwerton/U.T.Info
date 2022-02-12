@@ -5,36 +5,30 @@
 package com.u.t.info.view;
 
 import com.u.t.info.controller.AdicionarProduto;
-import com.u.t.info.controller.AtualizaCliente;
 import com.u.t.info.controller.AtualizaProduto;
-import com.u.t.info.src.Cliente;
 import com.u.t.info.src.Fornecedor;
 import com.u.t.info.src.Produto;
 import com.u.t.info.utils.Arquivo;
-import com.u.t.info.utils.JSONCliente;
 import com.u.t.info.utils.JSONFornecedor;
-
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.util.List;
-import java.util.concurrent.ForkJoinPool;
 
 /**
  *
  * @author agata
  */
-
 public class TelaCadastroProduto extends JFrame {
 
-    // JFrame produto;
-    //para teste, versao final pegar do banco
-    private String[] listafornecedores = {"Dell", "Samsung", "Positivo", "Asus", "Acer"};
-
+    //componentes da tela
     private JTabbedPane barraDeMenu;
+
     private List<Produto> listaProdutos;
+
+    private JPanel painel;
     private JPanel cadastro;
     private JPanel venda;
     private JPanel inf;
@@ -43,11 +37,9 @@ public class TelaCadastroProduto extends JFrame {
     private JLabel code;
     private JLabel model;
     private JLabel fornecedor;
-    private JLabel estoque;
     private JLabel estoqueMin;
     private JLabel precoVenda;
     private JLabel precoCompra;
-    private JLabel codeVenda;
     private JLabel descricaoLabel;
 
     private JTextField nome;
@@ -64,8 +56,11 @@ public class TelaCadastroProduto extends JFrame {
 
     private JButton cancelar;
     private JButton salvar;
-    private JPanel painel;
 
+    
+    /*
+    Construtor atualiza dados do produto
+    */
     public TelaCadastroProduto() {
         super("Produto");
         this.listaProdutos = new ArrayList<>();
@@ -73,16 +68,15 @@ public class TelaCadastroProduto extends JFrame {
 
     }
 
-    public void atualizaLista()
-    {
+    
+    //atualiza lista usada no combobox
+    public void atualizaLista() {
         fornecedores = new JComboBox();
         try {
-            //janela é aberta
             String dados = Arquivo.lerArquivo("arquivos/fornecedores.json");
             if (!dados.isEmpty()) {
                 List<Fornecedor> fornecedorList = JSONFornecedor.toFornecedores(dados);
-                for(int i = 0; i < fornecedorList.size(); i++)
-                {
+                for (int i = 0; i < fornecedorList.size(); i++) {
                     fornecedores.addItem(fornecedorList.get(i).getRazaoSocial());
                 }
             }
@@ -92,6 +86,7 @@ public class TelaCadastroProduto extends JFrame {
         }
     }
 
+    //desenha tela
     public void desenha() {
 
         painel = new JPanel();
@@ -115,6 +110,7 @@ public class TelaCadastroProduto extends JFrame {
 
     }
 
+    //desenha parte de cadastro
     public void desenhaCadastro() {
 
         cadastro = new JPanel();
@@ -257,6 +253,8 @@ public class TelaCadastroProduto extends JFrame {
         this.barraDeMenu.addTab("Cadastro", this.cadastro);
     }
 
+    
+    //desenha parte de venda do produto
     public void desenhaVenda() {
 
         venda = new JPanel();
@@ -333,6 +331,8 @@ public class TelaCadastroProduto extends JFrame {
         this.barraDeMenu.addTab("Custo / Preço de Venda", venda);
     }
 
+    
+    //desenha parte de informações adiiconais
     public void desenhaAdicionais() {
 
         inf = new JPanel();
@@ -385,10 +385,11 @@ public class TelaCadastroProduto extends JFrame {
         this.barraDeMenu.addTab("Informações Adicionais", inf);
 
         DefaultListModel<Produto> model = new DefaultListModel<>();
-        model.addElement(new Produto("Notebook", "123", 4000.00,4500.00, "Dell", "8GB CORE I5", "iNSPIRATION",1000, 50));
+        model.addElement(new Produto("Notebook", "123", 4000.00, 4500.00, "Dell", "8GB CORE I5", "iNSPIRATION", 1000, 50));
 
     }
 
+    //desenha parte dos botões
     public void desenhaBotoes() {
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -429,13 +430,15 @@ public class TelaCadastroProduto extends JFrame {
 
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         TelaCadastroProduto tela = new TelaCadastroProduto();
 
         tela.desenha();
         //tela.pack();
-    }
+    }*/
 
+    
+    //getters e setters
     public JTextField getNome() {
         return nome;
     }

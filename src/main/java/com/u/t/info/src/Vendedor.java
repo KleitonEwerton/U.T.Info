@@ -18,26 +18,6 @@ public class Vendedor extends Funcionario {
         super(nome, contato, cpf, codigoHash, rua, numero, cidade, uf, cep, salario);
         this.vendas = vendas;
     }
-    
-   
-    
-    public void cadatrarCliente(String nome, String endereco, String cpf, String contato)
-    {
-        Cliente cliente = new Cliente(nome,endereco,cpf,contato, "", "", "", "", "", "");
-        System.out.println(nome + " foi cadastrado(a).");
-    }
-    
-    public void pedidoDevolucao(Produto produto, String causa)
-    {
-        System.out.println("O produto " + produto.getNome() + " vai ser analisado.");
-        System.out.println("Causa da devolução: " + causa);
-    }
-    
-    public void efetuarVenda(Produto produto, Cliente cliente)
-    {
-        produto.setQtdeEstoque(produto.getQtdeEstoque()-1);
-        System.out.println("Venda do " + produto.getNome() + " para " + cliente.getNome());
-    }
 
     @Override
     public double calculaPagamento() {

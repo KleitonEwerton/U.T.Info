@@ -16,12 +16,23 @@ import javax.swing.*;
  */
 public class AdicionarProduto implements ActionListener {
 
+    //atributo do tipo TelaCadastroProduto
     private final TelaCadastroProduto tela;
 
+    
+    /*
+    Contrutor de classe
+    param: TelaCadastroProduto
+    */
     public AdicionarProduto(TelaCadastroProduto tela) {
         this.tela = tela;
     }
 
+    
+    /*
+    Realiza ação de adicionar um produto tratando excessões para  os campos
+    param: ActionEvent e
+    */
     @Override
     public void actionPerformed(ActionEvent e) {
 

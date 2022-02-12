@@ -9,6 +9,7 @@ import com.u.t.info.controller.HabilitarEstoque;
 import com.u.t.info.controller.NotificarGerente;
 import com.u.t.info.controller.RealizarDevolucao;
 import com.u.t.info.src.Produto;
+import com.u.t.info.src.Supervisor;
 import com.u.t.info.tables.TableProdutos;
 import com.u.t.info.utils.Arquivo;
 import com.u.t.info.utils.JSONProduto;
@@ -53,13 +54,18 @@ public class TelaSupervisor extends JFrame {
     private JTable tableProduto;
     private JComboBox jComboBoxProdutos;
 
-    public TelaSupervisor() {
-
-        //não entendi como usar ainda
-        super("Supervisonamento");
+    
+    /*
+    Contrutor da classe
+    param: Supervisor supervisor
+    */
+    public TelaSupervisor(Supervisor supervisor) {
+        super("Supervisonamento - " + supervisor.getNome());
         this.calendario();
     }
 
+    
+    //função que pega horario e data atual e armazena em um label
     public void calendario() {
         Thread clock = new Thread() {
             public void run() {
@@ -85,12 +91,13 @@ public class TelaSupervisor extends JFrame {
         clock.start();
     }
 
+    
+    //atualiza arquivo de produtos
     public void atualizaListaProdutos()
     {
         this.jComboBoxProdutos = new JComboBox();
         this.jComboBoxProdutos.setPreferredSize(new Dimension(200, 20));
         try {
-            //janela é aberta
             String dados = Arquivo.lerArquivo("arquivos/produtos.json");
             if (!dados.isEmpty()) {
                 List<Produto> produtos = JSONProduto.toProdutos(dados);
@@ -106,6 +113,7 @@ public class TelaSupervisor extends JFrame {
         }
     }
 
+    //desenha painel principal
     public void desenha() {
         this.painelPrincipal = new JPanel();
         this.painelPrincipal.setLayout(new BorderLayout());
@@ -124,6 +132,7 @@ public class TelaSupervisor extends JFrame {
         this.repaint();
     }
 
+    //desenha card que habilia e desabilita paineis*
     public void desenhaCard() {
         cardLayout = new CardLayout();
         painel = new JPanel();
@@ -137,6 +146,8 @@ public class TelaSupervisor extends JFrame {
         this.painelPrincipal.add(painel, BorderLayout.CENTER);
     }
 
+    
+    //desenha menu de botoes laterais
     public void desenhaMenus() {
         botoes = new JPanel();
         botoes.setBorder(BorderFactory.createTitledBorder("Menu"));
@@ -169,6 +180,8 @@ public class TelaSupervisor extends JFrame {
         this.painelPrincipal.add(botoes, BorderLayout.WEST);
     }
 
+    
+    //desenha o painel de estoque
     public void desenhaPainelEstoque() {
 
         estoque.setBorder(BorderFactory.createTitledBorder("Estoque"));
@@ -188,13 +201,13 @@ public class TelaSupervisor extends JFrame {
         this.estoque.add(txt_Inf, BorderLayout.CENTER);
         this.estoque.add(barraRolagem, BorderLayout.CENTER);
 
-        //oq fazer????
         JButton notificarGerente = new JButton("Notificar gerente");
         notificarGerente.addActionListener(new NotificarGerente(this));
         estoque.add(notificarGerente);
 
     }
 
+    //desenha o painel de devoluções
     public void desenhaPainelDevolucoes() {
 
         this.devolucoes.setBorder(BorderFactory.createTitledBorder("Devoluções"));
@@ -238,6 +251,8 @@ public class TelaSupervisor extends JFrame {
         //this.getEstoque().isOptimizedDrawingEnabled();
     }
 
+    
+    //getters e setters
     public JPanel getEstoque() {
         return estoque;
     }
