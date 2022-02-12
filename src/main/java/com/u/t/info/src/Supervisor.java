@@ -7,8 +7,8 @@ package com.u.t.info.src;
 
 public class Supervisor extends Funcionario{
 
-	public Supervisor(String nome, String contato, String cpf, String codigoHash, Integer identificacao, String rua, String numero, String cidade, String uf, String cep, double salario) {
-		super( nome,  contato,  cpf,codigoHash, identificacao, rua, numero, cidade, uf, cep, salario);
+	public Supervisor(String nome, String contato, String cpf, String codigoHash, String rua, String numero, String cidade, String uf, String cep, double salario) {
+		super( nome,  contato,  cpf,codigoHash, rua, numero, cidade, uf, cep, salario);
 		// TODO Auto-generated constructor stub
 	}
 	

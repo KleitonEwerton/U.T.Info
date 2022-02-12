@@ -153,13 +153,5 @@ public class TelaVendedor extends JFrame{
     {
         
     }
-        
-    
-    
-    
-    
-    public static void main(String[] args) {
-        TelaVendedor tela = new TelaVendedor();
-        tela.desenha();
-    }
+
 }

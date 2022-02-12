@@ -42,12 +42,13 @@ public class JSONGerente {
         
         try{
             
-            String lerArquivo = Arquivo.lerArquivo("gerente");
+            String lerArquivo = Arquivo.lerArquivo("arquivos/gerentes.json");
+
             listGerentes = toGerentes(lerArquivo);
             
         } catch (FileNotFoundException ex) {
             
-            System.out.println("Erro ao abrir o arquivo dos gerentes");
+            //System.out.println("Erro ao abrir o arquivo dos gerentes");
         }
         
         return listGerentes;

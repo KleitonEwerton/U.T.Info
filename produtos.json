@@ -1,1 +1,0 @@
-[{"nome":"Notebook","codigo":"12A","precoCompra":5000.0,"precoVenda":10000.0,"fornecedor":"Nikolas","descricao":"Top","modelo":"I5","qtdeEstoque":20,"estoqueMinimo":2},{"nome":"Celular","codigo":"85L","precoCompra":800.0,"precoVenda":1300.0,"fornecedor":"Nikolas","descricao":"Top de linha","modelo":"Samsung","qtdeEstoque":25,"estoqueMinimo":2}]

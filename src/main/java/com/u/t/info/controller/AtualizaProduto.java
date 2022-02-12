@@ -15,7 +15,7 @@ import java.util.List;
 public class AtualizaProduto implements WindowListener {
 
     private final TelaCadastroProduto tela;
-    private static final String CAMINHO = "produtos.json";
+    private static final String CAMINHO = "arquivos/produtos.json";
 
     public AtualizaProduto(TelaCadastroProduto tela) {
         this.tela = tela;

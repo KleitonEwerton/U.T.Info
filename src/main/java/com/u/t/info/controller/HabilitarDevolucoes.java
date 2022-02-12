@@ -23,6 +23,6 @@ public class HabilitarDevolucoes implements ActionListener{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        tela.getCardLayout().show(tela.getPainel(), "3");
+        tela.getCardLayout().show(tela.getPainel(), "2");
     }
 }

@@ -1,8 +1,14 @@
 package com.u.t.info.view;
 
-import com.u.t.info.utils.BuscaCep;
+import com.u.t.info.src.*;
+import com.u.t.info.utils.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -485,7 +491,7 @@ public class TelaCadastroFuncionario extends TelaCadastro {
         gbc34.insets = new Insets(20, 0, 20, 35);
         gbc34.gridheight = 1;
 
-        //salvar.addActionListener(new AdicionarCliente(this));
+        salvar.addActionListener(new AdicionarFuncionario(this));
         painel.add(salvar, gbc34);
 
         this.add(painel);
@@ -609,5 +615,86 @@ public class TelaCadastroFuncionario extends TelaCadastro {
         this.jtb = jtb;
     }
 
+}
+
+class AdicionarFuncionario implements ActionListener
+{
+    TelaCadastroFuncionario tela;
+
+    public AdicionarFuncionario (TelaCadastroFuncionario tela) {
+        this.tela = tela;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        String funcionario = tela.getComboBox().getSelectedItem().toString();
+
+        switch (funcionario)
+        {
+            case "Gerente":
+
+                    List<Gerente> gerenteList = new ArrayList<>();
+                    gerenteList = JSONGerente.lerGerentes();
+
+                    gerenteList.add(new Gerente(tela.getNome().getText(), tela.getTelefone().getText(),
+                            tela.getCpf().getText(), tela.getSenha1().getText(),
+                            tela.getRua().getText(), tela.getNumeroCasa().getText(),
+                            tela.getCidade().getText(), tela.getUf().getText(), tela.getCep().getText(),
+                            5500));
+
+                    String toJSON = JSONGerente.toJSONGerentes(gerenteList);
+                    try{
+
+                        Arquivo.escreverArquivo("arquivos/gerentes.json",toJSON);
+
+                    } catch (IOException ex) {
+
+                        System.out.println("Erro ao salvar os gerentes");
+                    }
+                break;
+            case "Vendedor":
+                List<Vendedor> vendedorList = new ArrayList<>();
+                vendedorList = JSONVendedor.lerVendedores();
+                List<Venda> vendaList = new ArrayList<>();
+
+                vendedorList.add(new Vendedor(vendaList, tela.getNome().getText(), tela.getTelefone().getText(),
+                        tela.getCpf().getText(), tela.getSenha1().getText(),
+                        tela.getRua().getText(), tela.getNumeroCasa().getText(),
+                        tela.getCidade().getText(), tela.getUf().getText(), tela.getCep().getText(),
+                        1100));
+
+                String toJSON1 = JSONVendedor.toJSONSVendedores(vendedorList);
+                try{
+
+                    Arquivo.escreverArquivo("arquivos/vendedores.json",toJSON1);
+
+                } catch (IOException ex) {
+
+                    System.out.println("Erro ao salvar os gerentes");
+                }
+                break;
+            case "Supervisor":
+                List<Supervisor> supervisorList = new ArrayList<>();
+                supervisorList = JSONSupervisor.lerSupervisor();
+
+                supervisorList.add(new Supervisor(tela.getNome().getText(), tela.getTelefone().getText(),
+                        tela.getCpf().getText(), tela.getSenha1().getText(),
+                        tela.getRua().getText(), tela.getNumeroCasa().getText(),
+                        tela.getCidade().getText(), tela.getUf().getText(), tela.getCep().getText(),
+                        5500));
+
+                String toJSON2 = JSONSupervisor.toJSONSupervisores(supervisorList);
+                try{
+
+                    Arquivo.escreverArquivo("arquivos/supervisores.json",toJSON2);
+
+                } catch (IOException ex) {
+
+                    System.out.println("Erro ao salvar os supervisores");
+                }
+                break;
+
+        }
+    }
 }
 

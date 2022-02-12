@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class AtualizaCliente implements WindowListener {
 
     private final TelaCadastroCliente tela;
-    private static final String CAMINHO = "clientes.json";
+    private static final String CAMINHO = "arquivos/clientes.json";
 
     public AtualizaCliente(TelaCadastroCliente tela) {
         this.tela = tela;

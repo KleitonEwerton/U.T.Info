@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 public class RelatorioDeEstoque implements WindowListener {
 
     private TelaGerente tela;
-    private static final String CAMINHO = "produtoEmFalta.json";
+    private static final String CAMINHO = "arquivos/produtoEmFalta.json";
 
     public RelatorioDeEstoque(TelaGerente tela) {
         this.tela = tela;

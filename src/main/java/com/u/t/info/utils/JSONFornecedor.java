@@ -41,7 +41,7 @@ public class JSONFornecedor {
         
         try{
             
-            String lerArquivo = Arquivo.lerArquivo("fornecedores");
+            String lerArquivo = Arquivo.lerArquivo("arquivos/fornecedores.json");
             listFornecedores = toFornecedores(lerArquivo);
             
         } catch (FileNotFoundException ex) {

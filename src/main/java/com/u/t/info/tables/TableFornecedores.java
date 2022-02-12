@@ -88,7 +88,7 @@ public class TableFornecedores extends AbstractTableModel{
         
         try{
             
-            Arquivo.escreverArquivo("fornecedores",toJSON);
+            Arquivo.escreverArquivo("arquivos/fornecedores.json",toJSON);
             
         } catch (IOException ex) {
             

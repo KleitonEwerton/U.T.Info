@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class NotificarGerente implements ActionListener {
 
     TelaSupervisor tela;
-    private static final String CAMINHO = "produtoEmFalta.json";
+    private static final String CAMINHO = "arquivos/produtoEmFalta.json";
 
     public NotificarGerente(TelaSupervisor tela) {
         this.tela = tela;

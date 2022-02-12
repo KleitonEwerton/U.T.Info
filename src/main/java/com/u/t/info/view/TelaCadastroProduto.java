@@ -8,9 +8,11 @@ import com.u.t.info.controller.AdicionarProduto;
 import com.u.t.info.controller.AtualizaCliente;
 import com.u.t.info.controller.AtualizaProduto;
 import com.u.t.info.src.Cliente;
+import com.u.t.info.src.Fornecedor;
 import com.u.t.info.src.Produto;
 import com.u.t.info.utils.Arquivo;
 import com.u.t.info.utils.JSONCliente;
+import com.u.t.info.utils.JSONFornecedor;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 
 /**
  *
@@ -75,17 +78,16 @@ public class TelaCadastroProduto extends JFrame {
         fornecedores = new JComboBox();
         try {
             //janela é aberta
-            String dados = Arquivo.lerArquivo("clientes.json");
+            String dados = Arquivo.lerArquivo("arquivos/fornecedores.json");
             if (!dados.isEmpty()) {
-                List<Cliente> cliente = JSONCliente.toClientes(dados);
-                for(int i = 0; i < cliente.size(); i++)
+                List<Fornecedor> fornecedorList = JSONFornecedor.toFornecedores(dados);
+                for(int i = 0; i < fornecedorList.size(); i++)
                 {
-                    fornecedores.addItem(cliente.get(i).getNome());
-                    //System.out.println("Nome: "+cliente.get(i).getNome());
+                    fornecedores.addItem(fornecedorList.get(i).getRazaoSocial());
                 }
             }
         } catch (FileNotFoundException ex) {
-            fornecedores.addItem("NULL");
+            fornecedores.addItem("");
             //aqui a lista esta vazia
         }
     }

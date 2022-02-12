@@ -5,22 +5,27 @@
 package com.u.t.info.src;
 
 
+import com.u.t.info.utils.JSONGerente;
+import com.u.t.info.utils.JSONSupervisor;
+import com.u.t.info.utils.JSONVendedor;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Funcionario {
 
     private String nome;
     private String contato;
     private String cpf;
-    private String codigoHash;
-    private Integer identificacao;
+    private String senha;
     private String rua, numero,cidade, uf, cep;
     private double salario;
 
-    public Funcionario(String nome, String contato, String cpf, String codigoHash, Integer identificacao, String rua, String numero, String cidade, String uf, String cep, double salario) {
+    public Funcionario(String nome, String contato, String cpf, String senha, String rua, String numero, String cidade, String uf, String cep, double salario) {
         this.nome = nome;
         this.contato = contato;
         this.cpf = cpf;
-        this.codigoHash = codigoHash;
-        this.identificacao = identificacao;
+        this.senha = senha;
         this.rua = rua;
         this.numero = numero;
         this.cidade = cidade;
@@ -53,20 +58,12 @@ public abstract class Funcionario {
         this.cpf = cpf;
     }
 
-    public String getCodigoHash() {
-        return codigoHash;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setCodigoHash(String codigoHash) {
-        this.codigoHash = codigoHash;
-    }
-
-    public Integer getIdentificacao() {
-        return identificacao;
-    }
-
-    public void setIdentificacao(Integer identificacao) {
-        this.identificacao = identificacao;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getRua() {
@@ -118,10 +115,36 @@ public abstract class Funcionario {
     }
 
     public abstract double calculaPagamento();
-    
-        
-    
-    
-    
-    
+
+    public static List<Funcionario> retornaListaFuncionarios()
+    {
+        List<Funcionario> funcionarios = new ArrayList<>();
+
+        List<Gerente> gerenteList = new ArrayList<>();
+        gerenteList = JSONGerente.lerGerentes();
+
+        List<Supervisor> supervisorList = new ArrayList<>();
+        supervisorList = JSONSupervisor.lerSupervisor();
+
+        List<Vendedor> vendedorList = new ArrayList<>();
+        vendedorList = JSONVendedor.lerVendedores();
+
+        for (Gerente gerentes : gerenteList)
+        {
+            funcionarios.add(gerentes);
+        }
+
+        for(Supervisor supervisor: supervisorList)
+        {
+            funcionarios.add(supervisor);
+        }
+
+        for(Vendedor vendedor: vendedorList)
+        {
+            funcionarios.add(vendedor);
+        }
+
+        return funcionarios;
+    }
+
 } 

@@ -4,7 +4,6 @@
  */
 package com.u.t.info.view;
 
-import com.u.t.info.controller.HabilitarCompra;
 import com.u.t.info.controller.HabilitarDevolucoes;
 import com.u.t.info.controller.HabilitarEstoque;
 import com.u.t.info.controller.NotificarGerente;
@@ -15,13 +14,10 @@ import com.u.t.info.utils.Arquivo;
 import com.u.t.info.utils.JSONProduto;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.List;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -95,7 +91,7 @@ public class TelaSupervisor extends JFrame {
         this.jComboBoxProdutos.setPreferredSize(new Dimension(200, 20));
         try {
             //janela é aberta
-            String dados = Arquivo.lerArquivo("produtos.json");
+            String dados = Arquivo.lerArquivo("arquivos/produtos.json");
             if (!dados.isEmpty()) {
                 List<Produto> produtos = JSONProduto.toProdutos(dados);
                 for(int i =0; i < produtos.size(); i++)
@@ -116,7 +112,6 @@ public class TelaSupervisor extends JFrame {
         this.painelPrincipal.setPreferredSize(new Dimension(800, 600));
 
         desenhaPainelEstoque();
-        desenhaPainelCompras();
         desenhaPainelDevolucoes();
 
         desenhaCard();
@@ -136,8 +131,7 @@ public class TelaSupervisor extends JFrame {
         //painel.setPreferredSize(new Dimension(500,500));
 
         painel.add(this.estoque, "1");
-        painel.add(this.compras, "2");
-        painel.add(this.devolucoes, "3");
+        painel.add(this.devolucoes, "2");
         cardLayout.show(painel, "1");
 
         this.painelPrincipal.add(painel, BorderLayout.CENTER);
@@ -161,22 +155,15 @@ public class TelaSupervisor extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         botoes.add(btnEstoque, gbc);
 
-        JButton btnCompras = new JButton("Compras");
-        btnCompras.addActionListener(new HabilitarCompra(this));
-        btnCompras.setBackground(Color.red);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        botoes.add(btnCompras, gbc);
-
         JButton btnDevolucao = new JButton("Devolução");
         btnDevolucao.addActionListener(new HabilitarDevolucoes(this));
         btnDevolucao.setBackground(Color.red);
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 1;
         botoes.add(btnDevolucao, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 2;
         gbc.weighty = 1.0;
         botoes.add(new JLabel(""), gbc);
         this.painelPrincipal.add(botoes, BorderLayout.WEST);
@@ -198,6 +185,7 @@ public class TelaSupervisor extends JFrame {
 
         //this.tabelaProdutos.setPreferredScrollableViewportSize(new Dimension(800, 400));
         barraRolagem = new JScrollPane(tableProduto);
+        this.estoque.add(txt_Inf, BorderLayout.CENTER);
         this.estoque.add(barraRolagem, BorderLayout.CENTER);
 
         //oq fazer????
@@ -205,23 +193,6 @@ public class TelaSupervisor extends JFrame {
         notificarGerente.addActionListener(new NotificarGerente(this));
         estoque.add(notificarGerente);
 
-    }
-
-    //não sei oq terá nesses dois paineis ainda
-    public void desenhaPainelCompras() {
-
-        compras.setBorder(BorderFactory.createTitledBorder("Compras"));
-
-        this.setLayout(new BorderLayout());
-        //estoque.setPreferredSize(new Dimension(500, 500));
-
-        JLabel quantidadeDeCompra = new JLabel("Quantidade para compra: ");
-        JLabel quantidadeEmestoque = new JLabel("Quantidade em estoque");
-
-        compras.add(quantidadeDeCompra);
-        compras.add(quantidadeEmestoque);
-
-        //this.painelPrincipal.add(compras, BorderLayout.EAST);
     }
 
     public void desenhaPainelDevolucoes() {
@@ -265,12 +236,6 @@ public class TelaSupervisor extends JFrame {
 
         //this.painelPrincipal.add(devolucoes, BorderLayout.EAST);
         //this.getEstoque().isOptimizedDrawingEnabled();
-    }
-
-    public static void main(String[] args) {
-        TelaSupervisor tela = new TelaSupervisor();
-        tela.desenha();
-        tela.pack();
     }
 
     public JPanel getEstoque() {

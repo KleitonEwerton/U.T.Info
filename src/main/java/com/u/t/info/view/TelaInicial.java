@@ -153,16 +153,6 @@ public class TelaInicial extends JFrame {
         gbc8.insets = new Insets(8, 0, 0, 0);
         auxPainelPrincipal.add(semCadastro, gbc8);
 
-        //botao para permitir usuario avisar gerente caso não esteja cadastrado
-        JButton btnAViso = new JButton("Avisar Gerente");
-        GridBagConstraints gbc9 = new GridBagConstraints();
-        gbc9.anchor = GridBagConstraints.CENTER;
-        gbc9.gridx = 0;
-        gbc9.gridy = 7;
-        gbc9.gridwidth = GridBagConstraints.REMAINDER;
-        gbc9.insets = new Insets(8, 0, 0, 0);
-        auxPainelPrincipal.add(btnAViso, gbc9);
-
         //juntando os paineis
         painelPrincipal.add(auxPainelPrincipal);
 
@@ -181,12 +171,6 @@ public class TelaInicial extends JFrame {
         //adicionando no painel principal
         getContentPane().add(painelPrincipal);
 
-    }
-
-    public static void main(String[] args) {
-        TelaInicial tela = new TelaInicial();
-        tela.desenhoTelaInicial();
-        tela.pack();
     }
 
     public JTextField getJfUsuario() {

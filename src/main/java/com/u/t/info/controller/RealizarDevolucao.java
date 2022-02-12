@@ -41,7 +41,7 @@ public class RealizarDevolucao implements ActionListener{
         //tela de cadastro para atualizar a lista de produtos
         TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto();
         try {
-            String dados = Arquivo.lerArquivo("produtos.json"); //ler o arquivo
+            String dados = Arquivo.lerArquivo("arquivos/produtos.json"); //ler o arquivo
             if (!dados.isEmpty()) { //nao for vazio
                 List<Produto> produtos = JSONProduto.toProdutos(dados);
                 for(int i =0; i < produtos.size(); i++)
@@ -58,12 +58,12 @@ public class RealizarDevolucao implements ActionListener{
                             //pega a lista atualizada
                             List<Produto> produtosAtualizados = telaCadastroProduto.getListaProdutos();
                             //apaga o que esta escrito no arquivo
-                            PrintWriter printWriter = new PrintWriter("produtos.json");
+                            PrintWriter printWriter = new PrintWriter("arquivos/produtos.json");
                             printWriter.print("");
                             printWriter.close();
                             String toJSON = JSONProduto.toJSON(produtosAtualizados);
                             //escreve com o estoque atualizado
-                            Arquivo.escreverArquivo("produtos.json", toJSON);
+                            Arquivo.escreverArquivo("arquivos/produtos.json", toJSON);
                             JOptionPane.showMessageDialog(tela, "Estoque Atualizado!");
                             tela.getJtQuantidadeDevolucao().setText("");
                         } catch (NumberFormatException ex) {

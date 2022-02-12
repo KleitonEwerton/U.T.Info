@@ -14,8 +14,8 @@ public class Vendedor extends Funcionario {
     
     private List<Venda> vendas;
 
-    public Vendedor(List<Venda> vendas, String nome, String contato, String cpf, String codigoHash, Integer identificacao, String rua, String numero, String cidade, String uf, String cep, double salario) {
-        super(nome, contato, cpf, codigoHash, identificacao, rua, numero, cidade, uf, cep, salario);
+    public Vendedor(List<Venda> vendas, String nome, String contato, String cpf, String codigoHash, String rua, String numero, String cidade, String uf, String cep, double salario) {
+        super(nome, contato, cpf, codigoHash, rua, numero, cidade, uf, cep, salario);
         this.vendas = vendas;
     }
     

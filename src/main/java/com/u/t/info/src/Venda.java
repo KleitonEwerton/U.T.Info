@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author luiz
  */
-public class Venda {
+public class Venda implements Vendas {
     private Vendedor vendedor;
     private List<Produto> produtos;
     private double valor;
@@ -21,29 +21,31 @@ public class Venda {
         this.valor = valor;
     }
 
+    @Override
     public Vendedor getVendedor() {
         return vendedor;
     }
 
+    @Override
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
     }
 
+    @Override
     public List<Produto> getProdutos() {
         return produtos;
     }
 
+    @Override
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
-
+    @Override
     public double getValor() {
         return valor;
     }
-
+    @Override
     public void setValor(double valor) {
         this.valor = valor;
     }
-    
-    
 }

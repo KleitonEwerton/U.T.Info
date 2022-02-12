@@ -5,7 +5,7 @@
 package com.u.t.info.tables;
 
 import com.u.t.info.src.Funcionario;
-import com.u.t.info.src.Gerente;
+
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
@@ -18,8 +18,8 @@ public class TableFuncionarios extends AbstractTableModel{
     
    
     public TableFuncionarios(){
-        listFuncionarios.add(new Gerente("Rfdsfdsfafa", "rafa.gmailfsdfsdfsf.com","1223333333211", "pdfsdsfdfsfdoooo", 12,"rua dfdsfdfsdfsfdfsas dores","120", "fdfsdf","nmddd","dfsdf",322));
-        listFuncionarios.add(new Gerente("Rfdsfdsfafa", "rafa.gmailfsdfsdfsf.com","1223333333211", "pdfsdsfdfsfdoooo", 12,"rua dfdsfdfsdfsfdfsas dores","120", "fdfsdf","nmddd","dfsdf",322));
+        //listFuncionarios.add(new Gerente("Rfdsfdsfafa", "rafa.gmailfsdfsdfsf.com","1223333333211", "pdfsdsfdfsfdoooo", 12,"rua dfdsfdfsdfsfdfsas dores","120", "fdfsdf","nmddd","dfsdf",322));
+        //listFuncionarios.add(new Gerente("Rfdsfdsfafa", "rafa.gmailfsdfsdfsf.com","1223333333211", "pdfsdsfdfsfdoooo", 12,"rua dfdsfdfsdfsfdfsas dores","120", "fdfsdf","nmddd","dfsdf",322));
     }
     
     @Override
@@ -49,10 +49,8 @@ public class TableFuncionarios extends AbstractTableModel{
             case 2:
                 return this.listFuncionarios.get(indexLinha).getCpf();
             case 3:
-                return this.listFuncionarios.get(indexLinha).getCodigoHash(); 
+                return this.listFuncionarios.get(indexLinha).getSenha();
             case 4:
-                return this.listFuncionarios.get(indexLinha).getIdentificacao();
-            case 5:
                 return this.listFuncionarios.get(indexLinha).getRua() +" "+this.listFuncionarios.get(indexLinha).getNumero() ;
         }
         return null;

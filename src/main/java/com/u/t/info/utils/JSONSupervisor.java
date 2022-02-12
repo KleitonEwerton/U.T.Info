@@ -9,14 +9,14 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JSONSupervidor {
+public class JSONSupervisor {
     
     public static String toJSONSupervisor(Supervisor supervisor) {
         Gson gson = new Gson();
         return gson.toJson(supervisor);
     }
 
-    public static String toJSONSupervisoress(List<Supervisor> supervisores) {
+    public static String toJSONSupervisores(List<Supervisor> supervisores) {
         Gson gson = new Gson();
         return gson.toJson(supervisores);
     }
@@ -41,7 +41,7 @@ public class JSONSupervidor {
         
         try{
             
-            String lerArquivo = Arquivo.lerArquivo("supervisor");
+            String lerArquivo = Arquivo.lerArquivo("arquivos/supervisores.json");
             listSupervisores = toSupervisores(lerArquivo);
             
         } catch (FileNotFoundException ex) {
