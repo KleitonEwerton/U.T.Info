@@ -16,7 +16,10 @@ import java.awt.Image;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -29,6 +32,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class TelaGerente extends JFrame{
     
@@ -499,31 +504,22 @@ class EmitirRelatorioVendas implements ActionListener{
         
         List<Venda> listVenda = JSONVendas.lerVendas();
         
-        try {
-            
-            lerArquivo("arquivos/vendas.json");
-            
-        } catch (FileNotFoundException ex) {
-            
-            try {
-                
-                escreverArquivo("arquivos/relatorio.xml","Vendedor;Produto;Valor\n");
-                
-            } catch (IOException ex1) {System.out.println("Erro ao escrever no arquivo arquivos/vendas.json");}
-            
-        }
         
         try {
             for(Venda venda: listVenda ){
-                escreverArquivo("arquivos/relatorio.xml",venda.getVendedor().getNome()+";"+venda.getProdutos() + ";"+venda.getValor()+"\n");
+                
+                escreverArquivo("arquivos/relatorio.txt","\nO vendedor '"+venda.getVendedor().getNome()+"' realizou uma venda no valor de R$" + venda.getValor()+" do produto" + venda.getProdutos()+"\n");
             }
-            System.out.println("Relatorio emitido. Acessado em arquivos/relatorio.xml");
+            System.out.println("Relatorio de vendas emitido. Acessado em arquivos/relatorio.txt");
             
         } catch (IOException ex) {
-           System.out.println("Erro ao escrever no arquivo arquivos/relatorio.xml");
+            
+           System.out.println("Erro ao escrever no arquivo arquivos/relatorio.txt");
         }
         
+        
     }
+        
     
     
 }
