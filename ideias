@@ -1,0 +1,11 @@
+nome e senha minimo: 8 caracteres
+fazer excessoes (todas as classes)
+marcar entrevista
+encaminhar botao pra cada tela
+tirar main das classes de telas
+                        Funcionario
+                        |   |   |
+               vendedor  gerente supervisor
+               |            | |
+               venda  fornecedor produto
+
