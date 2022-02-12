@@ -41,12 +41,12 @@ public class JSONVendas {
         
         try{
             
-            String lerArquivo = Arquivo.lerArquivo("vendas");
+            String lerArquivo = Arquivo.lerArquivo("arquivos/vendas");
             listSupervisores = toVendas(lerArquivo);
             
         } catch (FileNotFoundException ex) {
             
-            System.out.println("Erro ao abrir o arquivo das vendas");
+            //System.out.println("Erro ao abrir o arquivo das vendas");
         }
         
         return listSupervisores;

@@ -3,14 +3,24 @@ package com.u.t.info.view;
 
 import com.u.t.info.controller.RelatorioDeEstoque;
 import com.u.t.info.src.Gerente;
+import com.u.t.info.src.Venda;
 import com.u.t.info.tables.*;
+import static com.u.t.info.utils.Arquivo.escreverArquivo;
+import static com.u.t.info.utils.Arquivo.lerArquivo;
+import com.u.t.info.utils.JSONVendas;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,10 +37,12 @@ public class TelaGerente extends JFrame{
     private JPanel funcionarios;
     private JPanel produtos;
     private JPanel fornecedores;
+    private JPanel vendas;
     private JPanel auxPanelFuncionario;
     private JPanel auxPanelProduto;
     private JPanel auxPanelFornecedor;
-
+    private JPanel auxPanelVendas;
+    
     private JTable tableFuncionario;
     private JTable tableFornecedor;
     private JTable tableProduto;
@@ -46,11 +58,16 @@ public class TelaGerente extends JFrame{
     private JButton btnCadastraFornecedor;
     private JButton btnRemoverFornecedor;
     private JButton btnAtualizarFuncionarios;
+    private JButton btnEmitirRelatorio;
+    private JButton btnAtualizarVendas;
     
     private Gerente gerente;
     private JButton btnAtualizarProdutos;
     private JButton btnAtualizarFornecedores;
-    private Component vendas;
+    
+    private TableVendas modelVendas;
+    private JTable tableVendas;
+    
     
     public TelaGerente(Gerente gerente) {
         super("Aplicações de Gerenciamento - " + gerente.getNome());
@@ -69,9 +86,11 @@ public class TelaGerente extends JFrame{
         
         //TOOL BAR
         this.menuBar = new JTabbedPane();
+        
         this.funcionarios = new JPanel();
         this.produtos = new JPanel();
         this.fornecedores = new JPanel();
+        this.vendas = new JPanel();
         
 
         this.menuBar.addTab("Funcionários", this.funcionarios);
@@ -92,16 +111,43 @@ public class TelaGerente extends JFrame{
         drawFornecedores();
         this.fornecedores.add(auxPanelFornecedor);
         
+        drawVendas();
+        this.vendas.add(auxPanelVendas);
         //OUTROS
         this.setVisible(true);
         
        
     }  
     
-    private void drawVednas(){
+    private void drawVendas(){
         
+        //VENDAS
+        //BOTÕES PARTE INFERIOR
         
+        this.btnEmitirRelatorio = new JButton("Emitir relátorio");
+        ImageIcon image = new ImageIcon(new ImageIcon("img/refresh.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+        this.btnAtualizarVendas = new JButton("", image);
         
+        this.modelVendas = new TableVendas();
+        
+        this.tableVendas = new JTable(modelVendas);
+        
+        this.tableVendas.setVisible(true);
+        
+        this.tableVendas.setPreferredScrollableViewportSize(new Dimension(780,400));
+        
+        this.vendas.add(new JScrollPane(this.tableVendas));
+        
+        this.auxPanelVendas = new JPanel();
+        
+        this.btnEmitirRelatorio.setPreferredSize(new Dimension(720,30));
+        this.btnAtualizarVendas.setPreferredSize(new Dimension(50,30));
+        
+        this.btnEmitirRelatorio.addActionListener(new EmitirRelatorioVendas());
+        this.btnAtualizarVendas.addActionListener(new AtualizarVendas(this));
+        
+        auxPanelVendas.add(this.btnEmitirRelatorio);
+        auxPanelVendas.add(this.btnAtualizarVendas);
     }
     
     private void drawFuncionarios(){
@@ -235,6 +281,11 @@ public class TelaGerente extends JFrame{
     public Gerente getGerenteResponsavel (){
         return this.gerente;
     }
+
+    public TableVendas getModelVendas() {
+        return modelVendas;
+    }
+    
 }
 
 class AbrirTelaCadastroProduto implements ActionListener{
@@ -316,6 +367,7 @@ class RemoveProduto implements ActionListener{
     }
     
 }
+
 class RemoverFornecedor implements ActionListener{
 
     private final TelaGerente tela;
@@ -421,4 +473,57 @@ class AtualizarFornecedores implements ActionListener{
     }
 
    
+}
+
+class AtualizarVendas implements ActionListener{
+     private final TelaGerente tela;
+    public AtualizarVendas(TelaGerente tela){
+         this.tela = tela;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.tela.getModelVendas().atualizaTabela();
+    }
+    
+    
+}
+class EmitirRelatorioVendas implements ActionListener{
+    
+    public EmitirRelatorioVendas(){
+         
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        List<Venda> listVenda = JSONVendas.lerVendas();
+        
+        try {
+            
+            lerArquivo("arquivos/vendas.json");
+            
+        } catch (FileNotFoundException ex) {
+            
+            try {
+                
+                escreverArquivo("arquivos/relatorio.xml","Vendedor;Produto;Valor\n");
+                
+            } catch (IOException ex1) {System.out.println("Erro ao escrever no arquivo arquivos/vendas.json");}
+            
+        }
+        
+        try {
+            for(Venda venda: listVenda ){
+                escreverArquivo("arquivos/relatorio.xml",venda.getVendedor().getNome()+";"+venda.getProdutos() + ";"+venda.getValor()+"\n");
+            }
+            System.out.println("Relatorio emitido. Acessado em arquivos/relatorio.xml");
+            
+        } catch (IOException ex) {
+           System.out.println("Erro ao escrever no arquivo arquivos/relatorio.xml");
+        }
+        
+    }
+    
+    
 }
