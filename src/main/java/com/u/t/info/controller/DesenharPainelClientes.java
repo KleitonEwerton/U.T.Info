@@ -24,8 +24,7 @@ public class DesenharPainelClientes implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        this.tela.desenhaClientes();
-        this.tela.repaint();
+        tela.getCardLayout().show(tela.getPainelCards(),"1");
     }
     
 }

@@ -57,7 +57,7 @@ public class EntrarLogin implements ActionListener {
                         login = 1;
                         break;
                     case "com.u.t.info.src.Vendedor":
-                        TelaVendedor telaVendedor = new TelaVendedor();
+                        TelaVendedor telaVendedor = new TelaVendedor((Vendedor) funcionario);
                         telaVendedor.desenha();
                         tela.dispose();
                         login = 1;

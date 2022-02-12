@@ -12,18 +12,16 @@ import java.awt.event.ActionListener;
  *
  * @author luiz
  */
-public class DesenharPainelVendas implements ActionListener{
-    
+public class DesenharPainelDevolucoes implements ActionListener{
     private TelaVendedor tela;
 
-    public DesenharPainelVendas(TelaVendedor tela) {
+    public DesenharPainelDevolucoes(TelaVendedor tela) {
         this.tela = tela;
     }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        tela.getCardLayout().show(tela.getPainelCards(),"2");
-
+        tela.getCardLayout().show(tela.getPainelCards(),"3");
     }
     
     

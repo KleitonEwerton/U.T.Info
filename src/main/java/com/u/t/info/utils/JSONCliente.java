@@ -41,7 +41,7 @@ public class JSONCliente {
         
         try{
             
-            String lerArquivo = Arquivo.lerArquivo("clientes");
+            String lerArquivo = Arquivo.lerArquivo("arquivos/clientes.json");
             listClientes = toClientes(lerArquivo);
             
         } catch (FileNotFoundException ex) {

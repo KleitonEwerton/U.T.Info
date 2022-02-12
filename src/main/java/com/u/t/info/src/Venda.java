@@ -12,12 +12,14 @@ import java.util.List;
  */
 public class Venda implements Vendas {
     private Vendedor vendedor;
-    private List<Produto> produtos;
+    private Cliente cliente;
+    private Produto produto;
     private double valor;
 
-    public Venda(Vendedor vendedor, List<Produto> produtos, double valor) {
+    public Venda(Vendedor vendedor,Cliente cliente, Produto produtos, double valor) {
         this.vendedor = vendedor;
-        this.produtos = produtos;
+        this.cliente = cliente;
+        this.produto = produtos;
         this.valor = valor;
     }
 
@@ -32,13 +34,13 @@ public class Venda implements Vendas {
     }
 
     @Override
-    public List<Produto> getProdutos() {
-        return produtos;
+    public Produto getProduto() {
+        return produto;
     }
 
     @Override
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setProdutos(Produto produto) {
+        this.produto = produto;
     }
     @Override
     public double getValor() {
@@ -48,4 +50,13 @@ public class Venda implements Vendas {
     public void setValor(double valor) {
         this.valor = valor;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
 }

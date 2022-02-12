@@ -8,16 +8,12 @@ public interface Vendas {
 
     public void setVendedor(Vendedor vendedor);
 
-    public Produto getProduto();
+    public List<Produto> getProdutos();
 
-    public void setProdutos(Produto produto);
+    public void setProdutos(List<Produto> produtos);
 
     public double getValor();
 
     public void setValor(double valor);
-    
-    public void setCliente(Cliente cliente);
-    
-    public Cliente getCliente();
 
 }
