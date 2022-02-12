@@ -41,12 +41,16 @@ public class JSONVendas {
         
         try{
             
+<<<<<<< HEAD
             String lerArquivo = Arquivo.lerArquivo("arquivos/vendas.json");
+=======
+            String lerArquivo = Arquivo.lerArquivo("arquivos/vendas");
+>>>>>>> f226672188e56781ef5dd7b351841d41a169ad23
             listSupervisores = toVendas(lerArquivo);
             
         } catch (FileNotFoundException ex) {
             
-            System.out.println("Erro ao abrir o arquivo das vendas");
+            //System.out.println("Erro ao abrir o arquivo das vendas");
         }
         
         return listSupervisores;
