@@ -1,7 +1,6 @@
 package com.u.t.info.tables;
 
 import com.u.t.info.src.Venda;
-import com.u.t.info.utils.JSONVendas;
 import static com.u.t.info.utils.JSONVendas.lerVendas;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableVendas extends AbstractTableModel{
     
-    private final String[] colunas = new String[]{"Vendedor", "Produto","Valor"};
+    private final String[] colunas = new String[]{"Vendedor", "Cliente","Produto","Valor"};
     private List<Venda> listVenda = new ArrayList<>();    
     
    
@@ -49,10 +48,12 @@ public class TableVendas extends AbstractTableModel{
         switch(indexColuna){
             
             case 0:
-                return this.listVenda.get(indexLinha).getVendedor().getNome();      
+                return this.listVenda.get(indexLinha).getVendedor().getCpf();  
             case 1:
-                return this.listVenda.get(indexLinha).getProduto();
+                return this.listVenda.get(indexLinha).getCliente().getCpf();
             case 2:
+                return this.listVenda.get(indexLinha).getProduto().getCodigo();
+            case 3:
                 return this.listVenda.get(indexLinha).getValor();
             
         }

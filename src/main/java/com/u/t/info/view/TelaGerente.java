@@ -6,24 +6,22 @@ import com.u.t.info.src.Gerente;
 import com.u.t.info.src.Venda;
 import com.u.t.info.tables.*;
 import static com.u.t.info.utils.Arquivo.escreverArquivo;
-import static com.u.t.info.utils.Arquivo.lerArquivo;
 import com.u.t.info.utils.JSONVendas;
+import static com.u.t.info.utils.Utils.confirmacaoExclusao;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
+
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.PopupMenu;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,8 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 public class TelaGerente extends JFrame{
     
@@ -360,8 +357,8 @@ class RemoveProduto implements ActionListener{
         int indexLinha = this.tela.getTableProduto().getSelectedRow();
         
         try{
-            
-            this.tela.getModelProduto().removerProduto(indexLinha);
+            if(confirmacaoExclusao() == 0)
+                this.tela.getModelProduto().removerProduto(indexLinha);
             
         }catch(Exception ex){
             
@@ -387,8 +384,8 @@ class RemoverFornecedor implements ActionListener{
         int indexLinha = this.tela.getTableFornecedor().getSelectedRow();
         
         try{
-            
-            this.tela.getModelFornecedor().removerFornecedor(indexLinha);
+            if(confirmacaoExclusao() == 0)
+                this.tela.getModelFornecedor().removerFornecedor(indexLinha);
             
         }catch(Exception ex){
             
@@ -413,12 +410,12 @@ class RemoverFuncionario implements ActionListener{
         int indexLinha = this.tela.getTableFuncionario().getSelectedRow();
         
         try{
-            
-            if(!this.tela.getModelFuncionario().getFuncionario(indexLinha).getCpf().equals(this.tela.getGerenteResponsavel().getCpf()))
-            
-                this.tela.getModelFuncionario().removerFuncionario(indexLinha);
-            else 
-                JOptionPane.showMessageDialog(null, "Ops! Impossível remover a sí próprio", "ERRO",JOptionPane.ERROR_MESSAGE);
+            if(confirmacaoExclusao() == 0)
+                if(!this.tela.getModelFuncionario().getFuncionario(indexLinha).getCpf().equals(this.tela.getGerenteResponsavel().getCpf()))
+
+                    this.tela.getModelFuncionario().removerFuncionario(indexLinha);
+                else 
+                    JOptionPane.showMessageDialog(null, "Ops! Impossível remover a sí próprio", "ERRO",JOptionPane.ERROR_MESSAGE);
             
         }catch(Exception ex){
             
@@ -503,21 +500,19 @@ class EmitirRelatorioVendas implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
         List<Venda> listVenda = JSONVendas.lerVendas();
+        String relatorio = " ";
         
-        
+        relatorio = listVenda.stream().map(venda -> "\nO vendedor '"+venda.getVendedor().getCpf()+"' realizou uma venda no valor de R$" + venda.getValor()+" do produto" + venda.getProduto().getCodigo()+ " para o cliente '" + venda.getCliente().getCpf()+"'\n").reduce(relatorio, String::concat);
+           
         try {
-            for(Venda venda: listVenda ){
-                
-                escreverArquivo("arquivos/relatorio.txt","\nO vendedor '"+venda.getVendedor().getNome()+"' realizou uma venda no valor de R$" + venda.getValor()+" do produto" + venda.getProdutos()+"\n");
-            }
-            System.out.println("Relatorio de vendas emitido. Acessado em arquivos/relatorio.txt");
+            
+            escreverArquivo("arquivos/relatorio_de_vendas.txt",relatorio);
             
         } catch (IOException ex) {
             
-           System.out.println("Erro ao escrever no arquivo arquivos/relatorio.txt");
         }
         
-        
+        System.out.println("Relatorio de vendas emitido. Acessado em arquivos/relatorio_de_vendas.txt");
     }
         
     

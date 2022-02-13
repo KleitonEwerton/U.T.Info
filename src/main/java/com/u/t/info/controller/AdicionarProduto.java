@@ -5,9 +5,12 @@
 package com.u.t.info.controller;
 
 import com.u.t.info.src.Produto;
+import com.u.t.info.utils.Arquivo;
+import com.u.t.info.utils.JSONProduto;
 import com.u.t.info.view.TelaCadastroProduto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.*;
 
 /**
@@ -57,6 +60,11 @@ public class AdicionarProduto implements ActionListener {
                                 tela.getModelo().getText(), estInicial, 2);
 
                         tela.getListaProdutos().add(produto);
+                        
+                        List<Produto> listProduto = JSONProduto.lerProdutos();
+                        listProduto.add(produto);
+                        Arquivo.escreverArquivo("arquivos/produtos.json", JSONProduto.toJSONProdutos(listProduto));
+                        
                         JOptionPane.showMessageDialog(tela, "Produto adicionado");
                         LimparFormularioProduto limpar = new LimparFormularioProduto(tela);
                         limpar.LimparFormulario();

@@ -11,6 +11,8 @@ import com.u.t.info.src.Produto;
 import com.u.t.info.utils.Arquivo;
 import com.u.t.info.utils.JSONFornecedor;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -410,6 +412,7 @@ public class TelaCadastroProduto extends JFrame {
         gbc1.anchor = GridBagConstraints.SOUTH;
         gbc1.insets = new Insets(20, 595, 20, 0);
         gbc1.gridheight = 1;
+        cancelar.addActionListener(new Cancelar(this));
         painel.add(cancelar, gbc1);
 
         salvar = new JButton("Salvar");
@@ -430,12 +433,7 @@ public class TelaCadastroProduto extends JFrame {
 
     }
 
-    /*public static void main(String[] args) {
-        TelaCadastroProduto tela = new TelaCadastroProduto();
-
-        tela.desenha();
-        //tela.pack();
-    }*/
+   
 
     
     //getters e setters
@@ -514,4 +512,23 @@ public class TelaCadastroProduto extends JFrame {
     public void setListaProdutos(List<Produto> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }
+}
+
+class Cancelar implements ActionListener{
+    
+    private final TelaCadastroProduto tela;
+
+    public Cancelar(TelaCadastroProduto tela) {
+        this.tela = tela;
+        
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        tela.dispose();
+       
+    }
+
+    
 }

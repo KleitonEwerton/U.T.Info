@@ -1,5 +1,6 @@
 package com.u.t.info.view;
 
+import com.u.t.info.controller.CancelarAcao;
 import com.u.t.info.src.Fornecedor;
 import com.u.t.info.tables.TableFornecedores;
 import com.u.t.info.utils.BuscaCep;
@@ -479,21 +480,5 @@ class SalvarFornecedor implements ActionListener{
     }
     
 }
-class CancelarAcao implements ActionListener{
 
-    private final TelaCadastroFornecedor tela;
-
-    public CancelarAcao(TelaCadastroFornecedor tela) {
-        this.tela = tela;
-        
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        tela.dispose();
-       
-    }
-    
-}
 

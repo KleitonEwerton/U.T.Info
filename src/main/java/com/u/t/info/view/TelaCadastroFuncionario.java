@@ -1,5 +1,6 @@
 package com.u.t.info.view;
 
+import com.u.t.info.controller.CancelarAcao;
 import com.u.t.info.src.*;
 import com.u.t.info.utils.*;
 
@@ -468,7 +469,8 @@ public class TelaCadastroFuncionario extends TelaCadastro {
         painel.add(jtb, gbcPrincipal);
 
         sair = new JButton("Cancelar");
-
+        
+        
         GridBagConstraints gbc33 = new GridBagConstraints();
         gbc33.gridx = 1;
         gbc33.gridy = 1;
@@ -494,7 +496,7 @@ public class TelaCadastroFuncionario extends TelaCadastro {
 
         salvar.addActionListener(new AdicionarFuncionario(this));
         painel.add(salvar, gbc34);
-
+        sair.addActionListener(new CancelarAcao(this));
         this.add(painel);
     }
 
