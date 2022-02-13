@@ -51,7 +51,7 @@ public class TableVendas extends AbstractTableModel{
             case 0:
                 return this.listVenda.get(indexLinha).getVendedor().getNome();      
             case 1:
-                return this.listVenda.get(indexLinha).getProdutos();
+                return this.listVenda.get(indexLinha).getProduto();
             case 2:
                 return this.listVenda.get(indexLinha).getValor();
             

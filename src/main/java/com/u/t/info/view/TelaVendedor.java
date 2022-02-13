@@ -10,6 +10,7 @@ import com.u.t.info.controller.DesenharPainelClientes;
 import com.u.t.info.controller.DesenharPainelDevolucoes;
 import com.u.t.info.controller.DesenharPainelVendas;
 import com.u.t.info.src.Cliente;
+import com.u.t.info.src.Devolucao;
 import com.u.t.info.src.Fornecedor;
 import com.u.t.info.src.Produto;
 import com.u.t.info.src.Venda;
@@ -17,6 +18,7 @@ import com.u.t.info.src.Vendedor;
 import com.u.t.info.tables.TableClientes;
 import com.u.t.info.utils.Arquivo;
 import com.u.t.info.utils.JSONCliente;
+import com.u.t.info.utils.JSONDevolucao;
 import com.u.t.info.utils.JSONFornecedor;
 import static com.u.t.info.utils.JSONFornecedor.lerFornecedores;
 import com.u.t.info.utils.JSONProduto;
@@ -39,10 +41,13 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -100,6 +105,8 @@ public class TelaVendedor extends JFrame{
     JButton btnCadastrarCliente;
     JButton btnRealizarVenda;
     JButton btnRealizarDevolucao;
+    
+    JComboBox jcbDefeito;
     
     JRadioButton jrbSim;
     JRadioButton jrbNao;
@@ -412,6 +419,7 @@ public class TelaVendedor extends JFrame{
         this.painelDevolucoes.add(jlDevolucaoQuebrado,gbc);
         
         this.btnRealizarDevolucao = new JButton("Realizar Devolução");
+        this.btnRealizarDevolucao.addActionListener(new AtualizaDevolucoes(this));
         gbc.gridheight = 1;
         gbc.gridx = 5;
         gbc.gridy = 3;
@@ -424,17 +432,22 @@ public class TelaVendedor extends JFrame{
         this.bgDefeito.add(jrbSim);
         this.bgDefeito.add(jrbNao);
         
+        this.jcbDefeito = new JComboBox();
+        this.jcbDefeito.addItem("Sim");
+        this.jcbDefeito.addItem("Não");
+        
         gbc.gridheight = 1;
         gbc.gridx = 2;
         gbc.gridy = 2;
         gbc.weightx = 1.0;
-        this.painelDevolucoes.add(jrbSim,gbc);
-        
-        gbc.gridheight = 1;
-        gbc.gridx = 4;
-        gbc.gridy = 2;
-        gbc.weightx = 1.0;
-        this.painelDevolucoes.add(jrbNao,gbc);
+        this.painelDevolucoes.add(jcbDefeito,gbc);
+//        this.painelDevolucoes.add(jrbSim,gbc);
+//        
+//        gbc.gridheight = 1;
+//        gbc.gridx = 4;
+//        gbc.gridy = 2;
+//        gbc.weightx = 1.0;
+//        this.painelDevolucoes.add(jrbNao,gbc);
        
         
         this.painelPrincipal.add(this.painelVendas, BorderLayout.CENTER);
@@ -620,6 +633,40 @@ public class TelaVendedor extends JFrame{
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
     }
+
+    public ButtonGroup getBgDefeito() {
+        return bgDefeito;
+    }
+
+    public void setBgDefeito(ButtonGroup bgDefeito) {
+        this.bgDefeito = bgDefeito;
+    }
+
+    public JRadioButton getJrbSim() {
+        return jrbSim;
+    }
+
+    public void setJrbSim(JRadioButton jrbSim) {
+        this.jrbSim = jrbSim;
+    }
+
+    public JRadioButton getJrbNao() {
+        return jrbNao;
+    }
+
+    public void setJrbNao(JRadioButton jrbNao) {
+        this.jrbNao = jrbNao;
+    }
+
+    public JComboBox getJcbDefeito() {
+        return jcbDefeito;
+    }
+
+    public void setJcbDefeito(JComboBox jcbDefeito) {
+        this.jcbDefeito = jcbDefeito;
+    }
+    
+    
     
     
     
@@ -658,6 +705,7 @@ class AtualizaVendas implements ActionListener
             venda.add(new Venda(tela.getVendedor(),cliente, produto, valor));
             String json = JSONVendas.toJSONSVendas(venda);
             Arquivo.escreverArquivo("arquivos/vendas.json", json);
+            tela.getVendedor().getVendas().add(new Venda(tela.getVendedor(),cliente, produto, valor));
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(tela, "Quantidade inválida");
         } catch (IOException ex) {
@@ -667,3 +715,41 @@ class AtualizaVendas implements ActionListener
     }
     
 }
+
+class AtualizaDevolucoes implements ActionListener
+{
+    private TelaVendedor tela;
+
+    public AtualizaDevolucoes(TelaVendedor tela) {
+        this.tela = tela;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent arg0) {
+        int indiceProduto = tela.getJcbProdutosDevolucao().getSelectedIndex();
+        Produto produto = tela.getListaProduto().get(indiceProduto);
+        int defeito = tela.getJcbDefeito().getSelectedIndex();
+        try {
+            int quantidade = Integer.parseInt(tela.getJtQtdProdutoDevolucao().getText());
+            List<Devolucao> devolucao = JSONDevolucao.lerDevolucao();
+            if(defeito == 0)
+            {
+                devolucao.add(new Devolucao(tela.getVendedor().getNome(), produto, quantidade, "Sim"));
+            }
+            else
+            {
+                devolucao.add(new Devolucao(tela.getVendedor().getNome(), produto, quantidade,"Não"));
+            }     
+            String json = JSONDevolucao.toJSONDevolucoes(devolucao);
+            Arquivo.escreverArquivo("arquivos/devolucoes.json", json);
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(tela, "Quantidade inválida");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(tela,"Erro ao salvar devolução");
+        }
+        
+    }
+    
+}
+

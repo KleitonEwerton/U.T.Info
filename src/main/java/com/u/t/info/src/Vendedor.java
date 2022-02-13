@@ -19,6 +19,16 @@ public class Vendedor extends Funcionario {
         this.vendas = vendas;
     }
 
+    public List<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<Venda> vendas) {
+        this.vendas = vendas;
+    }
+    
+   
+
     @Override
     public double calculaPagamento() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
