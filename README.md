@@ -29,7 +29,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 Além disto é necessário configurar as variáveis de ambiente para todas as ferramentas acima.
 
 
-## 🎮 Rodando aplicação
+## 🎮 Rodando aplicação no windows
 
 ```bash
 # Clone este repositório
