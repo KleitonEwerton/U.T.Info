@@ -46,7 +46,7 @@ public class AdicionarCliente implements ActionListener {
             }
             try
             {
-                if(!tela.getNome().getText().matches("^[a-zA-Z]+$"))
+                if(!tela.getNome().getText().matches("^[ a-zA-Z]+$") || tela.getNome().getText().length() < 8)
                 {
                     throw new Exception();
                 }
@@ -103,7 +103,7 @@ public class AdicionarCliente implements ActionListener {
             }
             catch (Exception exception)
             {
-                JOptionPane.showConfirmDialog(null, "Verificar o nome! \nProibido uso de números!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                JOptionPane.showConfirmDialog(null, "Verificar o nome! \nProibido uso de números!\nTamanho Mínimo: 8 caracteres", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
             }
 
         }

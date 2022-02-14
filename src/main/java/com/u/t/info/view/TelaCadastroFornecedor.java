@@ -510,29 +510,39 @@ class SalvarFornecedor implements ActionListener{
                     {
                         throw new Exception();
                     }
-
-                    try {
-                        if(tela.getUf().getText().isEmpty())
+                    try
+                    {
+                        if(tela.getRazaoSocial().getText().length() < 8)
                         {
                             throw new Exception();
                         }
-                        List<String> arrayList = Arrays.asList(tela.getListaProdutos().getText().split("\\s*,\\s*"));
+                        try
+                        {
+                            if(tela.getUf().getText().isEmpty())
+                            {
+                                throw new Exception();
+                            }
+                            List<String> arrayList = Arrays.asList(tela.getListaProdutos().getText().split("\\s*,\\s*"));
 
-                        List<Fornecedor> listFornecedores = JSONFornecedor.lerFornecedores();
+                            List<Fornecedor> listFornecedores = JSONFornecedor.lerFornecedores();
 
-                        listFornecedores.add(new Fornecedor(tela.getRazaoSocial().getText(),
-                                tela.getCnpj().getText(), arrayList,tela.getRua().getText(),
-                                tela.getNumeroCasa().getText(),tela.getBairro().getText(),
-                                tela.getCidade().getText(), tela.getUf().getText(),
-                                tela.getCep().getText()));
+                            listFornecedores.add(new Fornecedor(tela.getRazaoSocial().getText(),
+                                    tela.getCnpj().getText(), arrayList,tela.getRua().getText(),
+                                    tela.getNumeroCasa().getText(),tela.getBairro().getText(),
+                                    tela.getCidade().getText(), tela.getUf().getText(),
+                                    tela.getCep().getText()));
 
-                        salvarFornecedoresJSON(listFornecedores, tela);
+                            salvarFornecedoresJSON(listFornecedores, tela);
+                        }
+                        catch (Exception exception)
+                        {
+                            JOptionPane.showConfirmDialog(null, "Clicar no botão para validar CEP!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                        }
                     }
                     catch (Exception exception)
                     {
-                        JOptionPane.showConfirmDialog(null, "Clicar no botão para validar CEP!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                        JOptionPane.showConfirmDialog(null, "Razão social inválido!\nTamanho Mínimo: 8 caracteres", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
                     }
-
                 }
                 catch (Exception exception)
                 {
@@ -550,6 +560,8 @@ class SalvarFornecedor implements ActionListener{
         }
         
     }
+
+
 
     public boolean verificaCNPJ(String CNPJ) {
         // considera-se erro CNPJ's formados por uma sequencia de numeros iguais
