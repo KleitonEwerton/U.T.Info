@@ -33,16 +33,16 @@ Além disto é necessário configurar as variáveis de ambiente para todas as fe
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/Luizmbs/U.T.Info.git
+git clone https://github.com/Luizmbs/U.T.Info.git
 
 # Acesse a pasta do projeto no terminal/cmd
-$ cd U.T.Info
+cd U.T.Info
 
 # Instale as dependências
-$ mvn install
+mvn install
 
 # Execute a aplicação em modo de desenvolvimento
-$ java -jar target/UTInfo-1.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar target/UTInfo-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 ```
 ## 🛠 Tecnologias
