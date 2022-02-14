@@ -41,11 +41,8 @@ $ cd U.T.Info
 # Instale as dependências
 $ mvn install
 
-#Acessa a pasta target
-$ cd target
-
 # Execute a aplicação em modo de desenvolvimento
-$ java -jar UTInfo-1.0-SNAPSHOT-jar-with-dependencies.jar
+$ java -jar target/UTInfo-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 ```
 ## 🛠 Tecnologias
