@@ -2,13 +2,25 @@ package com.u.t.info.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.u.t.info.controller.LimparFormularioFornecedor;
 import com.u.t.info.src.Fornecedor;
+import com.u.t.info.view.TelaCadastroFornecedor;
+
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 public class JSONFornecedor {
     
@@ -52,13 +64,15 @@ public class JSONFornecedor {
         
         return listFornecedores;
     }
-    public static void salvarFornecedoresJSON(List<Fornecedor> listFornecedor){
+    public static void salvarFornecedoresJSON(List<Fornecedor> listFornecedor, TelaCadastroFornecedor tela){
         
         try{
             
             String toJSONFornecedor = JSONFornecedor.toJSONFornecedores(listFornecedor);
             Arquivo.escreverArquivo("arquivos/fornecedores.json",toJSONFornecedor);
-            
+            JOptionPane.showMessageDialog(null, "Fornecedor adicionado");
+            LimparFormularioFornecedor limparFormularioFornecedor = new LimparFormularioFornecedor(tela);
+            limparFormularioFornecedor.LimparFormulario();
         } catch (IOException ex) {
             
             System.out.println("Erro ao salvar os fornecedores em arquivos/fornecedores.json");

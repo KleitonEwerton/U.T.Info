@@ -18,6 +18,14 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 public class TableFuncionarios extends AbstractTableModel{
     

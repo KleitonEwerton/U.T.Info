@@ -1,12 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.u.t.info.controller;
 
 import com.u.t.info.view.TelaSupervisor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 /**
  *
@@ -21,19 +26,18 @@ public class HabilitarEstoque implements ActionListener{
     //atributo
     private TelaSupervisor tela;
 
-    
-    /*
-    Contrutor
-    param: TelaSupervisor tela
-    */
+    /**
+     * Contrutor da classe
+     * @param tela
+     */
     public HabilitarEstoque(TelaSupervisor tela) {
         this.tela = tela;
     }
-    
-    /*
-    Função que reliza a ação de habilitar
-    param: ActionEvent e
-    */
+
+    /**
+     * Função que reliza a ação de habilitar
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         tela.getCardLayout().show(tela.getPainel(), "1");

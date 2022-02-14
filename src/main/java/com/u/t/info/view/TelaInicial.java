@@ -6,6 +6,15 @@ import com.u.t.info.controller.EntrarLogin;
 import java.awt.*;
 import javax.swing.*;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
+
 /**
  *
  * @author Nikolas
@@ -141,7 +150,7 @@ public class TelaInicial extends JFrame {
         auxPainelPrincipal.add(btnEntrar, gbc7);
 
         //exibição do texto
-        String txt = "Caso não possua cadastro no" + " <br/>" + " sistema, clique no botão abaixo" + "<br>" + " para informar o gerente!";
+        String txt = "Caso não possua cadastro no" + " <br/>" + " sistema, informe o gerente!";
         JLabel semCadastro = new JLabel("<html><div style='text-align: center;'>" + txt + "</div></html>", SwingConstants.CENTER);
         font = new Font("Leelawadee UI", Font.PLAIN, 18);
         semCadastro.setFont(font);

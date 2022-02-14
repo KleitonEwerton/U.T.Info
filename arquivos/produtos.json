@@ -1,1 +1,1 @@
-[{"nome":"pc","codigo":"22","precoCompra":21.0,"precoVenda":22.0,"fornecedor":"A","descricao":"Apenas um teste","modelo":"2222","qtdeEstoque":12,"estoqueMinimo":2},{"nome":"1","codigo":"1","precoCompra":1.0,"precoVenda":1.0,"fornecedor":"A","descricao":"ggg","modelo":"1","qtdeEstoque":1,"estoqueMinimo":2}]
+[{"nome":"pc"},{"nome":"1"},{"nome":"Maquiva envase"}]

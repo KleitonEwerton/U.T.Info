@@ -11,7 +11,6 @@ import com.u.t.info.controller.DesenharPainelDevolucoes;
 import com.u.t.info.controller.DesenharPainelVendas;
 import com.u.t.info.src.Cliente;
 import com.u.t.info.src.Devolucao;
-import com.u.t.info.src.Fornecedor;
 import com.u.t.info.src.Produto;
 import com.u.t.info.src.Venda;
 import com.u.t.info.src.Vendedor;
@@ -19,39 +18,27 @@ import com.u.t.info.tables.TableClientes;
 import com.u.t.info.utils.Arquivo;
 import com.u.t.info.utils.JSONCliente;
 import com.u.t.info.utils.JSONDevolucao;
-import com.u.t.info.utils.JSONFornecedor;
-import static com.u.t.info.utils.JSONFornecedor.lerFornecedores;
 import com.u.t.info.utils.JSONProduto;
 import com.u.t.info.utils.JSONVendas;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -59,6 +46,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 /**
  *
@@ -68,96 +64,58 @@ public class TelaVendedor extends JFrame{
  
     private Vendedor vendedor;
     
-    JPanel painelPrincipal;
-    JPanel painelClientes = new JPanel();
-    JPanel painelVendas= new JPanel();
-    JPanel painelDevolucoes= new JPanel();
-    JPanel painelBotoes;
-    JPanel painelCards;
-    
-    JLabel jlQuantidadeProduto;
-    JLabel jlProduto;
-    JLabel jlCliente;
-    JLabel jlDevolucaoProduto;
-    JLabel jlDevolucaoQuantidade;
-    JLabel jlDevolucaoQuebrado;
-    
-    JComboBox jcbProdutos;
-    JComboBox jcbClientes;
-    JComboBox jcbProdutosDevolucao;
-    
-    JTextField jtQuantidadeProduto;
-    JTextField jtQtdProdutoDevolucao;
-    
-    CardLayout cardLayout;
-    
-    JTable jtClientes;
-    JTable jtDevolucoes;
-    JTable jtVendas;
-    
-    TableClientes modelClientes;
-    DefaultTableModel modelVendas;
-    DefaultTableModel modelDevolucoes;
-    
-    JButton btnClientes;
-    JButton btnVendas;
-    JButton btnDevolucoes;
-    JButton btnCadastrarCliente;
-    JButton btnRealizarVenda;
-    JButton btnRealizarDevolucao;
-    
-    JComboBox jcbDefeito;
-    
-    JRadioButton jrbSim;
-    JRadioButton jrbNao;
-    
-    ButtonGroup bgDefeito;
-    
-    List<Produto> listaProduto;
-    List<Cliente> listaCliente;
+    private JPanel painelPrincipal;
+    private JPanel painelClientes = new JPanel();
+    private JPanel painelVendas= new JPanel();
+    private JPanel painelDevolucoes= new JPanel();
+    private JPanel painelBotoes;
+    private JPanel painelCards;
 
-    public List<Produto> getListaProduto() {
-        return listaProduto;
-    }
+    private JLabel jlQuantidadeProduto;
+    private JLabel jlProduto;
+    private JLabel jlCliente;
+    private JLabel jlDevolucaoProduto;
+    private JLabel jlDevolucaoQuantidade;
+    private JLabel jlDevolucaoQuebrado;
 
-    public void setListaProduto(List<Produto> listaProduto) {
-        this.listaProduto = listaProduto;
-    }
+    private JComboBox jcbProdutos;
+    private JComboBox jcbClientes;
+    private JComboBox jcbProdutosDevolucao;
 
-    public List<Cliente> getListaCliente() {
-        return listaCliente;
-    }
+    private JTextField jtQuantidadeProduto;
+    private JTextField jtQtdProdutoDevolucao;
 
-    public void setListaCliente(List<Cliente> listaCliente) {
-        this.listaCliente = listaCliente;
-    }
-    
-    
-    
-    List<Cliente> clientes;
-    Vector<Cliente> vcCliente;
+    private CardLayout cardLayout;
 
-    public Vector<Cliente> getVcCliente() {
-        return vcCliente;
-    }
+    private JTable jtClientes;
+    private JTable jtDevolucoes;
+    private JTable jtVendas;
 
-    public void setVcCliente(Vector<Cliente> vcCliente) {
-        this.vcCliente = vcCliente;
-    }
+    private TableClientes modelClientes;
+    private DefaultTableModel modelVendas;
+    private DefaultTableModel modelDevolucoes;
 
-    public List<Cliente> getClientes() {
-        return clientes;
-    }
+    private JButton btnClientes;
+    private JButton btnVendas;
+    private JButton btnDevolucoes;
+    private JButton btnCadastrarCliente;
+    private JButton btnRealizarVenda;
+    private JButton btnRealizarDevolucao;
 
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
-    }
-    
- 
-    
-   
-    
-    
+    private JComboBox jcbDefeito;
+
+    private JRadioButton jrbSim;
+    private JRadioButton jrbNao;
+
+    private ButtonGroup bgDefeito;
+
+    private List<Produto> listaProduto;
+    private List<Cliente> listaCliente;
+
+    /**
+     * Construtor da classe
+     * @param vendedor vendedor que fez o login na tela inicial
+     */
     public TelaVendedor(Vendedor vendedor)
     {
         super("Sistema de Vendas");
@@ -165,8 +123,11 @@ public class TelaVendedor extends JFrame{
         //this.clientes = new ArrayList<>();
        this.addWindowListener(new AtualizaTabelaClientes(this));
     }
-    
-     public void atualizaLista()
+
+    /**
+     * Metodo para adicionar produtos e clientes no JComboBox
+     */
+    public void atualizaLista()
     {
         jcbProdutos = new JComboBox();
         jcbProdutosDevolucao = new JComboBox();
@@ -193,7 +154,10 @@ public class TelaVendedor extends JFrame{
             //aqui a lista esta vazia
         }
     }
-    
+
+    /**
+     * Metodo para desenhar a tela principal
+     */
     public void desenha()
     {
         this.painelPrincipal = new JPanel();
@@ -220,7 +184,10 @@ public class TelaVendedor extends JFrame{
         this.add(this.painelPrincipal);
         this.repaint();
     }
-    
+
+    /**
+     * Metodo para desenhar os paineis
+     */
     private void desenhaCards()
     {
         painelCards = new JPanel();
@@ -234,9 +201,11 @@ public class TelaVendedor extends JFrame{
         
         this.painelPrincipal.add(painelCards, BorderLayout.CENTER);
     }
-   
 
-    
+
+    /**
+     * Metodo para desenhar botoes
+     */
     private void desenhaBotoes()
     {
         this.painelBotoes = new JPanel();
@@ -280,7 +249,10 @@ public class TelaVendedor extends JFrame{
         
         this.painelPrincipal.add(this.painelBotoes, BorderLayout.WEST);
     }
-    
+
+    /**
+     * Metodo para desenhar painel de clientes
+     */
     public void desenhaClientes()
     {
         JScrollPane scroll;
@@ -303,7 +275,10 @@ public class TelaVendedor extends JFrame{
         this.painelPrincipal.add(this.painelClientes, BorderLayout.CENTER);
         
     }
-    
+
+    /**
+     * Metodo para desenhar painel de vendas
+     */
     public void desenhaVendas()
     {
         JScrollPane scrollVendas;
@@ -370,7 +345,10 @@ public class TelaVendedor extends JFrame{
        this.painelPrincipal.add(this.painelVendas, BorderLayout.CENTER);
         
     }
-    
+
+    /**
+     * Metodo para desenhar painel de devolucoes
+     */
     public void desenhaDevolucoes()
     {
         JScrollPane scrollDevolucoes;
@@ -528,7 +506,40 @@ public class TelaVendedor extends JFrame{
         this.jtDevolucoes = jtDevolucoes;
     }
 
+    public List<Produto> getListaProduto() {
+        return listaProduto;
+    }
 
+    public void setListaProduto(List<Produto> listaProduto) {
+        this.listaProduto = listaProduto;
+    }
+
+    public List<Cliente> getListaCliente() {
+        return listaCliente;
+    }
+
+    public void setListaCliente(List<Cliente> listaCliente) {
+        this.listaCliente = listaCliente;
+    }
+
+    List<Cliente> clientes;
+    Vector<Cliente> vcCliente;
+
+    public Vector<Cliente> getVcCliente() {
+        return vcCliente;
+    }
+
+    public void setVcCliente(Vector<Cliente> vcCliente) {
+        this.vcCliente = vcCliente;
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
 
     public DefaultTableModel getModelVendas() {
         return modelVendas;
@@ -665,20 +676,6 @@ public class TelaVendedor extends JFrame{
     public void setJcbDefeito(JComboBox jcbDefeito) {
         this.jcbDefeito = jcbDefeito;
     }
-    
-    
-    
-    
-    
-    
-    
-
-        
-    
-    
-    
-    
-   
 }
 
 class AtualizaVendas implements ActionListener
@@ -686,14 +683,19 @@ class AtualizaVendas implements ActionListener
 
     private TelaVendedor tela;
 
+    /**
+     * Construtor da classe
+     * @param tela Tela de vendedor
+     */
     public AtualizaVendas(TelaVendedor tela) {
         this.tela = tela;
     }
-    
-    
+
+    /**
+     * Atualizar vendas
+     */
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        
         int indiceProduto = tela.getJcbProdutos().getSelectedIndex();
         int indiceCliente = tela.getJcbClientes().getSelectedIndex();
         Produto produto = tela.getListaProduto().get(indiceProduto);
@@ -720,10 +722,17 @@ class AtualizaDevolucoes implements ActionListener
 {
     private TelaVendedor tela;
 
+    /**
+     * Construtor da classe
+     * @param tela
+     */
     public AtualizaDevolucoes(TelaVendedor tela) {
         this.tela = tela;
     }
-    
+
+    /**
+     * Atualizar devolucoes
+     */
     @Override
     public void actionPerformed(ActionEvent arg0) {
         int indiceProduto = tela.getJcbProdutosDevolucao().getSelectedIndex();
@@ -750,6 +759,5 @@ class AtualizaDevolucoes implements ActionListener
         }
         
     }
-    
 }
 

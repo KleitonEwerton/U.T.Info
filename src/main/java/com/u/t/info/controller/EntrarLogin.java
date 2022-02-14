@@ -15,8 +15,12 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /*
- * OBS: APENAS TESTANDO COM CLIENTE
- * POSTERIORMENTE VAI MUDAR
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
  */
 
 /**
@@ -27,10 +31,18 @@ public class EntrarLogin implements ActionListener {
 
     private final TelaInicial tela;
 
+    /**
+     * Construtor da classe
+     * @param tela Tela inicial
+     */
     public EntrarLogin(TelaInicial tela) {
         this.tela = tela;
     }
 
+    /**
+     * Verificar as informacoes de login e redirecionar o funcionario para sua tela
+     * @param ae
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         //janela é aberta

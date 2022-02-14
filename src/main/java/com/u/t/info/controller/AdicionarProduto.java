@@ -13,6 +13,15 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
+
 /**
  *
  * @author agata
@@ -22,20 +31,19 @@ public class AdicionarProduto implements ActionListener {
     //atributo do tipo TelaCadastroProduto
     private final TelaCadastroProduto tela;
 
-    
-    /*
-    Contrutor de classe
-    param: TelaCadastroProduto
-    */
+    /**
+     * Contrutor de classe
+     * @param tela tela de cadastro do produto
+     */
     public AdicionarProduto(TelaCadastroProduto tela) {
         this.tela = tela;
     }
 
-    
-    /*
-    Realiza ação de adicionar um produto tratando excessões para  os campos
-    param: ActionEvent e
-    */
+
+    /**
+     * Realiza ação de adicionar um produto tratando excessões para  os campos
+     * @param e ActionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 

@@ -2,7 +2,6 @@
 package com.u.t.info.tables;
 
 import com.u.t.info.src.Fornecedor;
-import com.u.t.info.src.Funcionario;
 import com.u.t.info.utils.Arquivo;
 import com.u.t.info.utils.JSONFornecedor;
 import static com.u.t.info.utils.JSONFornecedor.lerFornecedores;
@@ -12,6 +11,14 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 public class TableFornecedores extends AbstractTableModel{
     

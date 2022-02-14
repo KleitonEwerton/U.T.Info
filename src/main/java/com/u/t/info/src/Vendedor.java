@@ -1,10 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.u.t.info.src;
 
 import java.util.List;
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 /**
  *
@@ -14,8 +18,24 @@ public class Vendedor extends Funcionario {
     
     private List<Venda> vendas;
 
-    public Vendedor(List<Venda> vendas, String nome, String contato, String cpf, String codigoHash, String rua, String numero, String cidade, String uf, String cep, double salario) {
-        super(nome, contato, cpf, codigoHash, rua, numero, cidade, uf, cep, salario);
+    /**
+     * Construtor da classe
+     * @param vendas lista de vendas
+     * @param nome nome do vendedor
+     * @param contato telefone do vendedor
+     * @param tipo tipo do telefone do vendedor
+     * @param cpf cpf do vendedor
+     * @param senha senha do vendedor
+     * @param rua rua do vendedor
+     * @param numero numero da casa do vendedor
+     * @param bairro bairro do vendedor
+     * @param cidade cidade do vendedor
+     * @param uf estado do vendedor
+     * @param cep cep do vendedor
+     * @param salario salario do vendedor
+     */
+    public Vendedor(List<Venda> vendas, String nome, String contato, String tipo, String cpf, String senha, String rua, String numero, String bairro, String cidade, String uf, String cep, double salario) {
+        super(nome, contato, tipo, cpf, senha, rua, numero, bairro, cidade, uf, cep, salario);
         this.vendas = vendas;
     }
 

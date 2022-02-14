@@ -7,6 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
+
 /**
  *
  * @author Nikolas
@@ -15,10 +24,17 @@ public class AdicionarCliente implements ActionListener {
 
     private final TelaCadastroCliente tela;
 
+    /**
+     * Construtor da classe
+     * @param tela tela de cadastro de cliente
+     */
     public AdicionarCliente(TelaCadastroCliente tela) {
         this.tela = tela;
     }
 
+    /**
+     * Adicionar um cliente
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         try
@@ -82,7 +98,7 @@ public class AdicionarCliente implements ActionListener {
                 }
                 catch (Exception exception)
                 {
-                    JOptionPane.showConfirmDialog(null, "Verificar os campos CPF, CEP, Número e/ou Telefone! \nProibido uso de letras\nOBS: Digitar sem colocar caracteres \"(.-)\"!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                    JOptionPane.showConfirmDialog(null, "Verificar os campos CPF, CEP, Número da casa e/ou Telefone! \nProibido uso de letras\nOBS: Digitar sem colocar caracteres \"(.-)\"!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
                 }
             }
             catch (Exception exception)
@@ -93,10 +109,15 @@ public class AdicionarCliente implements ActionListener {
         }
         catch (Exception exception)
         {
-            JOptionPane.showConfirmDialog(null, "Verificar os campos! \nProibido prosseguir sem digitar!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showConfirmDialog(null, "Verificar os campos! \nProibido prosseguir com campos vazios!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
         }
     }
 
+    /**
+     * Metodo para validar cpf
+     * @param CPF cpf do cliente
+     * @return verdadeiro se eh valido e falso se nao eh valido
+     */
     public boolean validaCPF(String CPF) {
         if (CPF.equals("00000000000") ||
                 CPF.equals("11111111111") ||
@@ -151,6 +172,5 @@ public class AdicionarCliente implements ActionListener {
             return(false);
         }
     }
-
 
 }

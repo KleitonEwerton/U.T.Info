@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.u.t.info.controller;
-
 
 import com.u.t.info.src.Produto;
 import com.u.t.info.utils.Arquivo;
@@ -18,6 +13,15 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.swing.JOptionPane;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
+
 /**
  *
  * @author agata
@@ -31,15 +35,18 @@ public class RealizarDevolucao implements ActionListener{
     //atributo
      private final TelaSupervisor tela;
 
-     
-     //construtor
+    /**
+     * Construtor da classe
+     * @param tela tela do supervisor
+     */
     public RealizarDevolucao(TelaSupervisor tela) {
         this.tela = tela;
     }
-    
-    /*
-    Evento de botão: remove o produto do arquivo e adiciona ele novamente com o estoque atualizado
-    */
+
+    /**
+     * Evento de botão: remove o produto do arquivo e adiciona ele novamente com o estoque atualizado
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String str = String.valueOf(tela.getjComboBoxProdutos().getSelectedItem()); //item selecionado

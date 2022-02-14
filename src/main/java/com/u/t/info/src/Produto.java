@@ -1,8 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.u.t.info.src;
+
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 public class Produto {
 
@@ -22,6 +27,18 @@ public class Produto {
 
     }
 
+    /**
+     * Construtor da classe
+     * @param nome nome do produto
+     * @param codigo codigo do produto
+     * @param precoCompra preco de compra do produto
+     * @param precoVenda preco de venda do produto
+     * @param fornecedor fornecedor do produto
+     * @param descricao descricao do produto
+     * @param modelo modelo do produto
+     * @param qtdeEstoque quantidade de estoque do produto
+     * @param estoqueMinimo estoque minimo do produto
+     */
     public Produto(String nome, String codigo, double precoCompra, double precoVenda, String fornecedor, String descricao, String modelo, int qtdeEstoque, int estoqueMinimo) {
 
         this.nome = nome;

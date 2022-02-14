@@ -1,8 +1,6 @@
 package com.u.t.info.utils;
 
 import com.u.t.info.view.TelaCadastro;
-import com.u.t.info.view.TelaCadastroCliente;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +10,18 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
+/**
+ *
+ * @author Nikolas
+ */
 public class BuscaCep implements ActionListener {
 
     String ruaStr;
@@ -21,10 +31,17 @@ public class BuscaCep implements ActionListener {
 
     private final TelaCadastro tela;
 
+    /**
+     * Construtor da classe
+     * @param tela
+     */
     public BuscaCep(TelaCadastro tela) {
         this.tela = tela;
     }
 
+    /**
+     * Pesquisar o cep ou mostrar mensagem de erro na tela
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         String cep = tela.getCep().getText();
@@ -37,6 +54,10 @@ public class BuscaCep implements ActionListener {
         }
     }
 
+    /**
+     * Metodo para buscar um cep valido
+     * @param cep cep valido
+     */
     public void buscarCep(String cep) {
         String json;
 

@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.u.t.info.src;
-
 
 import com.u.t.info.utils.JSONGerente;
 import com.u.t.info.utils.JSONSupervisor;
@@ -11,23 +6,48 @@ import com.u.t.info.utils.JSONVendedor;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 public abstract class Funcionario {
 
+    //atributos
     private String nome;
-    private String contato;
+    private String contato, tipo;
     private String cpf;
     private String senha;
-    private String rua, numero,cidade, uf, cep;
+    private String rua, numero,cidade, bairro, uf, cep;
     private double salario;
 
-    public Funcionario(String nome, String contato, String cpf, String senha, String rua, String numero, String cidade, String uf, String cep, double salario) {
+    /**
+     * Construtor da classe
+     * @param nome nome do funcionario
+     * @param contato telefone do funcionario
+     * @param tipo tipo do telefone do funcionario
+     * @param cpf cpf do funcionario
+     * @param senha senha do funcionario
+     * @param rua rua do funcionario
+     * @param numero numero da casa do funcionario
+     * @param bairro bairro do funcionario
+     * @param cidade cidade do funcionario
+     * @param uf estado do funcionario
+     * @param cep cep do funcionario
+     * @param salario salario do funcionario
+     */
+    public Funcionario(String nome, String contato, String tipo, String cpf, String senha, String rua, String numero, String bairro, String cidade, String uf, String cep, double salario) {
         this.nome = nome;
         this.contato = contato;
+        this.tipo = tipo;
         this.cpf = cpf;
         this.senha = senha;
         this.rua = rua;
         this.numero = numero;
+        this.bairro = bairro;
         this.cidade = cidade;
         this.uf = uf;
         this.cep = cep;
@@ -114,8 +134,28 @@ public abstract class Funcionario {
         this.salario = salario;
     }
 
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public abstract double calculaPagamento();
 
+    /**
+     * Metodo responsavel por retornar a lista de funcionarios
+     * @return
+     */
     public static List<Funcionario> retornaListaFuncionarios()
     {
         List<Funcionario> funcionarios = new ArrayList<>();

@@ -1,14 +1,25 @@
 package com.u.t.info.view;
 import javax.swing.*;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
+
 /**
  *
  * @author Nikolas
  */
 public abstract class TelaCadastro extends JFrame {
 
+    //atributos que serao uteis para preencher o endereco de acordo com o cep
     private JTextField rua, bairro, cidade, uf, cep;
 
+    //metodo abstrato que vai ser implementado em cada classe herdada
     public abstract void desenha();
 
     public JTextField getRua() {

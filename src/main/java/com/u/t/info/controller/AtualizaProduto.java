@@ -12,15 +12,32 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
+
 public class AtualizaProduto implements WindowListener {
 
     private final TelaCadastroProduto tela;
     private static final String CAMINHO = "arquivos/produtos.json";
 
+    /**
+     * Construtor da classe
+     * @param tela tela de cadastro do produto
+     */
     public AtualizaProduto(TelaCadastroProduto tela) {
         this.tela = tela;
     }
 
+    /**
+     * Resgatar a lista de produtos do arquivo
+     * @param windowEvent
+     */
     @Override
     public void windowOpened(WindowEvent windowEvent) {
         try {
@@ -36,6 +53,10 @@ public class AtualizaProduto implements WindowListener {
         }
     }
 
+    /**
+     * Salvar a lista de produtos no arquivo
+     * @param windowEvent
+     */
     @Override
     public void windowClosing(WindowEvent windowEvent) {
         try {

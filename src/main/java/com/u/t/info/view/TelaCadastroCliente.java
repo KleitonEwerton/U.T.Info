@@ -11,6 +11,15 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
+
 /**
  *
  * @author Nikolas
@@ -25,11 +34,17 @@ public class TelaCadastroCliente extends TelaCadastro {
     private ButtonGroup tel;
     private List<Cliente> clientes;
 
+    /**
+     * Construtor da classe
+     */
     public TelaCadastroCliente() {
         this.clientes = new ArrayList<>();
         this.addWindowListener(new AtualizaCliente(this));
     }
 
+    /**
+     * Metodo para desenhar a tela principal
+     */
     @Override
     public void desenha() {
         this.setTitle("Cadastro de Cliente");
@@ -41,6 +56,9 @@ public class TelaCadastroCliente extends TelaCadastro {
         desenhaTelaCadastroCliente(); //desenho da tela
     }
 
+    /**
+     * Metodo para desenhar a tela de cadastro de cliente
+     */
     private void desenhaTelaCadastroCliente() {
         JPanel painel = new JPanel();
         painel.setPreferredSize(new Dimension(800, 600));
@@ -127,7 +145,7 @@ public class TelaCadastroCliente extends TelaCadastro {
 
 
         Border cadastro = BorderFactory.createRaisedBevelBorder();
-        ImageIcon image = new ImageIcon(new ImageIcon("img/refresh.png").getImage().getScaledInstance(120, 100, Image.SCALE_DEFAULT));
+        ImageIcon image = new ImageIcon(new ImageIcon("img/Pessoa.png").getImage().getScaledInstance(120, 100, Image.SCALE_DEFAULT));
         JLabel imageLabel = new JLabel(image);
         imageLabel.setBorder(cadastro);
 
@@ -412,11 +430,13 @@ public class TelaCadastroCliente extends TelaCadastro {
         this.add(painel);
     }
 
+    /*
     public static void main(String[] args) {
         TelaCadastroCliente tela = new TelaCadastroCliente();
         tela.desenha();
         tela.pack();
     }
+     */
 
     public JTextField getNome() {
         return nome;

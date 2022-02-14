@@ -1,6 +1,9 @@
 package com.u.t.info.view;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import com.u.t.info.controller.AdicionarCliente;
 import com.u.t.info.controller.CancelarAcao;
+import com.u.t.info.controller.LimparFormularioFuncionario;
 import com.u.t.info.src.*;
 import com.u.t.info.utils.*;
 
@@ -9,9 +12,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.border.Border;
+
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 /**
  *
@@ -29,10 +42,16 @@ public class TelaCadastroFuncionario extends TelaCadastro {
     private JComboBox comboBox;
     private JTabbedPane jtb;
 
+    /**
+     * Construtor vazio
+     */
     public TelaCadastroFuncionario() {
 
     }
 
+    /**
+     * Metodo para desenhar a tela principal
+     */
     @Override
     public void desenha() {
         
@@ -45,6 +64,9 @@ public class TelaCadastroFuncionario extends TelaCadastro {
         desenhaTelaCadastroFuncionario(); //desenho da tela
     }
 
+    /**
+     * Metodo para desenhar a tela de cadastro de funcionario
+     */
     private void desenhaTelaCadastroFuncionario() {
         JPanel painel = new JPanel();
         painel.setLayout(new GridBagLayout());
@@ -339,6 +361,8 @@ public class TelaCadastroFuncionario extends TelaCadastro {
         painelCadastro.add(jLUF, gbc22);
 
         super.setUf(new JTextField(2));
+        super.getUf().setEnabled(false);
+
         GridBagConstraints gbc23 = new GridBagConstraints();
         gbc23.gridwidth = GridBagConstraints.REMAINDER;
         gbc23.anchor = GridBagConstraints.WEST;
@@ -500,11 +524,13 @@ public class TelaCadastroFuncionario extends TelaCadastro {
         this.add(painel);
     }
 
+    /*
     public static void main(String[] args) {
         TelaCadastroFuncionario tela = new TelaCadastroFuncionario();
         tela.desenha();
         tela.pack();
     }
+     */
 
     public JTextField getNome() {
         return nome;
@@ -624,79 +650,236 @@ class AdicionarFuncionario implements ActionListener
 {
     TelaCadastroFuncionario tela;
 
+    /**
+     * Construtor da classe
+     * @param tela
+     */
     public AdicionarFuncionario (TelaCadastroFuncionario tela) {
         this.tela = tela;
     }
 
+    /**
+     * Adicionar um funcionario
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        String funcionario = tela.getComboBox().getSelectedItem().toString();
+        try {
+            if (tela.getNome().getText().isEmpty() || tela.getTelefone().getText().isEmpty()
+                    || tela.getCep().getText().isEmpty() || tela.getRua().getText().isEmpty()
+                    || tela.getNumeroCasa().getText().isEmpty() || tela.getBairro().getText().isEmpty()
+                    || tela.getCidade().getText().isEmpty() || tela.getCpf().getText().isEmpty()
+                    || tela.getSenha1().getText().isEmpty() || tela.getSenha2().getText().isEmpty()) {
+                throw new Exception();
+            }
 
-        switch (funcionario)
-        {
-            case "Gerente":
+            try
+            {
+                if(!tela.getCpf().getText().matches("[0-9]+") || !tela.getCep().getText().matches("[0-9]+")
+                        || !tela.getNumeroCasa().getText().matches("[0-9]+") || !tela.getTelefone().getText().matches("[0-9]+"))
+                {
+                    throw new Exception();
+                }
 
-                    List<Gerente> gerenteList = new ArrayList<>();
-                    gerenteList = JSONGerente.lerGerentes();
-
-                    gerenteList.add(new Gerente(tela.getNome().getText(), tela.getTelefone().getText(),
-                            tela.getCpf().getText(), tela.getSenha1().getText(),
-                            tela.getRua().getText(), tela.getNumeroCasa().getText(),
-                            tela.getCidade().getText(), tela.getUf().getText(), tela.getCep().getText(),
-                            5500));
-
-                    String toJSON = JSONGerente.toJSONGerentes(gerenteList);
-                    try{
-
-                        Arquivo.escreverArquivo("arquivos/gerentes.json",toJSON);
-
-                    } catch (IOException ex) {
-
-                        System.out.println("Erro ao salvar os gerentes");
+                try
+                {
+                    if(!validaCPF(tela.getCpf().getText()))
+                    {
+                        throw new Exception();
                     }
-                break;
-            case "Vendedor":
-                List<Vendedor> vendedorList = new ArrayList<>();
-                vendedorList = JSONVendedor.lerVendedores();
-                List<Venda> vendaList = new ArrayList<>();
 
-                vendedorList.add(new Vendedor(vendaList, tela.getNome().getText(), tela.getTelefone().getText(),
-                        tela.getCpf().getText(), tela.getSenha1().getText(),
-                        tela.getRua().getText(), tela.getNumeroCasa().getText(),
-                        tela.getCidade().getText(), tela.getUf().getText(), tela.getCep().getText(),
-                        1100));
+                    try
+                    {
+                        if(tela.getUf().getText().isEmpty())
+                        {
+                            throw new Exception();
+                        }
 
-                String toJSON1 = JSONVendedor.toJSONSVendedores(vendedorList);
-                try{
+                        try
+                        {
+                            String str = tela.getTel().getSelection().getActionCommand();
+                            try
+                            {
+                                if ((tela.getTelefone().getText().length() < 10) || (tela.getTelefone().getText().length() > 11)) {
+                                    throw new Exception();
+                                }
 
-                    Arquivo.escreverArquivo("arquivos/vendedores.json",toJSON1);
+                                try {
+                                    if (!tela.getSenha1().getText().equals(tela.getSenha2().getText())) {
+                                        throw new Exception();
+                                    }
+                                    try
+                                    {
+                                        if (tela.getSenha1().getText().length() < 8)
+                                        {
+                                            throw new Exception();
+                                        }
+                                        String funcionario = tela.getComboBox().getSelectedItem().toString();
 
-                } catch (IOException ex) {
+                                        switch (funcionario) {
+                                            case "Gerente":
+                                                List<Gerente> gerenteList = new ArrayList<>();
+                                                gerenteList = JSONGerente.lerGerentes();
+                                                gerenteList.add(new Gerente(tela.getNome().getText(), tela.getTelefone().getText(), tela.getTel().getSelection().getActionCommand(),
+                                                        tela.getCpf().getText(), tela.getSenha1().getText(),
+                                                        tela.getRua().getText(), tela.getNumeroCasa().getText(), tela.getBairro().getText(),
+                                                        tela.getCidade().getText(), tela.getUf().getText(), tela.getCep().getText(),
+                                                        5500));
+                                                String toJSON = JSONGerente.toJSONGerentes(gerenteList);
+                                                try {
 
-                    System.out.println("Erro ao salvar os gerentes");
+                                                    Arquivo.escreverArquivo("arquivos/gerentes.json", toJSON);
+                                                    JOptionPane.showMessageDialog(tela, "Funcionario adicionado");
+                                                    LimparFormularioFuncionario limparFormularioFuncionario = new LimparFormularioFuncionario(tela);
+                                                    limparFormularioFuncionario.LimparFormulario();
+                                                } catch (IOException ex) {
+
+                                                    System.out.println("Erro ao salvar os gerentes");
+                                                }
+                                                break;
+                                            case "Vendedor":
+                                                List<Vendedor> vendedorList = new ArrayList<>();
+                                                vendedorList = JSONVendedor.lerVendedores();
+                                                List<Venda> vendaList = new ArrayList<>();
+
+                                                vendedorList.add(new Vendedor(vendaList, tela.getNome().getText(), tela.getTelefone().getText(), str,
+                                                        tela.getCpf().getText(), tela.getSenha1().getText(),
+                                                        tela.getRua().getText(), tela.getNumeroCasa().getText(), tela.getBairro().getText(),
+                                                        tela.getCidade().getText(), tela.getUf().getText(), tela.getCep().getText(),
+                                                        1100));
+
+                                                String toJSON1 = JSONVendedor.toJSONSVendedores(vendedorList);
+                                                try {
+
+                                                    Arquivo.escreverArquivo("arquivos/vendedores.json", toJSON1);
+                                                    JOptionPane.showMessageDialog(tela, "Funcionario adicionado");
+                                                    LimparFormularioFuncionario limparFormularioFuncionario = new LimparFormularioFuncionario(tela);
+                                                    limparFormularioFuncionario.LimparFormulario();
+                                                } catch (IOException ex) {
+
+                                                    System.out.println("Erro ao salvar os gerentes");
+                                                }
+                                                break;
+                                            case "Supervisor":
+                                                List<Supervisor> supervisorList = new ArrayList<>();
+                                                supervisorList = JSONSupervisor.lerSupervisor();
+
+                                                supervisorList.add(new Supervisor(tela.getNome().getText(), tela.getTelefone().getText(), str,
+                                                        tela.getCpf().getText(), tela.getSenha1().getText(),
+                                                        tela.getRua().getText(), tela.getNumeroCasa().getText(), tela.getBairro().getText(),
+                                                        tela.getCidade().getText(), tela.getUf().getText(), tela.getCep().getText(),
+                                                        5500));
+
+                                                String toJSON2 = JSONSupervisor.toJSONSupervisores(supervisorList);
+                                                try {
+
+                                                    Arquivo.escreverArquivo("arquivos/supervisores.json", toJSON2);
+                                                    JOptionPane.showMessageDialog(tela, "Funcionario adicionado");
+                                                    LimparFormularioFuncionario limparFormularioFuncionario = new LimparFormularioFuncionario(tela);
+                                                    limparFormularioFuncionario.LimparFormulario();
+                                                } catch (IOException ex) {
+
+                                                    System.out.println("Erro ao salvar os supervisores");
+                                                }
+                                                break;
+                                        }
+                                    }
+                                    catch (Exception exception)
+                                    {
+                                        JOptionPane.showConfirmDialog(null, "Senha deve conter, no mínimo, 8 caracteres!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                                    }
+
+                                }
+                                catch (Exception exception)
+                                {
+                                    JOptionPane.showConfirmDialog(null, "Senhas Diferentes!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                                }
+                            }
+                            catch (Exception exception)
+                            {
+                                JOptionPane.showConfirmDialog(null, "Telefone invalido!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                            }
+
+                        }
+                        catch (NullPointerException e) {
+                            JOptionPane.showConfirmDialog(null, "Selecione o tipo do número", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        JOptionPane.showConfirmDialog(null, "Clicar no botão para validar CEP!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                    }
                 }
-                break;
-            case "Supervisor":
-                List<Supervisor> supervisorList = new ArrayList<>();
-                supervisorList = JSONSupervisor.lerSupervisor();
-
-                supervisorList.add(new Supervisor(tela.getNome().getText(), tela.getTelefone().getText(),
-                        tela.getCpf().getText(), tela.getSenha1().getText(),
-                        tela.getRua().getText(), tela.getNumeroCasa().getText(),
-                        tela.getCidade().getText(), tela.getUf().getText(), tela.getCep().getText(),
-                        5500));
-
-                String toJSON2 = JSONSupervisor.toJSONSupervisores(supervisorList);
-                try{
-
-                    Arquivo.escreverArquivo("arquivos/supervisores.json",toJSON2);
-
-                } catch (IOException ex) {
-
-                    System.out.println("Erro ao salvar os supervisores");
+                catch (Exception exception)
+                {
+                    JOptionPane.showConfirmDialog(null, "CPF Inválido", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
                 }
-                break;
 
+
+            }
+            catch (Exception exception)
+            {
+                JOptionPane.showConfirmDialog(null, "Verificar os campos CPF, CEP, Número da casa e/ou Telefone! \nProibido uso de letras\nOBS: Digitar sem colocar caracteres \"(.-)\"!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+            }
+
+        }
+        catch (Exception exception)
+        {
+            JOptionPane.showConfirmDialog(null, "Verificar os campos! \nProibido prosseguir com campos vazios!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+        }
+    }
+
+    public boolean validaCPF(String CPF) {
+        if (CPF.equals("00000000000") ||
+                CPF.equals("11111111111") ||
+                CPF.equals("22222222222") || CPF.equals("33333333333") ||
+                CPF.equals("44444444444") || CPF.equals("55555555555") ||
+                CPF.equals("66666666666") || CPF.equals("77777777777") ||
+                CPF.equals("88888888888") || CPF.equals("99999999999") ||
+                (CPF.length() != 11))
+            return(false);
+
+        char dig10, dig11;
+        int sm, i, r, num, peso;
+
+        // "try" - protege o codigo para eventuais erros de conversao de tipo (int)
+        try {
+            // Calculo do 1o. Digito Verificador
+            sm = 0;
+            peso = 10;
+            for (i=0; i<9; i++) {
+                // converte o i-esimo caractere do CPF em um numero:
+                // por exemplo, transforma o caractere '0' no inteiro 0
+                // (48 eh a posicao de '0' na tabela ASCII)
+                num = (int)(CPF.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11))
+                dig10 = '0';
+            else dig10 = (char)(r + 48); // converte no respectivo caractere numerico
+
+            // Calculo do 2o. Digito Verificador
+            sm = 0;
+            peso = 11;
+            for(i=0; i<10; i++) {
+                num = (int)(CPF.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11))
+                dig11 = '0';
+            else dig11 = (char)(r + 48);
+
+            // Verifica se os digitos calculados conferem com os digitos informados.
+            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
+                return(true);
+            else return(false);
+        } catch (InputMismatchException erro) {
+            return(false);
         }
     }
 }

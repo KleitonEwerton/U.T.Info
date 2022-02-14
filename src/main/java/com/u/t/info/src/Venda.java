@@ -5,17 +5,33 @@
 package com.u.t.info.src;
 
 import java.util.List;
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 /**
  *
  * @author luiz
  */
 public class Venda implements Vendas {
+    //atributos
     private Vendedor vendedor;
     private Cliente cliente;
     private Produto produto;
     private double valor;
 
+    /**
+     * Construtor da classe
+     * @param vendedor vendedor que esta realizando a compra
+     * @param cliente cliente que esta comprando
+     * @param produtos produto que esta sendo vendido
+     * @param valor valor da compra
+     */
     public Venda(Vendedor vendedor,Cliente cliente, Produto produtos, double valor) {
         this.vendedor = vendedor;
         this.cliente = cliente;

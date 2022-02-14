@@ -20,6 +20,15 @@ import java.util.*;
 import java.util.List;
 import javax.swing.*;
 
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
+
 /**
  *
  * @author agata
@@ -128,7 +137,7 @@ public class TelaSupervisor extends JFrame {
         this.add(this.painelPrincipal);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+        this.setResizable(false); //bloquear redimensionamento
         this.repaint();
     }
 
@@ -190,7 +199,6 @@ public class TelaSupervisor extends JFrame {
         //estoque.setPreferredSize(new Dimension(500, 500));
 
         this.estoque.setPreferredSize(new Dimension(500, 500));
-
         this.modelProduto = new TableProdutos();
 
         this.tableProduto = new JTable(modelProduto);
@@ -198,7 +206,14 @@ public class TelaSupervisor extends JFrame {
 
         //this.tabelaProdutos.setPreferredScrollableViewportSize(new Dimension(800, 400));
         barraRolagem = new JScrollPane(tableProduto);
-        this.estoque.add(txt_Inf, BorderLayout.CENTER);
+
+        JPanel mensagemTexto = new JPanel();
+        mensagemTexto.setPreferredSize(new Dimension(500, 50));
+        mensagemTexto.setLayout(new BorderLayout());
+        mensagemTexto.add(txt_Inf, BorderLayout.CENTER);
+
+        this.estoque.add(mensagemTexto, BorderLayout.NORTH);
+
         this.estoque.add(barraRolagem, BorderLayout.CENTER);
 
         JButton notificarGerente = new JButton("Notificar gerente");

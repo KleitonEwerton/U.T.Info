@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.u.t.info.controller;
 
 import com.u.t.info.src.Produto;
@@ -13,6 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 /**
  *
@@ -31,20 +36,18 @@ public class NotificarGerente implements ActionListener {
     //caminho onde armazena o produto selecionado pelo supervisor
     private static final String CAMINHO = "arquivos/produtoEmFalta.json";
 
-    
-    /*
-    Construtor
-    param: TelaSupervisor tela
-    */
+    /**
+     * Construtor da classe
+     * @param tela tela do supervisor
+     */
     public NotificarGerente(TelaSupervisor tela) {
         this.tela = tela;
     }
 
-    
-    /*
-    Ação que realiza a leitura da linha da tabela selecionada e passa pro arquivo que sera usado para notificar o gerente
-    param: ActionEvent e
-    */
+    /**
+     * Ação que realiza a leitura da linha da tabela selecionada e passa pro arquivo que sera usado para notificar o gerente
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         

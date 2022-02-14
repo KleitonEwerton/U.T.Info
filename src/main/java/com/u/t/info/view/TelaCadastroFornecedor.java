@@ -2,23 +2,28 @@ package com.u.t.info.view;
 
 import com.u.t.info.controller.CancelarAcao;
 import com.u.t.info.src.Fornecedor;
-import com.u.t.info.tables.TableFornecedores;
 import com.u.t.info.utils.BuscaCep;
 import com.u.t.info.utils.JSONFornecedor;
 import static com.u.t.info.utils.JSONFornecedor.salvarFornecedoresJSON;
-
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.Border;
+
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 /**
  *
@@ -32,10 +37,16 @@ public class TelaCadastroFornecedor extends TelaCadastro {
     private JTextArea listaProdutos;
     private List<Fornecedor> fornecedores;
 
+    /**
+     * Construtor da classe
+     */
     public TelaCadastroFornecedor() {
         this.fornecedores = new ArrayList<>();
     }
 
+    /**
+     * Metodo para desenhar a tela principal
+     */
     @Override
     public void desenha() {
         this.setTitle("Cadastro de Fornecedor");
@@ -47,6 +58,9 @@ public class TelaCadastroFornecedor extends TelaCadastro {
         desenhaTelaCadastroFornecedor(); //desenho da tela
     }
 
+    /**
+     * Metodo para desenhar a tela de cadastro de funcionario
+     */
     private void desenhaTelaCadastroFornecedor() {
         JPanel painel = new JPanel();
         painel.setPreferredSize(new Dimension(800, 600));
@@ -302,6 +316,7 @@ public class TelaCadastroFornecedor extends TelaCadastro {
         painel.add(jLUF, gbc19);
 
         super.setUf(new JTextField(2));
+        super.getUf().setEnabled(false);
         GridBagConstraints gbc20 = new GridBagConstraints();
         gbc20.gridwidth = GridBagConstraints.REMAINDER;
         gbc20.anchor = GridBagConstraints.WEST;
@@ -458,27 +473,142 @@ class SalvarFornecedor implements ActionListener{
 
     private final TelaCadastroFornecedor tela;
 
+    /**
+     * Construtor da classe
+     * @param tela Tela de cadastro de fornecedor
+     */
     public SalvarFornecedor(TelaCadastroFornecedor tela) {
         this.tela = tela;
         
     }
-    
+
+    /**
+     * Adicionar um fornecedor
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
+        try
+        {
+            if(tela.getRazaoSocial().getText().isEmpty() || tela.getCnpj().getText().isEmpty()
+                    || tela.getCep().getText().isEmpty() || tela.getRua().getText().isEmpty()
+                    || tela.getNumeroCasa().getText().isEmpty() || tela.getBairro().getText().isEmpty()
+                    || tela.getCidade().getText().isEmpty())
+            {
+                throw new Exception();
+            }
 
-        List<String> arrayList = Arrays.asList(tela.getListaProdutos().getText().split("\\s*,\\s*"));
-        
-        List<Fornecedor> listFornecedores = JSONFornecedor.lerFornecedores();
-        
-        listFornecedores.add(new Fornecedor(tela.getRazaoSocial().getText(),
-                tela.getCnpj().getText(), arrayList,tela.getRua().getText(),
-                tela.getNumeroCasa().getText(),tela.getCidade().getText(), tela.getUf().getText(),
-                tela.getCep().getText()));
-        
-        salvarFornecedoresJSON(listFornecedores);
+            try {
+                if(!tela.getCnpj().getText().matches("[0-9]+") || !tela.getCep().getText().matches("[0-9]+")
+                        || !tela.getNumeroCasa().getText().matches("[0-9]+"))
+                {
+                    throw new Exception();
+                }
+
+                try
+                {
+                    if(!verificaCNPJ(tela.getCnpj().getText()))
+                    {
+                        throw new Exception();
+                    }
+
+                    try {
+                        if(tela.getUf().getText().isEmpty())
+                        {
+                            throw new Exception();
+                        }
+                        List<String> arrayList = Arrays.asList(tela.getListaProdutos().getText().split("\\s*,\\s*"));
+
+                        List<Fornecedor> listFornecedores = JSONFornecedor.lerFornecedores();
+
+                        listFornecedores.add(new Fornecedor(tela.getRazaoSocial().getText(),
+                                tela.getCnpj().getText(), arrayList,tela.getRua().getText(),
+                                tela.getNumeroCasa().getText(),tela.getBairro().getText(),
+                                tela.getCidade().getText(), tela.getUf().getText(),
+                                tela.getCep().getText()));
+
+                        salvarFornecedoresJSON(listFornecedores, tela);
+                    }
+                    catch (Exception exception)
+                    {
+                        JOptionPane.showConfirmDialog(null, "Clicar no botão para validar CEP!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                    }
+
+                }
+                catch (Exception exception)
+                {
+                    JOptionPane.showConfirmDialog(null, "CNPJ Inválido", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                }
+            }
+            catch (Exception exception)
+            {
+                JOptionPane.showConfirmDialog(null, "Verificar os campos CNPJ, CEP e/ou Número da casa! \nProibido uso de letras\nOBS: Digitar sem colocar caracteres \"(.-)\"!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+            }
+        }
+        catch (Exception exception)
+        {
+            JOptionPane.showConfirmDialog(null, "Verificar os campos! \nProibido prosseguir com campos vazios!", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+        }
         
     }
-    
+
+    public boolean verificaCNPJ(String CNPJ) {
+        // considera-se erro CNPJ's formados por uma sequencia de numeros iguais
+        if (CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111") ||
+                CNPJ.equals("22222222222222") || CNPJ.equals("33333333333333") ||
+                CNPJ.equals("44444444444444") || CNPJ.equals("55555555555555") ||
+                CNPJ.equals("66666666666666") || CNPJ.equals("77777777777777") ||
+                CNPJ.equals("88888888888888") || CNPJ.equals("99999999999999") ||
+                (CNPJ.length() != 14))
+            return(false);
+
+        char dig13, dig14;
+        int sm, i, r, num, peso;
+
+        // "try" - protege o código para eventuais erros de conversao de tipo (int)
+        try {
+            // Calculo do 1o. Digito Verificador
+            sm = 0;
+            peso = 2;
+            for (i=11; i>=0; i--) {
+                // converte o i-ésimo caractere do CNPJ em um número:
+                // por exemplo, transforma o caractere '0' no inteiro 0
+                // (48 eh a posição de '0' na tabela ASCII)
+                num = (int)(CNPJ.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso + 1;
+                if (peso == 10)
+                    peso = 2;
+            }
+
+            r = sm % 11;
+            if ((r == 0) || (r == 1))
+                dig13 = '0';
+            else dig13 = (char)((11-r) + 48);
+
+            // Calculo do 2o. Digito Verificador
+            sm = 0;
+            peso = 2;
+            for (i=12; i>=0; i--) {
+                num = (int)(CNPJ.charAt(i)- 48);
+                sm = sm + (num * peso);
+                peso = peso + 1;
+                if (peso == 10)
+                    peso = 2;
+            }
+
+            r = sm % 11;
+            if ((r == 0) || (r == 1))
+                dig14 = '0';
+            else dig14 = (char)((11-r) + 48);
+
+            // Verifica se os dígitos calculados conferem com os dígitos informados.
+            if ((dig13 == CNPJ.charAt(12)) && (dig14 == CNPJ.charAt(13)))
+                return(true);
+            else return(false);
+        } catch (InputMismatchException erro) {
+            return(false);
+        }
+    }
 }
 
 

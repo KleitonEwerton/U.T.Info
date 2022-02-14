@@ -1,14 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.u.t.info.src;
 
 import java.util.List;
 
-
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 public class Fornecedor {
-    
+
+    //atributos
     private String razaoSocial;
     private String cnpj;
     
@@ -18,12 +22,26 @@ public class Fornecedor {
     private final String cidade;
     private final String uf;
     private final String cep;
-    
-    public Fornecedor(String razaoSocial, String cnpj,List<String> listaDeProdutos, String rua, String numero, String cidade, String uf, String cep) {
+    private final String bairro;
+
+    /**
+     * Construtor da classe
+     * @param razaoSocial razão social do fornecedor
+     * @param cnpj cnpj do fornecedor
+     * @param listaDeProdutos lista de produtos que o fornecedor vende
+     * @param rua rua do fornecedor
+     * @param numero numero da sede do fornecedor
+     * @param bairro bairro do fornecedor
+     * @param cidade cidade do fornecedor
+     * @param uf estado do fornecedor
+     * @param cep cep do fornecedor
+     */
+    public Fornecedor(String razaoSocial, String cnpj,List<String> listaDeProdutos, String rua, String numero, String bairro, String cidade, String uf, String cep) {
         this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
         this.rua = rua;
         this.numero = numero;
+        this.bairro = bairro;
         this.cidade=cidade;
         this.uf = uf;
         this.cep = cep;
@@ -77,6 +95,8 @@ public class Fornecedor {
     public String getCep() {
         return cep;
     }
-    
-    
+
+    public String getBairro() {
+        return bairro;
+    }
 }

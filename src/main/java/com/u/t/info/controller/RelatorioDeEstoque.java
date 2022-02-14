@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.u.t.info.controller;
-
 
 import com.u.t.info.src.Produto;
 import com.u.t.info.utils.Arquivo;
@@ -14,6 +9,15 @@ import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
+
+/*
+Integrantes do grupo:
+Nome                            Matricula
+Ágata Meireles Carvalho         202065001AC
+Kleiton Ewerton de Oliveira     202065050AC
+Luiz Miguel Batista Silva       202065060A
+Nikolas Oliver Sales Genesio    202065072AC
+ */
 
 /**
  *
@@ -32,21 +36,18 @@ public class RelatorioDeEstoque implements WindowListener {
     //caminho para acesso ao arquivo
     private static final String CAMINHO = "arquivos/produtoEmFalta.json";
 
-    
-    /*
-    Contrutor de clase
-    param: TelaGerente tela;
-    */
+    /**
+     * Contrutor de clase
+     * @param tela
+     */
     public RelatorioDeEstoque(TelaGerente tela) {
         this.tela = tela;
     }
 
-    
-    /*
-
-        ação realizada ao abrir tela
-    param: WindowEvent
-*/
+    /**
+     * Ação realizada ao abrir tela
+     * @param e
+     */
     @Override
     public void windowOpened(WindowEvent e) {
         try {
