@@ -5,7 +5,7 @@
 
 
 <h4 align="center"> 
-	☕  Java project  ☕ Em produção  ☕
+	☕  Java project  ☕ Finalizado  ☕
 </h4>
 
 ## 🏝️ Features
@@ -17,8 +17,8 @@
 - [x] Supervisor
 - [x] Gerente
 - [x] Produto
-- [ ] Banco de dados
-- [ ] Implementação gráfica
+- [x] Banco de dados
+- [x] Implementação gráfica
 
 
 

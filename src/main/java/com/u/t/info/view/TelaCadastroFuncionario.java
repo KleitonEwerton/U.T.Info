@@ -1,10 +1,11 @@
 package com.u.t.info.view;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import com.u.t.info.controller.AdicionarCliente;
+//import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import com.u.t.info.controller.CancelarAcao;
 import com.u.t.info.controller.LimparFormularioFuncionario;
 import com.u.t.info.src.*;
+import static com.u.t.info.src.Funcionario.retornaListaFuncionarios;
 import com.u.t.info.utils.*;
 
 import java.awt.*;
@@ -811,7 +812,7 @@ class AdicionarFuncionario implements ActionListener
                 }
                 catch (Exception exception)
                 {
-                    JOptionPane.showConfirmDialog(null, "CPF Inválido", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
+                    JOptionPane.showConfirmDialog(null, "CPF Inválido ou já utilizado", "ERRO", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null);
                 }
 
 
@@ -829,6 +830,27 @@ class AdicionarFuncionario implements ActionListener
     }
 
     public boolean validaCPF(String CPF) {
+        
+        List<Funcionario> listFunc = retornaListaFuncionarios();
+        List<String>cpfs = new ArrayList<>();
+        //Adiciona todos os cpfs cadastrados
+        for(Funcionario f: listFunc){
+            switch (f.getClass().getTypeName())
+            {
+                case "com.u.t.info.src.Gerente":
+                    cpfs.add(((Gerente)f).getCpf());
+                    break;
+                case "com.u.t.info.src.Supervisor":
+                    cpfs.add(((Supervisor)f).getCpf());
+                    break;
+                case "com.u.t.info.src.Vendedor":
+                    cpfs.add(((Vendedor)f).getCpf());
+                    break;
+            }
+        }
+        if(cpfs.contains(CPF))return false; //Verifica se não já está cadastrado
+        
+        
         if (CPF.equals("00000000000") ||
                 CPF.equals("11111111111") ||
                 CPF.equals("22222222222") || CPF.equals("33333333333") ||
